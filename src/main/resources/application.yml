@@ -1,0 +1,68 @@
+spring:
+  datasource:
+    core: 
+      username: core
+      password: Nokm_346671
+      url: jdbc:postgresql://server1:5462/qo_core
+     # driver-class-name: com.mysql.jdbc.Driver
+      platform: postgresql 
+    ecom: 
+      username: core
+      password: Nokm_346671
+      url: jdbc:postgresql://server1:5462/qo_core
+      # driver-class-name: com.mysql.jdbc.Driver
+      platform: postgresql
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        ddl-auto: none
+        naming_strategy: org.hibernate.cfg.ImprovedNamingStrategy
+        #naming:
+        #  implicit-strategy: org.hibernate.boot.model.naming.ImplicitNamingStrategyLegacyJpaImpl
+        #  physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+        jdbc:
+          lob:
+            non_contextual_creation: true
+    show-sql: true
+    database: postgresql
+  cache:
+    type: redis
+    cache-names: core
+    redis:
+      time-to-live: 60000
+  redis:
+    host: server10
+    port: 6379
+  data:
+    redis:
+      repositories:
+        type: none
+        enabled: false
+
+# HTTP Server
+server:
+  port: 7000
+  servlet:
+    context-path: /core-api
+  tomcat:
+    max-threads: 5
+
+#management:
+#  security:
+#    enabled: false
+
+# App Properties
+app:
+  # Пароль для JWT токенов
+  jwtSecret: Mokasd_32453ab
+  
+  # 30 minutes
+  jwtExpirationMs: 1800000
+  
+  # 30 days
+  jwtRefreshExpirationMs: 2592000000 
+  
+  ## For test
+  #jwtExpirationMs: 60000
+  #jwtRefreshExpirationMs: 120000  
