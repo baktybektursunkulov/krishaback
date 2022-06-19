@@ -1,8 +1,6 @@
 package gs.repositories.ho.dbtables;
 
 import gs.payload.response.horesponse.HoCatResponse;
-import gs.repositories.ad.dbtables.*;
-import model.ad.dbtables.Ad_Cat;
 import gs.repositories.core.dbtables.*;
 import java.util.List;
 import java.util.Optional; 

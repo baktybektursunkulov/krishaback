@@ -1,8 +1,5 @@
-package model.ad.dbtables;
+package model.ho.dbtables;
 
-import model.core.dbtables.*;
-import beans.LocaleBean;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -11,73 +8,77 @@ import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import gs.common.model.db.Abstract_Entity;
-import gs.services.core.dbtables.C_Lang_Service;
-//import java.util.Locale;
-import managers.core.dbtables.*;
+import managers.ho.dbtables.*;
 import org.hibernate.Session;
-import org.springframework.beans.factory.annotation.Autowired;
-import others.core_lang_funcs;
 
 @Entity
-@Table(name = "ad_cat")
-@Proxy(lazy = false)
+@Table(name="ho_contact_info_type")
+@Proxy(lazy=false) 
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
-public class Ad_Cat extends Abstract_Entity {
+
+public class Ho_Contact_Info_Type extends Abstract_Entity {
 
   //fields
-  private Integer ad_cat;
+  private Integer ho_contact_info_type;
+  private String code;
   private String name;
   private Boolean is_deleted;
-  private Integer parent_id;
 
-  public Ad_Cat() {
+  //transient fields
+
+
+
+  public Ho_Contact_Info_Type() {
 
   }
 
   //fields getter and setter methods
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name = "ad_cat", unique = true, nullable = false)
-  public Integer getAd_cat() {
-    return this.ad_cat;
+  @Column(name="ho_contact_info_type", unique=true, nullable=false)
+  public Integer getHo_contact_info_type() {
+    return this.ho_contact_info_type;
+  }
+  public void setHo_contact_info_type(Integer ho_contact_info_type) {
+    this.ho_contact_info_type = ho_contact_info_type;
   }
 
-  public void setAd_cat(Integer ca_cat) {
-    this.ad_cat = ca_cat;
+  @Type(type="text")
+  @Column(name="code", nullable=false)
+  public String getCode() {
+    return this.code;
+  }
+  public void setCode(String code) {
+    this.code = code;
   }
 
-  @Column(name = "name", nullable = false)
+  @Type(type="text")
+  @Column(name="name", nullable=false)
   public String getName() {
     return this.name;
   }
-
   public void setName(String name) {
     this.name = name;
   }
 
-  @JsonIgnore
-  @Column(name = "is_deleted", nullable = false)
+  @Column(name="is_deleted", nullable=false)
   public Boolean getIs_deleted() {
     return this.is_deleted;
   }
-
   public void setIs_deleted(Boolean is_deleted) {
     this.is_deleted = is_deleted;
   }
 
-  @Column(name = "parent_id")
-  public Integer getParent_id() {
-    return parent_id;
-  }
 
-  public void setParent_id(Integer parent_id) {
-    this.parent_id = parent_id;
-  }
 
+
+
+
+  
   @Override
   public int hashCode() {
     int hash = 7;
-    hash = 89 * hash + Objects.hashCode(this.getAd_cat());
+    hash = 89 * hash + Objects.hashCode(this.getHo_contact_info_type());
     return hash;
   }
 
@@ -89,18 +90,17 @@ public class Ad_Cat extends Abstract_Entity {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    final Ad_Cat other = (Ad_Cat) obj;
-    if (!Objects.equals(this.getAd_cat(), other.getAd_cat())) {
+    final Ho_Contact_Info_Type other = (Ho_Contact_Info_Type) obj;
+    if (!Objects.equals(this.getHo_contact_info_type(), other.getHo_contact_info_type())) {
       return false;
     }
     return true;
   }
 
-  @JsonIgnore
   @Transient
   @Override
   public Serializable getEntity_id() {
-    return getAd_cat();
+    return getHo_contact_info_type();
   }
 
-}
+} 

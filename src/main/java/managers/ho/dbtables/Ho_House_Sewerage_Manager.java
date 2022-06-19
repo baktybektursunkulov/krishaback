@@ -14,19 +14,19 @@ import managers.core.dbtables.Abstract_Controller_Manager;
 
 @ManagedBean
 @ApplicationScoped
-public class Ho_House_Bathroom_Manager extends Abstract_Controller_Manager<Ho_House_Bathroom> {
+public class Ho_House_Sewerage_Manager extends Abstract_Controller_Manager<Ho_House_Sewerage> {
 
-  private static Ho_House_Bathroom_Manager currentInstance = null;
+  private static Ho_House_Sewerage_Manager currentInstance = null;
 
-  public static Ho_House_Bathroom_Manager getCI() {
+  public static Ho_House_Sewerage_Manager getCI() {
     if (currentInstance == null) {
-      currentInstance = new Ho_House_Bathroom_Manager();
+      currentInstance = new Ho_House_Sewerage_Manager();
     }
     return currentInstance;
   }
 
-  public Ho_House_Bathroom_Manager() {
-    super(Ho_House_Bathroom.class);
+  public Ho_House_Sewerage_Manager() {
+    super(Ho_House_Sewerage.class);
   }
 
 }

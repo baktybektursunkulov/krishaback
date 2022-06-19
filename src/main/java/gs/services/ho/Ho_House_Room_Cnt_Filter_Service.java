@@ -1,13 +1,10 @@
 package gs.services.ho;
 
 import gs.payload.response.horesponse.HoCatResponse;
-import gs.services.ad.*;
-import model.ad.dbtables.Ad_Cat;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import gs.repositories.ad.dbtables.Ad_Cat_Repository;
 import gs.repositories.ho.dbtables.Ho_Cat_Repository;
 import gs.repositories.ho.dbtables.Ho_House_Room_Cnt_Filter_Repository;
 import model.ho.dbtables.Ho_Cat;

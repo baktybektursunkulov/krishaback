@@ -1,7 +1,5 @@
 package gs.controllers.ho.dbtables;
 
-import gs.controllers.ad.dbtables.*;
-import gs.services.ad.Ad_Cat_Service;
 import gs.controllers.core.dbtables.*;
 import gs.payload.response.adresponse.AdCatResponse;
 import gs.payload.response.adresponse.AdCatResponse1;
@@ -21,7 +19,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
-import model.ad.dbtables.Ad_Cat;
 import model.ho.dbtables.Ho_Cat;
 import model.ho.dbtables.Ho_House_Room_Cnt_Filter;
 import org.springframework.beans.factory.annotation.Autowired;
