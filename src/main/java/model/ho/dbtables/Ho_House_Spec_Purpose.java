@@ -1,6 +1,5 @@
 package model.ho.dbtables;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -13,14 +12,14 @@ import managers.ho.dbtables.*;
 import org.hibernate.Session;
 
 @Entity
-@Table(name="ho_house_shop_type")
+@Table(name="ho_house_spec_purpose")
 @Proxy(lazy=false) 
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 
-public class Ho_House_Shop_Type extends Abstract_Entity {
+public class Ho_House_Spec_Purpose extends Abstract_Entity {
 
   //fields
-  private Integer ho_house_shop_type;
+  private Integer ho_house_spec_purpose;
   private String code;
   private String name;
   private Boolean is_deleted;
@@ -29,22 +28,19 @@ public class Ho_House_Shop_Type extends Abstract_Entity {
 
 
 
-  public Ho_House_Shop_Type() {
+  public Ho_House_Spec_Purpose() {
 
   }
-
- 
-  
 
   //fields getter and setter methods
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name="ho_house_shop_type", unique=true, nullable=false)
-  public Integer getHo_house_shop_type() {
-    return this.ho_house_shop_type;
+  @Column(name="ho_house_spec_purpose", unique=true, nullable=false)
+  public Integer getHo_house_spec_purpose() {
+    return this.ho_house_spec_purpose;
   }
-  public void setHo_house_shop_type(Integer ho_house_shop_type) {
-    this.ho_house_shop_type = ho_house_shop_type;
+  public void setHo_house_spec_purpose(Integer ho_house_spec_purpose) {
+    this.ho_house_spec_purpose = ho_house_spec_purpose;
   }
 
   @Type(type="text")
@@ -64,7 +60,7 @@ public class Ho_House_Shop_Type extends Abstract_Entity {
   public void setName(String name) {
     this.name = name;
   }
-  @JsonIgnore
+
   @Column(name="is_deleted", nullable=false)
   public Boolean getIs_deleted() {
     return this.is_deleted;
@@ -82,7 +78,7 @@ public class Ho_House_Shop_Type extends Abstract_Entity {
   @Override
   public int hashCode() {
     int hash = 7;
-    hash = 89 * hash + Objects.hashCode(this.getHo_house_shop_type());
+    hash = 89 * hash + Objects.hashCode(this.getHo_house_spec_purpose());
     return hash;
   }
 
@@ -94,8 +90,8 @@ public class Ho_House_Shop_Type extends Abstract_Entity {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    final Ho_House_Shop_Type other = (Ho_House_Shop_Type) obj;
-    if (!Objects.equals(this.getHo_house_shop_type(), other.getHo_house_shop_type())) {
+    final Ho_House_Spec_Purpose other = (Ho_House_Spec_Purpose) obj;
+    if (!Objects.equals(this.getHo_house_spec_purpose(), other.getHo_house_spec_purpose())) {
       return false;
     }
     return true;
@@ -104,7 +100,7 @@ public class Ho_House_Shop_Type extends Abstract_Entity {
   @Transient
   @Override
   public Serializable getEntity_id() {
-    return getHo_house_shop_type();
+    return getHo_house_spec_purpose();
   }
 
 } 

@@ -1,6 +1,5 @@
 package model.ho.dbtables;
 
-import model.ad.dbtables.*;
 import model.core.dbtables.*;
 import beans.LocaleBean;
 import com.fasterxml.jackson.annotation.JsonIgnore;

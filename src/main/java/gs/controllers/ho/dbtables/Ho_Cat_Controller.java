@@ -2,9 +2,6 @@ package gs.controllers.ho.dbtables;
 
 
 import gs.controllers.core.dbtables.*;
-import gs.payload.response.adresponse.AdCatResponse;
-import gs.payload.response.adresponse.AdCatResponse1;
-import gs.payload.response.AdCatResponseId;
 import gs.payload.response.horesponse.HoCatResponse;
 import model.core.dbtables.*;
 import gs.services.core.dbtables.*;

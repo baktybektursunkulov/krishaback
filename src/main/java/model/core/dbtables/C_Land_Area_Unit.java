@@ -1,6 +1,5 @@
-package model.ho.dbtables;
+package model.core.dbtables;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -9,42 +8,41 @@ import org.hibernate.annotations.Proxy;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.CacheConcurrencyStrategy;
 import gs.common.model.db.Abstract_Entity;
-import managers.ho.dbtables.*;
+import managers.core.dbtables.*;
 import org.hibernate.Session;
 
 @Entity
-@Table(name="ho_house_shop_type")
+@Table(name="c_land_area_unit")
 @Proxy(lazy=false) 
 @org.hibernate.annotations.Cache(usage = CacheConcurrencyStrategy.READ_WRITE)
 
-public class Ho_House_Shop_Type extends Abstract_Entity {
+public class C_Land_Area_Unit extends Abstract_Entity {
 
   //fields
-  private Integer ho_house_shop_type;
+  private Integer c_land_area_unit;
   private String code;
   private String name;
+  private Boolean is_base_unit;
+  private Double multiplier_to_base_unit;
   private Boolean is_deleted;
 
   //transient fields
 
 
 
-  public Ho_House_Shop_Type() {
+  public C_Land_Area_Unit() {
 
   }
-
- 
-  
 
   //fields getter and setter methods
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
-  @Column(name="ho_house_shop_type", unique=true, nullable=false)
-  public Integer getHo_house_shop_type() {
-    return this.ho_house_shop_type;
+  @Column(name="c_land_area_unit", unique=true, nullable=false)
+  public Integer getC_land_area_unit() {
+    return this.c_land_area_unit;
   }
-  public void setHo_house_shop_type(Integer ho_house_shop_type) {
-    this.ho_house_shop_type = ho_house_shop_type;
+  public void setC_land_area_unit(Integer c_land_area_unit) {
+    this.c_land_area_unit = c_land_area_unit;
   }
 
   @Type(type="text")
@@ -64,7 +62,23 @@ public class Ho_House_Shop_Type extends Abstract_Entity {
   public void setName(String name) {
     this.name = name;
   }
-  @JsonIgnore
+
+  @Column(name="is_base_unit", nullable=false)
+  public Boolean getIs_base_unit() {
+    return this.is_base_unit;
+  }
+  public void setIs_base_unit(Boolean is_base_unit) {
+    this.is_base_unit = is_base_unit;
+  }
+
+  @Column(name="multiplier_to_base_unit", nullable=false)
+  public Double getMultiplier_to_base_unit() {
+    return this.multiplier_to_base_unit;
+  }
+  public void setMultiplier_to_base_unit(Double multiplier_to_base_unit) {
+    this.multiplier_to_base_unit = multiplier_to_base_unit;
+  }
+
   @Column(name="is_deleted", nullable=false)
   public Boolean getIs_deleted() {
     return this.is_deleted;
@@ -78,11 +92,13 @@ public class Ho_House_Shop_Type extends Abstract_Entity {
 
 
 
+
+
   
   @Override
   public int hashCode() {
     int hash = 7;
-    hash = 89 * hash + Objects.hashCode(this.getHo_house_shop_type());
+    hash = 89 * hash + Objects.hashCode(this.getC_land_area_unit());
     return hash;
   }
 
@@ -94,8 +110,8 @@ public class Ho_House_Shop_Type extends Abstract_Entity {
     if (getClass() != obj.getClass()) {
       return false;
     }
-    final Ho_House_Shop_Type other = (Ho_House_Shop_Type) obj;
-    if (!Objects.equals(this.getHo_house_shop_type(), other.getHo_house_shop_type())) {
+    final C_Land_Area_Unit other = (C_Land_Area_Unit) obj;
+    if (!Objects.equals(this.getC_land_area_unit(), other.getC_land_area_unit())) {
       return false;
     }
     return true;
@@ -104,7 +120,7 @@ public class Ho_House_Shop_Type extends Abstract_Entity {
   @Transient
   @Override
   public Serializable getEntity_id() {
-    return getHo_house_shop_type();
+    return getC_land_area_unit();
   }
 
 } 

@@ -1,9 +1,6 @@
 package gs.controllers.ho.dbtables;
 
 import gs.controllers.core.dbtables.*;
-import gs.payload.response.adresponse.AdCatResponse;
-import gs.payload.response.adresponse.AdCatResponse1;
-import gs.payload.response.AdCatResponseId;
 import gs.payload.response.horesponse.HoCatResponse;
 import gs.payload.response.horesponse.HoHouseRoomCntFilterResponse;
 import model.core.dbtables.*;

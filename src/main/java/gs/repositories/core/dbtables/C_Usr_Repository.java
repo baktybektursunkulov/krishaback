@@ -1,5 +1,6 @@
 package gs.repositories.core.dbtables;
 
+import java.util.List;
 import model.core.dbtables.C_Usr;
 import java.util.Optional;
 
@@ -10,7 +11,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface C_Usr_Repository extends JpaRepository<C_Usr, Long> {
-
+  
+  @Query("select t from C_Usr t")
+  List<C_Usr> find_all();
+  
   @Query("select t from C_Usr t where t.c_usr=:id_ ")
   Optional<C_Usr> find_by_id(@Param("id_") Long id_);
 
