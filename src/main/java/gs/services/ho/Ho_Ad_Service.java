@@ -21,23 +21,4 @@ public class Ho_Ad_Service {
     repository.save(ho_ad);
     return ho_ad;
 }  
-//  public List<Ho_Cat> find_page_title() {
-//    return repository.find_page_title();
-//  }
-//   public List<Ho_Cat> get_sell_rent_subcat(Integer id) {
-//    return repository.get_sell_rent_subcat(id);
-//  }
-//  public Ho_Cat find_by_id(Integer id) {
-//    return repository.find_by_id(id);
-//  }
-//  public List<Ho_Cat> get_subcat_list(Integer id) {
-//    return repository.get_subcat_list(id);
-//  }
-//  public List<Ho_Cat> get_seocontent_menu_list(){
-//    return repository.get_seocontent_menu_list();
-//  }
-//  
-//  public List<Ho_Cat> get_sell_rent_cat(){
-//    return repository.get_sell_rent_cat();
-//  }
 }
