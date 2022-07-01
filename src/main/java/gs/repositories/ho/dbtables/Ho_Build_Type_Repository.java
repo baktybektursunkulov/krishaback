@@ -19,5 +19,8 @@ public interface Ho_Build_Type_Repository extends JpaRepository<Ho_Build_Type, I
   @Query("select t.name as name,t.ho_build_type as id from Ho_Build_Type t where t.is_deleted=false ")
   List<HoAdCatResponse> find_all();
   
+  @Query("select t from Ho_Build_Type t where t.is_deleted=false ")
+  List<Ho_Build_Type> find_all1();
+  
 }
 

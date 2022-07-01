@@ -20,5 +20,8 @@ public interface Ho_Contact_Info_Type_Repository extends JpaRepository<Ho_Contac
   @Query("select t.ho_contact_info_type as id, t.name as name from Ho_Contact_Info_Type t where t.is_deleted=false")
   List<HoAdCatResponse> find_all();
   
+    @Query("select t from Ho_Contact_Info_Type t where t.is_deleted=false")
+  List<Ho_Contact_Info_Type> find_all1();
+  
 }
 

@@ -9,8 +9,15 @@ import gs.payload.response.horesponse.HoAdCatResponse;
 import gs.services.core.dbtables.C_Lang_Service;
 import gs.services.ho.Ho_Ad_Cat_Service;
 import io.swagger.annotations.Api;
+import java.io.IOException;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import model.core.dbtables.Country;
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -121,4 +128,6 @@ public class Ho_Ad_Cat_Controller {
     public ResponseEntity<List<HoAdCatResponse>> ho_house_spec_purpose_repository() throws RuntimeException {
         return new ResponseEntity<>(ho_ad_cat_Service.ho_house_spec_purpose_repository(), HttpStatus.OK);
     }
+  
+    
 }
