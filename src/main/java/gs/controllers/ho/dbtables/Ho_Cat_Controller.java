@@ -54,7 +54,9 @@ public class Ho_Cat_Controller {
   public ResponseEntity<List<Offer_previewResponse>> offer_preview(HttpServletRequest httpServletRequest) throws RuntimeException {
     List<Offer_previewResponse> offer_preview = new ArrayList();
     List<Ho_Ad> ho_ads = ho_ad_Service.find();
+    int i=0;
     for (Ho_Ad ho_ad : ho_ads) {
+      if(i==20)break;
       List<C_Tbl_Rec_Img_Moder> c_tbl_rec_img_moder_list_ = c_tbl_rec_img_moder_repository.find_all(ho_ad.getHo_ad().longValue());
       if (!c_tbl_rec_img_moder_list_.isEmpty()) {
         C_Tbl_Rec_Img_Moder c_tbl_rec_img_moder = c_tbl_rec_img_moder_list_.get(0);
@@ -65,7 +67,7 @@ public class Ho_Cat_Controller {
         ho_ad.getPrice(), c_loc_repository.find_by_Id(ho_ad.getC_loc()), c_tbl_rec_img_moder_repository.find_all_small(ho_ad.getHo_ad().longValue()),
         ho_ad.getStreet_name()));
       }else continue;
-      
+      i++;
     }
     return new ResponseEntity<>(offer_preview, HttpStatus.OK);
   }
