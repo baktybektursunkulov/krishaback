@@ -51,23 +51,23 @@ public class Ho_Cat_Controller {
   C_Bin_File_Body_Repository c_bin_file_body_repository;
 
   @GetMapping(value = "/offer_preview")
-  public ResponseEntity<List<Offer_previewResponse>> offer_preview(HttpServletRequest httpServletRequest) throws RuntimeException {
+  public ResponseEntity<List<Offer_previewResponse>> offer_preview(@Valid @RequestParam Integer page,HttpServletRequest httpServletRequest) throws RuntimeException {
     List<Offer_previewResponse> offer_preview = new ArrayList();
     List<Ho_Ad> ho_ads = ho_ad_Service.find();
-    int i=0;
-    for (Ho_Ad ho_ad : ho_ads) {
-      if(i==20)break;
-      List<C_Tbl_Rec_Img_Moder> c_tbl_rec_img_moder_list_ = c_tbl_rec_img_moder_repository.find_all(ho_ad.getHo_ad().longValue());
+    int d=page*18;
+    for (int i=d-18;i< ho_ads.size();i++) {
+      if(i==d)break;
+      List<C_Tbl_Rec_Img_Moder> c_tbl_rec_img_moder_list_ = c_tbl_rec_img_moder_repository.find_all(ho_ads.get(i).getHo_ad().longValue());
       if (!c_tbl_rec_img_moder_list_.isEmpty()) {
         C_Tbl_Rec_Img_Moder c_tbl_rec_img_moder = c_tbl_rec_img_moder_list_.get(0);
         C_Img c_img = c_img_repository.find_all(c_tbl_rec_img_moder.getC_img());
         System.out.println("test");
       System.out.println("test");
-      offer_preview.add(new Offer_previewResponse(ho_ad.getHo_ad(), c_tbl_rec_img_moder.getC_img().intValue(), c_img.getFile_name(),
-        ho_ad.getPrice(), c_loc_repository.find_by_Id(ho_ad.getC_loc()), c_tbl_rec_img_moder_repository.find_all_small(ho_ad.getHo_ad().longValue()),
-        ho_ad.getStreet_name()));
+      offer_preview.add(new Offer_previewResponse(ho_ads.get(i).getHo_ad(), c_tbl_rec_img_moder.getC_img().intValue(), c_img.getFile_name(),
+        ho_ads.get(i).getPrice(), c_loc_repository.find_by_Id(ho_ads.get(i).getC_loc()), c_tbl_rec_img_moder_repository.find_all_small(ho_ads.get(i).getHo_ad().longValue()),
+        ho_ads.get(i).getStreet_name()));
       }else continue;
-      i++;
+     
     }
     return new ResponseEntity<>(offer_preview, HttpStatus.OK);
   }
