@@ -20,6 +20,7 @@ public interface Ho_House_Condition_Repository extends JpaRepository<Ho_House_Co
 
   @Query("select t.ho_house_condition as id, t.name as name from Ho_House_Condition t where t.is_deleted=false ")
   List<HoAdCatResponse> find_all();
-  
+  @Query("select t from Ho_House_Condition t where t.is_deleted=false ")
+  List<Ho_House_Condition> find_all1();
 }
 

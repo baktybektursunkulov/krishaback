@@ -1,21 +1,35 @@
 package gs.controllers.ho.dbtables;
 
-
+import static gs.common.byte_funcs.bytes;
 import gs.controllers.core.dbtables.*;
 import gs.payload.response.horesponse.HoCatResponse;
+import gs.payload.response.horesponse.Offer_previewResponse;
+import gs.repositories.core.dbtables.C_Bin_File_Body_Repository;
+import gs.repositories.core.dbtables.C_Img_Repository;
+import gs.repositories.core.dbtables.C_Loc_Repository;
+import gs.repositories.core.dbtables.C_Tbl_Rec_Img_Moder_Repository;
+import gs.repositories.ho.dbtables.Ho_Ad_Repository;
 import model.core.dbtables.*;
 import gs.services.core.dbtables.*;
+import gs.services.ho.Ho_Ad_Service;
 import gs.services.ho.Ho_Cat_Service;
 import io.swagger.annotations.Api;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.OutputStream;
+import java.nio.file.Files;
 import java.util.ArrayList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import model.ho.dbtables.Ho_Ad;
 import model.ho.dbtables.Ho_Cat;
+import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @RestController
@@ -25,109 +39,130 @@ public class Ho_Cat_Controller {
 
   @Autowired
   Ho_Cat_Service ho_Cat_Service;
+  @Autowired
+  Ho_Ad_Service ho_ad_Service;
+  @Autowired
+  C_Loc_Repository c_loc_repository;
+  @Autowired
+  C_Tbl_Rec_Img_Moder_Repository c_tbl_rec_img_moder_repository;
+  @Autowired
+  C_Img_Repository c_img_repository;
+  @Autowired
+  C_Bin_File_Body_Repository c_bin_file_body_repository;
+
+  @GetMapping(value = "/offer_preview")
+  public ResponseEntity<List<Offer_previewResponse>> offer_preview(HttpServletRequest httpServletRequest) throws RuntimeException {
+    List<Offer_previewResponse> offer_preview = new ArrayList();
+    List<Ho_Ad> ho_ads = ho_ad_Service.find();
+    for (Ho_Ad ho_ad : ho_ads) {
+      List<C_Tbl_Rec_Img_Moder> c_tbl_rec_img_moder_list_ = c_tbl_rec_img_moder_repository.find_all(ho_ad.getHo_ad().longValue());
+      if (!c_tbl_rec_img_moder_list_.isEmpty()) {
+        C_Tbl_Rec_Img_Moder c_tbl_rec_img_moder = c_tbl_rec_img_moder_list_.get(0);
+        C_Img c_img = c_img_repository.find_all(c_tbl_rec_img_moder.getC_img());
+        System.out.println("test");
+      System.out.println("test");
+      offer_preview.add(new Offer_previewResponse(ho_ad.getHo_ad(), c_tbl_rec_img_moder.getC_img().intValue(), c_img.getFile_name(),
+        ho_ad.getPrice(), c_loc_repository.find_by_Id(ho_ad.getC_loc()), c_tbl_rec_img_moder_repository.find_all_small(ho_ad.getHo_ad().longValue()),
+        ho_ad.getStreet_name()));
+      }else continue;
+      
+    }
+    return new ResponseEntity<>(offer_preview, HttpStatus.OK);
+  }
 
   @GetMapping(value = "/find_all")
   public ResponseEntity<List<HoCatResponse>> find_all(HttpServletRequest httpServletRequest) throws RuntimeException {
-    
+
     List<HoCatResponse> ho_list = new ArrayList();
     List<Ho_Cat> ho_Cats = ho_Cat_Service.find_all();
-    
+
     for (Ho_Cat ho_Cat : ho_Cats) {
       ho_list.add(new HoCatResponse(ho_Cat.getHo_cat(),
-                                             ho_Cat.getSingular_name()));
+        ho_Cat.getSingular_name()));
     }
-    
- 
+
     return new ResponseEntity<>(ho_list, HttpStatus.OK);
   }
-  
-   @GetMapping(value = "/find_page_title")
-  public ResponseEntity<HoCatResponse> find_page_title(@Valid @RequestParam Integer id,HttpServletRequest httpServletRequest) throws RuntimeException {
+
+  @GetMapping(value = "/find_page_title")
+  public ResponseEntity<HoCatResponse> find_page_title(@Valid @RequestParam Integer id, HttpServletRequest httpServletRequest) throws RuntimeException {
     HoCatResponse child_list;
     List<Ho_Cat> ho_Cats = ho_Cat_Service.find_page_title();
-    
+
     Ho_Cat ho_Cat = ho_Cat_Service.find_by_id(id);
-   
-      child_list=new HoCatResponse(ho_Cat.getHo_cat(),
-                                             ho_Cat.getPage_title());
-     
-    
-    
- 
+
+    child_list = new HoCatResponse(ho_Cat.getHo_cat(),
+      ho_Cat.getPage_title());
+
     return new ResponseEntity<>(child_list, HttpStatus.OK);
   }
-  
-    @GetMapping(value = "/get_subcat_list")
-  public ResponseEntity<List<HoCatResponse>> get_subcat_list(@Valid @RequestParam Integer id,HttpServletRequest httpServletRequest) throws RuntimeException {
-   
-    
+
+  @GetMapping(value = "/get_subcat_list")
+  public ResponseEntity<List<HoCatResponse>> get_subcat_list(@Valid @RequestParam Integer id, HttpServletRequest httpServletRequest) throws RuntimeException {
+
     //Ho_Cat ho_Cat1 = ho_Cat_Service.get_subcat_list(id);
     List<HoCatResponse> ho_list = new ArrayList();
     List<Ho_Cat> ho_Cats = ho_Cat_Service.get_subcat_list(id);
-    
+
     for (Ho_Cat ho_Cat : ho_Cats) {
       ho_list.add(new HoCatResponse(ho_Cat.getHo_cat(),
-                                             ho_Cat.getPlural_name()));
+        ho_Cat.getPlural_name()));
     }
     return new ResponseEntity<>(ho_list, HttpStatus.OK);
   }
-  
-     @GetMapping(value = "/find_title")
+
+  @GetMapping(value = "/find_title")
   public ResponseEntity<List<HoCatResponse>> find_title(HttpServletRequest httpServletRequest) throws RuntimeException {
-   
+
     List<HoCatResponse> child_list = new ArrayList();
     List<Ho_Cat> ho_Cats = ho_Cat_Service.find_page_title();
-    
+
     for (Ho_Cat ho_Cat : ho_Cats) {
       child_list.add(new HoCatResponse(ho_Cat.getHo_cat(),
-                                             ho_Cat.getName()));
+        ho_Cat.getName()));
     }
-    
- 
+
     return new ResponseEntity<>(child_list, HttpStatus.OK);
   }
-  
-   @GetMapping(value = "/get_seocontent_menu_list")
+
+  @GetMapping(value = "/get_seocontent_menu_list")
   public ResponseEntity<List<HoCatResponse>> get_seocontent_menu_list(HttpServletRequest httpServletRequest) throws RuntimeException {
-   
+
     List<HoCatResponse> child_list = new ArrayList();
     List<Ho_Cat> ho_Cats = ho_Cat_Service.get_seocontent_menu_list();
-    
+
     for (Ho_Cat ho_Cat : ho_Cats) {
       child_list.add(new HoCatResponse(ho_Cat.getHo_cat(),
-                                             ho_Cat.getName()));
+        ho_Cat.getName()));
     }
-    
- 
+
     return new ResponseEntity<>(child_list, HttpStatus.OK);
   }
-  
+
   @GetMapping(value = "/get_sell_rent_cat")
   public ResponseEntity<List<HoCatResponse>> get_sell_rent_cat(HttpServletRequest httpServletRequest) throws RuntimeException {
-   
+
     List<HoCatResponse> child_list = new ArrayList();
     List<Ho_Cat> ho_Cats = ho_Cat_Service.get_sell_rent_cat();
-    
+
     for (Ho_Cat ho_Cat : ho_Cats) {
       child_list.add(new HoCatResponse(ho_Cat.getHo_cat(),
-                                             ho_Cat.getName()));
+        ho_Cat.getName()));
     }
-    
- 
+
     return new ResponseEntity<>(child_list, HttpStatus.OK);
   }
-  
-    @GetMapping(value = "/get_sell_rent_subcat")
-  public ResponseEntity<List<HoCatResponse>> get_sell_rent_subcat(@Valid @RequestParam Integer id,HttpServletRequest httpServletRequest) throws RuntimeException {
-   
-    
+
+  @GetMapping(value = "/get_sell_rent_subcat")
+  public ResponseEntity<List<HoCatResponse>> get_sell_rent_subcat(@Valid @RequestParam Integer id, HttpServletRequest httpServletRequest) throws RuntimeException {
+
     //Ho_Cat ho_Cat1 = ho_Cat_Service.get_subcat_list(id);
     List<HoCatResponse> ho_list = new ArrayList();
     List<Ho_Cat> ho_Cats = ho_Cat_Service.get_sell_rent_subcat(id);
-    
+
     for (Ho_Cat ho_Cat : ho_Cats) {
       ho_list.add(new HoCatResponse(ho_Cat.getHo_cat(),
-                                             ho_Cat.getName()));
+        ho_Cat.getName()));
     }
     return new ResponseEntity<>(ho_list, HttpStatus.OK);
   }
@@ -196,6 +231,3 @@ public class Ho_Cat_Controller {
 //  }
 
 }
-
-
-

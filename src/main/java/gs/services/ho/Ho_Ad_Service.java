@@ -1,6 +1,7 @@
 package gs.services.ho;
 
 import gs.payload.response.horesponse.HoCatResponse;
+import gs.payload.response.horesponse.HoPhoneResponse;
 import gs.repositories.ho.dbtables.Ho_Ad_Repository;
 import java.util.List;
 
@@ -21,4 +22,13 @@ public class Ho_Ad_Service {
     repository.save(ho_ad);
     return ho_ad;
 }  
+  public List<Integer> find_all()  { 
+    return repository.find_all();
+}
+  public void update(Ho_Ad ho_ad, int id) {
+    repository.save(ho_ad);
+  }
+  public List<Ho_Ad> find(){
+    return repository.find();
+  }
 }

@@ -16,5 +16,6 @@ public interface C_Loc_Repository extends JpaRepository<C_Loc, Long> {
 
   @Query("select t.c_loc as id, t.name as name from C_Loc t where t.parent_id=:id_ and is_deleted=false order by name")
   List<HoCLocResponse> find_by_id(@Param("id_") Integer id_);
-
+    @Query("select t.name as name from C_Loc t where t.c_loc=:id_ and is_deleted=false")
+  String find_by_Id(@Param("id_") Integer id_);
 }

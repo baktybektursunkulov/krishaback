@@ -19,6 +19,8 @@ public interface Ho_House_Inet_Repository extends JpaRepository<Ho_House_Inet, I
 
   @Query("select t.ho_house_inet as id, t.name as name  from Ho_House_Inet t where t.is_deleted=false ")
   List<HoAdCatResponse> find_all();
+   @Query("select t from Ho_House_Inet t where t.is_deleted=false ")
+  List<Ho_House_Inet> find_all1();
   
 }
 

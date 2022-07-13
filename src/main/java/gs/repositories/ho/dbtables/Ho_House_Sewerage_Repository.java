@@ -21,6 +21,7 @@ public interface Ho_House_Sewerage_Repository extends JpaRepository<Ho_House_Sew
 
   @Query("select t.ho_house_sewerage as id , t.name as name from Ho_House_Sewerage t where t.is_deleted=false ")
   List<HoAdCatResponse> find_all();
-  
+   @Query("select t from Ho_House_Sewerage t where t.is_deleted=false ")
+  List<Ho_House_Sewerage> find_all1();
 }
 

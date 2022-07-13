@@ -10,6 +10,7 @@ import model.ho.dbtables.Ho_Cat;
 import model.ho.dbtables.Ho_House_Balcony;
 import model.ho.dbtables.Ho_House_Electricity;
 import model.ho.dbtables.Ho_House_Inet;
+import model.ho.dbtables.Ho_House_Sewerage;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -22,5 +23,7 @@ public interface Ho_House_Electricity_Repository extends JpaRepository<Ho_House_
   @Query("select t.ho_house_electricity as id, t.name as name  from Ho_House_Electricity t where t.is_deleted=false ")
   List<HoAdCatResponse> find_all();
   
+   @Query("select t from Ho_House_Electricity t where t.is_deleted=false ")
+  List<Ho_House_Electricity> find_all1();
 }
 
