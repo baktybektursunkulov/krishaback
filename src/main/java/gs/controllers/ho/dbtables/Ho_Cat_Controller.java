@@ -55,8 +55,6 @@ public class Ho_Cat_Controller {
     List<Offer_previewResponse> offer_preview = new ArrayList();
     List<Integer> ho_cat=ho_Cat_Service.ho_cat_sell_rent(parent_id,id);
      List<Ho_Ad> ho_ads = ho_ad_Service.find(ho_cat.get(0));
-//     List<Ho_Ad> ho_adss = new ArrayList();
-//     ho_adss.addAll(h);
     int d=page*18;
     int i=d-18;
     int j=d-18;
@@ -69,17 +67,30 @@ public class Ho_Cat_Controller {
     System.out.println(ho_ads.size());
     while(i< ho_ads.size()) {
       
+     C_Loc c_loc=c_loc_repository.find_all(ho_ads.get(j).getC_loc());
+     try{if(c_loc.getIs_city().equals(false))
+      System.out.println(c_loc.getIs_city());
+     while(c_loc.getIs_city().equals(false)){
+       c_loc=c_loc_repository.find_all(c_loc.getParent_id());
+     }
+     if(c_loc.getIs_city().equals(false)){j++;continue;}
+     
+     
       List<C_Tbl_Rec_Img_Moder> c_tbl_rec_img_moder_list_ = c_tbl_rec_img_moder_repository.find_all(ho_ads.get(j).getHo_ad().longValue());
       if (!c_tbl_rec_img_moder_list_.isEmpty()) {
+        
         C_Tbl_Rec_Img_Moder c_tbl_rec_img_moder = c_tbl_rec_img_moder_list_.get(0);
         C_Img c_img = c_img_repository.find_all(c_tbl_rec_img_moder.getC_img());
       offer_preview.add(new Offer_previewResponse(ho_ads.get(i).getHo_ad(), c_tbl_rec_img_moder.getC_img().intValue(), c_img.getFile_name(),
-        ho_ads.get(j).getPrice(), c_loc_repository.find_by_Id(ho_ads.get(j).getC_loc()), c_tbl_rec_img_moder_repository.find_all_small(ho_ads.get(j).getHo_ad().longValue()),
+        ho_ads.get(j).getPrice(),c_loc.getName() , c_tbl_rec_img_moder_repository.find_all_small(ho_ads.get(j).getHo_ad().longValue()),
         ho_ads.get(j).getStreet_name()));
       i++;
       }
       j++;
-      
+    }catch(NullPointerException e){
+      j++;
+      continue;
+      }
      if(i==d)break;
     }
     return new ResponseEntity<>(offer_preview, HttpStatus.OK);
@@ -95,10 +106,16 @@ public class Ho_Cat_Controller {
     int k=1;
     while(ho_ads.size()<d&&ho_cat.size()>k){
     if(ho_ads.size()-j<18){ho_ads.addAll(ho_ad_Service.find(ho_cat.get(k)));k++;}
-    
     }
     while(i< ho_ads.size()) {
       
+     C_Loc c_loc=c_loc_repository.find_all(ho_ads.get(j).getC_loc());
+      try{
+     while(c_loc.getIs_city().equals(false)){
+       c_loc=c_loc_repository.find_all(c_loc.getParent_id());
+     }
+     if(c_loc.getIs_city().equals(false)){j++;continue;}
+     
       List<C_Tbl_Rec_Img_Moder> c_tbl_rec_img_moder_list_ = c_tbl_rec_img_moder_repository.find_all(ho_ads.get(j).getHo_ad().longValue());
       if (!c_tbl_rec_img_moder_list_.isEmpty()) {
         C_Tbl_Rec_Img_Moder c_tbl_rec_img_moder = c_tbl_rec_img_moder_list_.get(0);
@@ -109,7 +126,10 @@ public class Ho_Cat_Controller {
       i++;
       }
       j++;
-      
+      }catch(NullPointerException e){
+      j++;
+      continue;
+      }
      if(i==d)break;
     }
     return new ResponseEntity<>(offer_preview, HttpStatus.OK);
