@@ -139,177 +139,177 @@ public class Selenium {
   @Autowired
   C_Tbl_Rec_Img_Moder_Repository c_tbl_rec_img_moder_repository;
 
-  @PutMapping("/update_ho_ad")
-  private void update(@RequestBody Ho_Ad ho_ad) throws FileNotFoundException, InterruptedException, InterruptedException {
-    File file = new File("C:\\Users\\User\\Downloads\\demo\\parse");
-     List<Integer> ho_ad1 = ho_Ad_Service.find_all();
-    Scanner scanner = new Scanner(file);
-    int j = 0;
-    System.out.println(scanner.nextLine());
-    List<Ho_Ad> ho_add=ho_Ad_repository.find();
-    while (scanner.hasNextLine()) {
-      String stringt = scanner.nextLine();
-      Document doc;
-        try {
-        doc = (Document) Jsoup.connect(stringt).get();
-        Thread.sleep(2000);
-        ho_ad.setHo_ad(ho_ad1.get(j));
-          Date timestamp = new Date();
-          ho_ad.setIns_dt(timestamp);
-          ho_ad.setIs_deleted(Boolean.FALSE);
-          ho_ad.setIs_agree_with_rules(true);
-          ho_ad.setHo_usr(1L);
-          ho_ad.setHo_cat(20);
-          ho_ad.setHo_ad_status(1);
-          ho_ad.setHo_house_rent_period(ho_add.get(j).getHo_house_rent_period());
-          ho_ad.setLat(ho_add.get(j).getLat());
-        ho_ad.setLon(ho_add.get(j).getLon());
-        ho_ad.setRoom_cnt(ho_add.get(j).getRoom_cnt());
-        ho_ad.setPrice(ho_add.get(j).getPrice());
-        ho_ad.setHo_build_type(ho_add.get(j).getHo_build_type());
-        ho_ad.setConstruction_year(ho_add.get(j).getConstruction_year());
-        ho_ad.setFloor(ho_add.get(j).getFloor());
-        ho_ad.setMax_floor(ho_add.get(j).getMax_floor());
-        ho_ad.setTotal_area(ho_add.get(j).getTotal_area());
-        ho_ad.setIs_in_priv_hostel(ho_add.get(j).getIs_in_priv_hostel());
-        ho_ad.setC_loc(ho_add.get(j).getC_loc());
-        ho_ad.setHo_resid_complex(ho_add.get(j).getHo_resid_complex());
-        ho_ad.setStreet_name(ho_add.get(j).getStreet_name());
-        ho_ad.setCeiling_height(ho_add.get(j).getCeiling_height());
-        ho_ad.setTxt(ho_add.get(j).getTxt());
-        ho_ad.setHo_contact_info_type(ho_add.get(j).getHo_contact_info_type());
-        Elements inputElements = doc.getElementsByClass("offer__advert-short-info");
-
-        Elements elements = doc.getElementsByClass("offer__info-title");
-        String[] s_elem = new String[elements.size()];
-        int iterator = 0;
-        for (Element inElement : elements) {
-          s_elem[iterator] = inElement.text();
-          iterator++;
-        }
-        int iteratorx = 0;
-        String[] s_elemx = new String[elements.size()];
-        for (Element inputElement : inputElements) {
-          s_elemx[iteratorx] = inputElement.text();
-          iteratorx++;
-        }
-        System.out.println("Tip doma");
-        for (int itip = 0; itip < elements.size(); itip++) {
-          String tip = s_elem[itip];
-          System.out.println(itip);
-          if (tip.equals("Город")) {
-            continue;
-          }
-          String s = s_elemx[itip];
-
-          if (tip.equals("Тип дома")) {
-            tipdoma(s, ho_ad);
-          } else if (tip.equals("Жилой комплекс")) {
-            jilkomp(s, ho_ad);
-          } else if (tip.equals("Парковка")) {
-            parking(s, ho_ad);
-          } else if (tip.equals("Состояние")) {
-            condition(s, ho_ad);
-          } else if (tip.equals("Этаж")) {
-            stage(s, ho_ad);
-          } else if (tip.equals("Интернет")) {
-            inet(s, ho_ad);
-          } else if (tip.equals("Санузел")) {
-            bathroom(s, ho_ad);
-          } else if (tip.equals("Балкон")) {
-            balcony(s, ho_ad);
-          } else if (tip.equals("Пол")) {
-            floor(s, ho_ad);
-          } else if (tip.equals("Мебель")) {
-            furniture(s, ho_ad);
-          } else if (tip.equals("Телефон")) {
-            phone(s, ho_ad);
-          } else if (tip.equals("Год постройки")) {
-            ho_ad.setConstruction_year(Integer.parseInt(s));
-          } else if (tip.equals("Дверь")) {
-            door(s, ho_ad);
-          }
-
-        }
-        System.out.println("god postroikiy");
-        Elements elementsClient = doc.getElementsByTag("dd");
-        Elements elementss = doc.getElementsByTag("dt");
-        String[] offer = new String[elementsClient.size()];
-        int i_offer = 0;
-        for (Element offerElement : elementsClient) {
-          offer[i_offer] = offerElement.text();
-          i_offer++;
-        }
-        int i_offerx = 0;
-        String[] offerx = new String[elementsClient.size()];
-        for (Element offerxElement : elementss) {
-          offerx[i_offerx] = offerxElement.text();
-          i_offerx++;
-        }
-        for (int itip = 0; itip < elementsClient.size(); itip++) {
-          String s = offer[itip];
-          String f = offerx[itip];
-          if (f.equals("В прив. общежитии")) {
-            flat_priv_dorm(s, ho_ad);
-          } else if (f.equals("Потолки")) {
-            ceiling(s, ho_ad);
-          } else if (f.equals("Парковка")) {
-            parking(s, ho_ad);
-          } else if (f.equals("Балкон остеклён")) {
-            flat_balcony_g(s, ho_ad);
-          } else if (f.equals("Интернет")) {
-            inet(s, ho_ad);
-          } else if (f.equals("Санузел")) {
-            bathroom(s, ho_ad);
-          } else if (f.equals("Балкон")) {
-            balcony(s, ho_ad);
-          } else if (f.equals("Пол")) {
-            floor(s, ho_ad);
-          } else if (f.equals("Мебель")) {
-            furniture(s, ho_ad);
-          } else if (f.equals("Телефон")) {
-            phone(s, ho_ad);
-          } else if (f.equals("Дверь")) {
-            door(s, ho_ad);
-
-          }
-        }
-        System.out.println("text");
-        ho_Ad_Service.saveOrUpdate(ho_ad);
-        }catch (IOException ex) {
-      continue;
-    }
-    
-    j++;
-    }
-   
-    
-  }
-
-  @GetMapping("/phone")
-  public void phone() throws FileNotFoundException {
-    List<Integer> ho_ad1 = ho_Ad_Service.find_all();
-    String separator = File.separator;
-    File file = new File("C:\\Users\\User\\Downloads\\demo\\Phone");
-    Scanner scanner = new Scanner(file);
-    int i = 0;
-
-    while (scanner.hasNextLine()) {
-      Ho_Ad ho_ad = new Ho_Ad();
-      Ho_Ad_Phone_Num ho_ad_phone_num = new Ho_Ad_Phone_Num();
-      String stringt = scanner.nextLine();
-      ho_ad_phone_num.setHo_ad(ho_ad1.get(i));
-      ho_ad_phone_num.setIs_deleted(Boolean.FALSE);
-      if (stringt == "baktybek") {
-        System.out.println("baktybek");
-      } else {
-        ho_ad_phone_num.setPhone_num(stringt);
-      }
-      ho_ad_phone_num_repository.save(ho_ad_phone_num);
-      i++;
-    }
-
-  }
+//  @PutMapping("/update_ho_ad")
+//  private void update(@RequestBody Ho_Ad ho_ad) throws FileNotFoundException, InterruptedException, InterruptedException {
+//    File file = new File("C:\\Users\\User\\Downloads\\demo\\parse");
+//     List<Integer> ho_ad1 = ho_Ad_Service.find_all();
+//    Scanner scanner = new Scanner(file);
+//    int j = 0;
+//    System.out.println(scanner.nextLine());
+//    List<Ho_Ad> ho_add=ho_Ad_repository.find();
+//    while (scanner.hasNextLine()) {
+//      String stringt = scanner.nextLine();
+//      Document doc;
+//        try {
+//        doc = (Document) Jsoup.connect(stringt).get();
+//        Thread.sleep(2000);
+//        ho_ad.setHo_ad(ho_ad1.get(j));
+//          Date timestamp = new Date();
+//          ho_ad.setIns_dt(timestamp);
+//          ho_ad.setIs_deleted(Boolean.FALSE);
+//          ho_ad.setIs_agree_with_rules(true);
+//          ho_ad.setHo_usr(1L);
+//          ho_ad.setHo_cat(20);
+//          ho_ad.setHo_ad_status(1);
+//          ho_ad.setHo_house_rent_period(ho_add.get(j).getHo_house_rent_period());
+//          ho_ad.setLat(ho_add.get(j).getLat());
+//        ho_ad.setLon(ho_add.get(j).getLon());
+//        ho_ad.setRoom_cnt(ho_add.get(j).getRoom_cnt());
+//        ho_ad.setPrice(ho_add.get(j).getPrice());
+//        ho_ad.setHo_build_type(ho_add.get(j).getHo_build_type());
+//        ho_ad.setConstruction_year(ho_add.get(j).getConstruction_year());
+//        ho_ad.setFloor(ho_add.get(j).getFloor());
+//        ho_ad.setMax_floor(ho_add.get(j).getMax_floor());
+//        ho_ad.setTotal_area(ho_add.get(j).getTotal_area());
+//        ho_ad.setIs_in_priv_hostel(ho_add.get(j).getIs_in_priv_hostel());
+//        ho_ad.setC_loc(ho_add.get(j).getC_loc());
+//        ho_ad.setHo_resid_complex(ho_add.get(j).getHo_resid_complex());
+//        ho_ad.setStreet_name(ho_add.get(j).getStreet_name());
+//        ho_ad.setCeiling_height(ho_add.get(j).getCeiling_height());
+//        ho_ad.setTxt(ho_add.get(j).getTxt());
+//        ho_ad.setHo_contact_info_type(ho_add.get(j).getHo_contact_info_type());
+//        Elements inputElements = doc.getElementsByClass("offer__advert-short-info");
+//
+//        Elements elements = doc.getElementsByClass("offer__info-title");
+//        String[] s_elem = new String[elements.size()];
+//        int iterator = 0;
+//        for (Element inElement : elements) {
+//          s_elem[iterator] = inElement.text();
+//          iterator++;
+//        }
+//        int iteratorx = 0;
+//        String[] s_elemx = new String[elements.size()];
+//        for (Element inputElement : inputElements) {
+//          s_elemx[iteratorx] = inputElement.text();
+//          iteratorx++;
+//        }
+//        System.out.println("Tip doma");
+//        for (int itip = 0; itip < elements.size(); itip++) {
+//          String tip = s_elem[itip];
+//          System.out.println(itip);
+//          if (tip.equals("Город")) {
+//            continue;
+//          }
+//          String s = s_elemx[itip];
+//
+//          if (tip.equals("Тип дома")) {
+//            tipdoma(s, ho_ad);
+//          } else if (tip.equals("Жилой комплекс")) {
+//            jilkomp(s, ho_ad);
+//          } else if (tip.equals("Парковка")) {
+//            parking(s, ho_ad);
+//          } else if (tip.equals("Состояние")) {
+//            condition(s, ho_ad);
+//          } else if (tip.equals("Этаж")) {
+//            stage(s, ho_ad);
+//          } else if (tip.equals("Интернет")) {
+//            inet(s, ho_ad);
+//          } else if (tip.equals("Санузел")) {
+//            bathroom(s, ho_ad);
+//          } else if (tip.equals("Балкон")) {
+//            balcony(s, ho_ad);
+//          } else if (tip.equals("Пол")) {
+//            floor(s, ho_ad);
+//          } else if (tip.equals("Мебель")) {
+//            furniture(s, ho_ad);
+//          } else if (tip.equals("Телефон")) {
+//            phone(s, ho_ad);
+//          } else if (tip.equals("Год постройки")) {
+//            ho_ad.setConstruction_year(Integer.parseInt(s));
+//          } else if (tip.equals("Дверь")) {
+//            door(s, ho_ad);
+//          }
+//
+//        }
+//        System.out.println("god postroikiy");
+//        Elements elementsClient = doc.getElementsByTag("dd");
+//        Elements elementss = doc.getElementsByTag("dt");
+//        String[] offer = new String[elementsClient.size()];
+//        int i_offer = 0;
+//        for (Element offerElement : elementsClient) {
+//          offer[i_offer] = offerElement.text();
+//          i_offer++;
+//        }
+//        int i_offerx = 0;
+//        String[] offerx = new String[elementsClient.size()];
+//        for (Element offerxElement : elementss) {
+//          offerx[i_offerx] = offerxElement.text();
+//          i_offerx++;
+//        }
+//        for (int itip = 0; itip < elementsClient.size(); itip++) {
+//          String s = offer[itip];
+//          String f = offerx[itip];
+//          if (f.equals("В прив. общежитии")) {
+//            flat_priv_dorm(s, ho_ad);
+//          } else if (f.equals("Потолки")) {
+//            ceiling(s, ho_ad);
+//          } else if (f.equals("Парковка")) {
+//            parking(s, ho_ad);
+//          } else if (f.equals("Балкон остеклён")) {
+//            flat_balcony_g(s, ho_ad);
+//          } else if (f.equals("Интернет")) {
+//            inet(s, ho_ad);
+//          } else if (f.equals("Санузел")) {
+//            bathroom(s, ho_ad);
+//          } else if (f.equals("Балкон")) {
+//            balcony(s, ho_ad);
+//          } else if (f.equals("Пол")) {
+//            floor(s, ho_ad);
+//          } else if (f.equals("Мебель")) {
+//            furniture(s, ho_ad);
+//          } else if (f.equals("Телефон")) {
+//            phone(s, ho_ad);
+//          } else if (f.equals("Дверь")) {
+//            door(s, ho_ad);
+//
+//          }
+//        }
+//        System.out.println("text");
+//        ho_Ad_Service.saveOrUpdate(ho_ad);
+//        }catch (IOException ex) {
+//      continue;
+//    }
+//    
+//    j++;
+//    }
+//   
+//    
+//  }
+//
+//  @GetMapping("/phone")
+//  public void phone() throws FileNotFoundException {
+//    List<Integer> ho_ad1 = ho_Ad_Service.find_all();
+//    String separator = File.separator;
+//    File file = new File("C:\\Users\\User\\Downloads\\demo\\Phone");
+//    Scanner scanner = new Scanner(file);
+//    int i = 0;
+//
+//    while (scanner.hasNextLine()) {
+//      Ho_Ad ho_ad = new Ho_Ad();
+//      Ho_Ad_Phone_Num ho_ad_phone_num = new Ho_Ad_Phone_Num();
+//      String stringt = scanner.nextLine();
+//      ho_ad_phone_num.setHo_ad(ho_ad1.get(i));
+//      ho_ad_phone_num.setIs_deleted(Boolean.FALSE);
+//      if (stringt == "baktybek") {
+//        System.out.println("baktybek");
+//      } else {
+//        ho_ad_phone_num.setPhone_num(stringt);
+//      }
+//      ho_ad_phone_num_repository.save(ho_ad_phone_num);
+//      i++;
+//    }
+//
+//  }
 
   @GetMapping("/loc")
   public void loc() throws InterruptedException, FileNotFoundException, IOException {

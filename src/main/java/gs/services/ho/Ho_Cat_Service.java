@@ -13,9 +13,15 @@ public class Ho_Cat_Service {
 
   @Autowired
   private Ho_Cat_Repository repository;
-
+ 
   public List<Ho_Cat> find_all() {
     return repository.find_all();
+  }
+  public List<Integer> ho_cat_sell(Integer id) {
+    return repository.ho_cat_sell(id);
+  }
+  public List<Integer> ho_cat_sell_rent(Integer id,Integer order_num) {
+    return repository.ho_cat_sell_rent(id,order_num);
   }
   public List<Ho_Cat> find_page_title() {
     return repository.find_page_title();

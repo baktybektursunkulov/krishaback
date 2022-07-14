@@ -9,6 +9,7 @@ import gs.repositories.core.dbtables.C_Img_Repository;
 import gs.repositories.core.dbtables.C_Loc_Repository;
 import gs.repositories.core.dbtables.C_Tbl_Rec_Img_Moder_Repository;
 import gs.repositories.ho.dbtables.Ho_Ad_Repository;
+import gs.repositories.ho.dbtables.Ho_Cat_Repository;
 import model.core.dbtables.*;
 import gs.services.core.dbtables.*;
 import gs.services.ho.Ho_Ad_Service;
@@ -49,25 +50,63 @@ public class Ho_Cat_Controller {
   C_Img_Repository c_img_repository;
   @Autowired
   C_Bin_File_Body_Repository c_bin_file_body_repository;
-
-  @GetMapping(value = "/offer_preview")
-  public ResponseEntity<List<Offer_previewResponse>> offer_preview(@Valid @RequestParam Integer page,HttpServletRequest httpServletRequest) throws RuntimeException {
+  @GetMapping(value = "/preview_sell_rent")
+  public ResponseEntity<List<Offer_previewResponse>> preview_sell_rent(@Valid @RequestParam Integer id,@Valid @RequestParam Integer parent_id,@Valid @RequestParam Integer page,HttpServletRequest httpServletRequest) throws RuntimeException {
     List<Offer_previewResponse> offer_preview = new ArrayList();
-    List<Ho_Ad> ho_ads = ho_ad_Service.find();
+    List<Integer> ho_cat=ho_Cat_Service.ho_cat_sell_rent(parent_id,id);
+     List<Ho_Ad> ho_ads = ho_ad_Service.find(ho_cat.get(0));
     int d=page*18;
-    for (int i=d-18;i< ho_ads.size();i++) {
-      if(i==d)break;
-      List<C_Tbl_Rec_Img_Moder> c_tbl_rec_img_moder_list_ = c_tbl_rec_img_moder_repository.find_all(ho_ads.get(i).getHo_ad().longValue());
+    int i=d-18;
+    int j=d-18;
+    int k=1;
+    while(ho_ads.size()<j&&ho_cat.size()>k){
+    if(ho_ads.size()-j<18){ho_ads.addAll(ho_ad_Service.find(ho_cat.get(k)));k++;}
+    
+    }
+    while(i< ho_ads.size()) {
+      
+      List<C_Tbl_Rec_Img_Moder> c_tbl_rec_img_moder_list_ = c_tbl_rec_img_moder_repository.find_all(ho_ads.get(j).getHo_ad().longValue());
       if (!c_tbl_rec_img_moder_list_.isEmpty()) {
         C_Tbl_Rec_Img_Moder c_tbl_rec_img_moder = c_tbl_rec_img_moder_list_.get(0);
         C_Img c_img = c_img_repository.find_all(c_tbl_rec_img_moder.getC_img());
-        System.out.println("test");
-      System.out.println("test");
       offer_preview.add(new Offer_previewResponse(ho_ads.get(i).getHo_ad(), c_tbl_rec_img_moder.getC_img().intValue(), c_img.getFile_name(),
-        ho_ads.get(i).getPrice(), c_loc_repository.find_by_Id(ho_ads.get(i).getC_loc()), c_tbl_rec_img_moder_repository.find_all_small(ho_ads.get(i).getHo_ad().longValue()),
-        ho_ads.get(i).getStreet_name()));
-      }else continue;
-     
+        ho_ads.get(j).getPrice(), c_loc_repository.find_by_Id(ho_ads.get(j).getC_loc()), c_tbl_rec_img_moder_repository.find_all_small(ho_ads.get(j).getHo_ad().longValue()),
+        ho_ads.get(j).getStreet_name()));
+      i++;
+      }
+      j++;
+      
+     if(i==d)break;
+    }
+    return new ResponseEntity<>(offer_preview, HttpStatus.OK);
+  }
+  @GetMapping(value = "/offer_preview")
+  public ResponseEntity<List<Offer_previewResponse>> offer_preview(@Valid @RequestParam Integer parent_id,@Valid @RequestParam Integer page,HttpServletRequest httpServletRequest) throws RuntimeException {
+    List<Offer_previewResponse> offer_preview = new ArrayList();
+    List<Integer> ho_cat=ho_Cat_Service.ho_cat_sell(parent_id);
+     List<Ho_Ad> ho_ads = ho_ad_Service.find(ho_cat.get(0));
+    int d=page*18;
+    int i=d-18;
+    int j=d-18;
+    int k=1;
+    while(ho_ads.size()<j&&ho_cat.size()>k){
+    if(ho_ads.size()-j<18){ho_ads.addAll(ho_ad_Service.find(ho_cat.get(k)));k++;}
+    
+    }
+    while(i< ho_ads.size()) {
+      
+      List<C_Tbl_Rec_Img_Moder> c_tbl_rec_img_moder_list_ = c_tbl_rec_img_moder_repository.find_all(ho_ads.get(j).getHo_ad().longValue());
+      if (!c_tbl_rec_img_moder_list_.isEmpty()) {
+        C_Tbl_Rec_Img_Moder c_tbl_rec_img_moder = c_tbl_rec_img_moder_list_.get(0);
+        C_Img c_img = c_img_repository.find_all(c_tbl_rec_img_moder.getC_img());
+      offer_preview.add(new Offer_previewResponse(ho_ads.get(i).getHo_ad(), c_tbl_rec_img_moder.getC_img().intValue(), c_img.getFile_name(),
+        ho_ads.get(j).getPrice(), c_loc_repository.find_by_Id(ho_ads.get(j).getC_loc()), c_tbl_rec_img_moder_repository.find_all_small(ho_ads.get(j).getHo_ad().longValue()),
+        ho_ads.get(j).getStreet_name()));
+      i++;
+      }
+      j++;
+      
+     if(i==d)break;
     }
     return new ResponseEntity<>(offer_preview, HttpStatus.OK);
   }

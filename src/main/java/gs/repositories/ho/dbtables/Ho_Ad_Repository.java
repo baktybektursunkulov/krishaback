@@ -21,8 +21,8 @@ public interface Ho_Ad_Repository extends CrudRepository<Ho_Ad, Integer> {
 
   @Query("select t.ho_ad from Ho_Ad t where t.is_deleted=false and t.ho_cat=20 order by t.ho_ad")
   List<Integer> find_all();
-  @Query("select t from Ho_Ad t where t.is_deleted=false order by t.ho_ad")
-  List<Ho_Ad> find();
+  @Query( "select t from Ho_Ad t where t.ho_cat=:id_ and t.is_deleted=false order by t.ho_ad ")
+  List<Ho_Ad> find(@Param("id_") Integer id_);
   @Query("select t from Ho_Ad t where t.is_deleted=false and t.ho_cat=20 order by t.ho_ad")
   List<Ho_Ad> findall();
 }

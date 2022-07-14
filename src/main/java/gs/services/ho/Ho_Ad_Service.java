@@ -28,7 +28,7 @@ public class Ho_Ad_Service {
   public void update(Ho_Ad ho_ad, int id) {
     repository.save(ho_ad);
   }
-  public List<Ho_Ad> find(){
-    return repository.find();
+  public List<Ho_Ad> find(Integer id){
+    return repository.find(id);
   }
 }

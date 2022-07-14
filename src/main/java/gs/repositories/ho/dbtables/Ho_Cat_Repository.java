@@ -13,7 +13,12 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface Ho_Cat_Repository extends JpaRepository<Ho_Cat, Integer> {
-
+  @Query("select t.ho_cat from Ho_Cat t where t.is_deleted=false and parent_id=:id_ order by t.ho_cat")
+  List<Integer>ho_cat_sell(@Param("id_") Integer id_);
+  
+   @Query("select t.ho_cat from Ho_Cat t where t.is_deleted=false and parent_id=:id_ and t.order_num=:order_num_ order by t.ho_cat")
+  List<Integer>ho_cat_sell_rent(@Param("id_") Integer id_,@Param("order_num_") Integer order_num_);
+  
   @Query("select t from Ho_Cat t where t.is_deleted=false and parent_id is null")
   List<Ho_Cat> find_all();
   
