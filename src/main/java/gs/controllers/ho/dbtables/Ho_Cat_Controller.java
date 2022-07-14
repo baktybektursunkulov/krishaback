@@ -55,14 +55,18 @@ public class Ho_Cat_Controller {
     List<Offer_previewResponse> offer_preview = new ArrayList();
     List<Integer> ho_cat=ho_Cat_Service.ho_cat_sell_rent(parent_id,id);
      List<Ho_Ad> ho_ads = ho_ad_Service.find(ho_cat.get(0));
+//     List<Ho_Ad> ho_adss = new ArrayList();
+//     ho_adss.addAll(h);
     int d=page*18;
     int i=d-18;
     int j=d-18;
     int k=1;
-    while(ho_ads.size()<j&&ho_cat.size()>k){
-    if(ho_ads.size()-j<18){ho_ads.addAll(ho_ad_Service.find(ho_cat.get(k)));k++;}
-    
-    }
+    while(ho_ads.size()<d&&ho_cat.size()>k){
+    if(ho_ads.size()-j<18){
+      ho_ads.addAll(ho_ad_Service.find(ho_cat.get(k)));
+      k++;
+    }    }
+    System.out.println(ho_ads.size());
     while(i< ho_ads.size()) {
       
       List<C_Tbl_Rec_Img_Moder> c_tbl_rec_img_moder_list_ = c_tbl_rec_img_moder_repository.find_all(ho_ads.get(j).getHo_ad().longValue());
@@ -89,7 +93,7 @@ public class Ho_Cat_Controller {
     int i=d-18;
     int j=d-18;
     int k=1;
-    while(ho_ads.size()<j&&ho_cat.size()>k){
+    while(ho_ads.size()<d&&ho_cat.size()>k){
     if(ho_ads.size()-j<18){ho_ads.addAll(ho_ad_Service.find(ho_cat.get(k)));k++;}
     
     }
