@@ -286,30 +286,27 @@ public class Selenium {
 //    
 //  }
 //
-//  @GetMapping("/phone")
-//  public void phone() throws FileNotFoundException {
-//    List<Integer> ho_ad1 = ho_Ad_Service.find_all();
-//    String separator = File.separator;
-//    File file = new File("C:\\Users\\User\\Downloads\\demo\\Phone");
-//    Scanner scanner = new Scanner(file);
-//    int i = 0;
-//
-//    while (scanner.hasNextLine()) {
-//      Ho_Ad ho_ad = new Ho_Ad();
-//      Ho_Ad_Phone_Num ho_ad_phone_num = new Ho_Ad_Phone_Num();
-//      String stringt = scanner.nextLine();
-//      ho_ad_phone_num.setHo_ad(ho_ad1.get(i));
-//      ho_ad_phone_num.setIs_deleted(Boolean.FALSE);
-//      if (stringt == "baktybek") {
-//        System.out.println("baktybek");
-//      } else {
-//        ho_ad_phone_num.setPhone_num(stringt);
-//      }
-//      ho_ad_phone_num_repository.save(ho_ad_phone_num);
-//      i++;
-//    }
-//
-//  }
+  @GetMapping("/phone")
+  public void phone() throws FileNotFoundException {
+    List<Integer> ho_ad1 = ho_Ad_Service.find_all();
+    String separator = File.separator;
+    File file = new File("C:\\Users\\User\\Downloads\\demo\\Phone");
+    Scanner scanner = new Scanner(file);
+    int i = 0;
+
+    while (scanner.hasNextLine()) {
+      Ho_Ad ho_ad = new Ho_Ad();
+      Ho_Ad_Phone_Num ho_ad_phone_num = new Ho_Ad_Phone_Num();
+      String stringt = scanner.nextLine();
+      ho_ad_phone_num.setHo_ad(ho_ad1.get(i));
+      ho_ad_phone_num.setIs_deleted(Boolean.FALSE);
+      if (stringt == "") stringt="87789477600";
+        ho_ad_phone_num.setPhone_num(stringt);
+      ho_ad_phone_num_repository.save(ho_ad_phone_num);
+      i++;
+    }
+
+  }
 
   @GetMapping("/loc")
   public void loc() throws InterruptedException, FileNotFoundException, IOException {
