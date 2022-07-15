@@ -5,6 +5,15 @@ public class C_Loc_Response {
   private Integer id;
   private String title;
   private Boolean hasChildren;
+  private Boolean isBigCity;
+
+  public Boolean getIsBigCity() {
+    return isBigCity;
+  }
+
+  public void setIsBigCity(Boolean isBigCity) {
+    this.isBigCity = isBigCity;
+  }
   private String latitude;
   private String longitude;
 
@@ -32,10 +41,11 @@ public class C_Loc_Response {
     this.hasChildren = hasChildren;
   }
   
-  public C_Loc_Response(Integer id, String title,Boolean hasChildren,String latitude,String longitude) {
+  public C_Loc_Response(Integer id, String title,Boolean hasChildren,Boolean isBigCity,String latitude,String longitude) {
     this.id = id;
     this.title = title;
     this.hasChildren=hasChildren;
+    this.isBigCity=isBigCity;
     this.latitude=latitude;
     this.longitude=longitude;
   }

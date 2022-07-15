@@ -25,4 +25,5 @@ public interface C_Loc_Repository extends JpaRepository<C_Loc, Long> {
   List<C_Loc> c_loc_all(@Param("id_") Integer id_);
   @Query("select t from C_Loc t where t.parent_id=:id_ and is_deleted=false and t.is_city=true order by name ")
   List<C_Loc> c_city(@Param("id_") Integer id_);
+  
 }

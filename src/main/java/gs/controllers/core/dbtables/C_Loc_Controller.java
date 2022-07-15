@@ -69,7 +69,7 @@ public class C_Loc_Controller {
         trf = false;
       }
       loc_list.add(new C_Loc_Response(c_loc.getC_loc(),
-        c_loc.getName(), trf,String.valueOf(c_loc.getLat()),String.valueOf(c_loc.getLon())));
+        c_loc.getName(), trf,c_loc.getIs_city(),String.valueOf(c_loc.getLat()),String.valueOf(c_loc.getLon())));
     }
     return new ResponseEntity<>(loc_list, HttpStatus.OK);
   }
