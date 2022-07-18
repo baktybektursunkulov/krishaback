@@ -1083,8 +1083,8 @@ public class Selenium {
     }
   }
 
-  @GetMapping("/dasha")
-  public void dasha() throws FileNotFoundException, InterruptedException, IOException {
+  @GetMapping("/dacha")
+  public void dacha() throws FileNotFoundException, InterruptedException, IOException {
     File file = new File("C:\\Users\\User\\Downloads\\demo\\parse");
     Scanner scanner = new Scanner(file);
     int has = 0;

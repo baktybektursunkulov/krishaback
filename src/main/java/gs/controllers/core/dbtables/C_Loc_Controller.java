@@ -33,24 +33,27 @@ public class C_Loc_Controller {
   @Autowired
   private C_Loc_Repository c_loc_repository;
   
-  @PostMapping("/update_c_loc")
-  private void update(@RequestBody C_Loc c_loc){
-    List<C_Loc> c_loc1=c_loc_repository.findall(3);
+  @PutMapping("/update_c_loc")
+  private void update(@RequestBody C_Loc c_loc) throws InterruptedException{
+     List<C_Loc> c_locs=c_loc_repository.findall(1);
+     for(C_Loc c_locc:c_locs){
+    List<C_Loc> c_loc1=c_loc_repository.findall(c_locc.getC_loc());
     for(C_Loc c_loc2:c_loc1){
+      Thread.sleep(2000);
       c_loc.setC_loc(c_loc2.getC_loc());
       c_loc.setParent_id(c_loc2.getParent_id());
       c_loc.setName(c_loc2.getName());
       c_loc.setIs_country(c_loc2.getIs_country());
-      c_loc.setIs_region(c_loc2.getIs_region());
       c_loc.setIs_city(c_loc2.getIs_city());
-      c_loc.setIs_aul(c_loc2.getIs_aul());
-      c_loc.setIs_village(c_loc2.getIs_village());
-      c_loc.setIs_grp(c_loc2.getIs_grp());
-      c_loc.setIs_settlement(c_loc2.getIs_settlement());
-      c_loc.setIs_station(c_loc2.getIs_station());
+      try{
+       GoogleGeocodeResult geocodeResult = google_geocode_funcs.geocode(c_locc.getName()+", "+c_loc2.getName());
+    System.out.println(geocodeResult.getResponse_lat() + ", " + geocodeResult.getResponse_lon());
+    c_loc.setLat(geocodeResult.getResponse_lat());
+    c_loc.setLon(geocodeResult.getResponse_lon());
+      }catch(NullPointerException e){}
       c_loc_repository.save(c_loc);
-     
-    }
+     }
+     }
   }
     @GetMapping(value = "/findById")
     public ResponseEntity<List<HoCLocResponse>> findById(@Valid @RequestParam Integer id, HttpServletRequest httpServletRequest) throws RuntimeException {

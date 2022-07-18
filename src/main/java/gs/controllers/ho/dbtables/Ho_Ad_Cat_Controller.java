@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package gs.controllers.ho.dbtables;
 
 import gs.payload.response.horesponse.HoAdCatResponse;
@@ -25,10 +22,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-/**
- *
- * @author User
- */
 @RestController
 @RequestMapping("/ho_ad_cat")
 @Api(tags = {"Ho_Ad_Cat_Controller"})
@@ -40,7 +33,25 @@ public class Ho_Ad_Cat_Controller {
     public ResponseEntity<List<HoAdCatResponse>> ho_build_type_repository() throws RuntimeException {
         return new ResponseEntity<>(ho_ad_cat_Service.ho_build_type_repository(), HttpStatus.OK);
     }
-  @GetMapping(value = "/ho_resid_complex_repository")
+
+    @GetMapping(value = "/raznoe")
+    public ResponseEntity<List<HoAdCatResponse>> ho_house_misc_repository() throws RuntimeException {
+        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_misc_repository(), HttpStatus.OK);
+    }
+    @GetMapping(value = "/kommunikasia")
+    public ResponseEntity<List<HoAdCatResponse>> ho_house_commun_repository() throws RuntimeException {
+        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_commun_repository(), HttpStatus.OK);
+    }
+    @GetMapping(value = "/bezopasnost")
+    public ResponseEntity<List<HoAdCatResponse>> ho_house_security_repository() throws RuntimeException {
+        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_security_repository(), HttpStatus.OK);
+    }
+    @GetMapping(value = "/mestopolojenia")
+    public ResponseEntity<List<HoAdCatResponse>> ho_house_loc_repository() throws RuntimeException {
+        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_loc_repository(), HttpStatus.OK);
+    }
+ 
+    @GetMapping(value = "/ho_resid_complex_repository")
     public ResponseEntity<List<HoAdCatResponse>> ho_resid_complex_repository() throws RuntimeException {
         return new ResponseEntity<>(ho_ad_cat_Service.ho_resid_complex_repository(), HttpStatus.OK);
     }

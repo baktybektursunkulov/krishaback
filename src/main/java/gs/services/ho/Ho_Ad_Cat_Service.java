@@ -8,7 +8,14 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class Ho_Ad_Cat_Service {
-  
+  @Autowired
+  private Ho_House_Commun_Repository ho_house_commun_repository;
+  @Autowired
+  private Ho_House_Misc_Repository ho_house_misc_repository;
+  @Autowired
+  private Ho_House_Loc_Repository ho_house_loc_repository;
+  @Autowired
+  private Ho_House_Security_Repository ho_house_security_repository;
   @Autowired
   private Ho_Build_Type_Repository ho_build_type_repository;
   @Autowired
@@ -59,8 +66,20 @@ public class Ho_Ad_Cat_Service {
   public List<HoAdCatResponse> ho_build_type_repository() {
     return ho_build_type_repository.find_all();
   }
+    public List<HoAdCatResponse> ho_house_loc_repository() {
+    return ho_house_loc_repository.find_all();
+  }
   public List<HoAdCatResponse> ho_resid_complex_repository() {
     return ho_resid_complex_repository.find_all();
+  }
+     public List<HoAdCatResponse> ho_house_misc_repository() {
+    return ho_house_misc_repository.find_all();
+  }
+    public List<HoAdCatResponse> ho_house_security_repository() {
+    return ho_house_security_repository.find_all();
+  }
+      public List<HoAdCatResponse> ho_house_commun_repository() {
+    return ho_house_commun_repository.find_all();
   }
   public List<HoAdCatResponse> ho_house_condition_repository() {
     return ho_house_condition_repository.find_all();
