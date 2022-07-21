@@ -24,6 +24,8 @@ public interface Ho_House_Irrigation_Water_Repository extends JpaRepository<Ho_H
   List<HoAdCatResponse> find_all();
    @Query("select t from Ho_House_Irrigation_Water t where t.is_deleted=false ")
   List<Ho_House_Irrigation_Water> find_all1();
+    @Query("select t.name as name from Ho_House_Irrigation_Water t where t.is_deleted=false and t.ho_house_irrigation_water=:id_ ")
+  String find_by_id(@Param("id_") Integer id_);
   
 }
 

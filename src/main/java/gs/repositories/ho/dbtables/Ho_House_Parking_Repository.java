@@ -24,5 +24,7 @@ public interface Ho_House_Parking_Repository extends JpaRepository<Ho_House_Park
   
     @Query("select t  from Ho_House_Parking t where t.is_deleted=false ")
   List<Ho_House_Parking> find_all1();
+     @Query("select t.name as name from Ho_House_Parking t where t.ho_house_parking=:id_ and t.is_deleted=false ")
+  String find_by_id(@Param("id_") Integer id_);
 }
 

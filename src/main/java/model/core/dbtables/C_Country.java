@@ -1,6 +1,7 @@
 package model.core.dbtables;
 
 import beans.LocaleBean;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -27,9 +28,13 @@ public class C_Country extends Abstract_Entity {
   private Long flag_img;
 
   //transient fields
+ 
   private String name_translation;
+  
   private C_Cur c_cur_t = null;
+
   private C_Img flag_img_t = null;
+
   public String dynamic_img_url;
 
   public C_Country() {

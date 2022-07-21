@@ -3,6 +3,7 @@ package gs.repositories.ho.dbtables;
 import gs.payload.response.horesponse.HoCatResponse;
 import gs.payload.response.horesponse.HoPhoneResponse;
 import gs.repositories.core.dbtables.*;
+import java.text.DateFormat.Field;
 import java.util.List;
 import java.util.Optional; 
 import model.ho.dbtables.Ho_Ad;
@@ -21,9 +22,18 @@ public interface Ho_Ad_Repository extends CrudRepository<Ho_Ad, Integer> {
 
   @Query("select t.ho_ad from Ho_Ad t where t.is_deleted=false and t.ho_cat=30 order by t.ho_ad")
   List<Integer> find_all();
+  
   @Query( "select t from Ho_Ad t where t.ho_cat=:id_ and t.is_deleted=false order by t.ho_ad ")
   List<Ho_Ad> find(@Param("id_") Integer id_);
+  
   @Query("select t from Ho_Ad t where t.is_deleted=false and t.ho_cat=20 order by t.ho_ad")
   List<Ho_Ad> findall();
+  
+  @Query( "select t from Ho_Ad t where t.ho_ad=:id_ and t.is_deleted=false ")
+  Ho_Ad find_by_id(@Param("id_") Integer id_);
+  
+//  
+//  @Query("select Column_name from Information_schema.columns where Table_name like 'ho_ad'")
+//  List<Field> column_names();
 }
 

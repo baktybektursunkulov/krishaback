@@ -55,11 +55,13 @@ public class C_Loc_Controller {
      }
      }
   }
-    @GetMapping(value = "/findById")
-    public ResponseEntity<List<HoCLocResponse>> findById(@Valid @RequestParam Integer id, HttpServletRequest httpServletRequest) throws RuntimeException {
+  
+  @GetMapping(value = "/findById")
+  public ResponseEntity<List<HoCLocResponse>> findById(@Valid @RequestParam Integer id, HttpServletRequest httpServletRequest) throws RuntimeException {
         return new ResponseEntity<>(c_loc_repository.find_by_id(id), HttpStatus.OK);
     }
-   @GetMapping(value = "/get_loc")
+  
+  @GetMapping(value = "/get_loc")
   public ResponseEntity<List<C_Loc_Response>> get_loc(@Valid @RequestParam Integer id, HttpServletRequest httpServletRequest) throws RuntimeException {
     List<C_Loc_Response> loc_list = new ArrayList();
     List<C_Loc> c_locs = c_loc_repository.c_loc_all(id);

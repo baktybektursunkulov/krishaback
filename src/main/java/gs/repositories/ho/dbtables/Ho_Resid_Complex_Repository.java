@@ -25,7 +25,9 @@ public interface Ho_Resid_Complex_Repository extends JpaRepository<Ho_Resid_Comp
   
   @Query("select t.id as id, t.name as name from Ho_Resid_Complex t where t.is_deleted=false and t.name=:name_")
   HoAdCatResponse find_by_name(@Param("name_") String name_);
-
+  
+ @Query("select t.name as name from Ho_Resid_Complex t where t.is_deleted=false and t.ho_resid_complex=:id_")
+  String find_by_id(@Param("id_") Integer id_);
   
 }
 

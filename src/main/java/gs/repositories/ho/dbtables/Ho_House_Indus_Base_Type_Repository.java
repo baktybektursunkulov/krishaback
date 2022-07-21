@@ -24,6 +24,10 @@ public interface Ho_House_Indus_Base_Type_Repository extends JpaRepository<Ho_Ho
   
   @Query("select t from Ho_House_Indus_Base_Type t where t.is_deleted=false ")
   List<Ho_House_Indus_Base_Type> find_all1();
+   @Query("select t from Ho_House_Indus_Base_Type t where t.is_deleted=false and t.ho_house_indus_base_type=:id_ ")
+  Ho_House_Indus_Base_Type find_by_id(@Param("id_") Integer id_);
+   @Query("select t.name as name from Ho_House_Indus_Base_Type t where t.is_deleted=false and t.ho_house_indus_base_type=:id_ ")
+  String find_by_id1(@Param("id_") Integer id_);
   
 }
 

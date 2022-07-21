@@ -24,6 +24,7 @@ public interface Ho_House_Gas_Repository extends JpaRepository<Ho_House_Gas, Int
   List<HoAdCatResponse> find_all();
    @Query("select t from Ho_House_Gas t where t.is_deleted=false ")
   List<Ho_House_Gas> find_all1();
-  
+   @Query("select t.name as name from Ho_House_Gas t where t.is_deleted=false and t.ho_house_gas=:id_ ")
+  String find_by_id(@Param("id_") Integer id_);
 }
 

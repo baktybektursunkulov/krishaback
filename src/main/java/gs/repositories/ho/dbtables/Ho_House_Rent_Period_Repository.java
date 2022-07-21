@@ -25,5 +25,7 @@ public interface Ho_House_Rent_Period_Repository extends JpaRepository<Ho_House_
   @Query("select t from Ho_House_Rent_Period t where t.is_deleted=false ")
   List<Ho_House_Rent_Period> find_all1();
   
+      @Query("select t.name as name from Ho_House_Rent_Period t where t.is_deleted=false and t.ho_house_rent_period=:id_ ")
+  String find_by_id(@Param("id_") Integer id_);
 }
 

@@ -8,6 +8,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import gs.repositories.ho.dbtables.Ho_Cat_Repository;
+import java.text.DateFormat;
 import model.ho.dbtables.Ho_Ad;
 import model.ho.dbtables.Ho_Cat;
 import model.ho.dbtables.Ho_House_Shop_Type;
@@ -31,4 +32,11 @@ public class Ho_Ad_Service {
   public List<Ho_Ad> find(Integer id){
     return repository.find(id);
   }
+  public Ho_Ad find_by_id(Integer id){
+    return repository.find_by_id(id);
+  }
+//  
+//  public List<DateFormat.Field> column_names(){
+//    return repository.column_names();
+//  }
 }

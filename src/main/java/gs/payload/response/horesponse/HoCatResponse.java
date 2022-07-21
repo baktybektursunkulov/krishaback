@@ -16,7 +16,6 @@ public class HoCatResponse {
     this.id = id;
     this.title = title;
   }
-
   public Integer getId() {
     return id;
   }

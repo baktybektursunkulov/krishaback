@@ -1,6 +1,7 @@
 
 package model.ho.dbtables;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
@@ -143,7 +144,6 @@ public class Ho_Ad extends Abstract_Entity {
 
 }
 
-  //fields getter and setter methods
   @Id
   @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name="ho_ad", unique=true, nullable=false)
@@ -153,6 +153,7 @@ public class Ho_Ad extends Abstract_Entity {
   public void setHo_ad(Integer ho_ad) {
     this.ho_ad = ho_ad;
   }
+
 
   @Column(name="c_country", nullable=false)
   public Integer getC_country() {
@@ -816,13 +817,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.c_country_t;
   }
-//  @Transient
-//  public C_Country getC_country_t_2(Session session_) {
-//    if (this.c_country_t == null && this.getC_country() != null) {
-//      this.c_country_t = C_Country_Manager.getCI().get_rec(session_, this.getC_country()); 
-//    }
-//    return this.c_country_t;
-//  }
+  @Transient
+  public C_Country getC_country_t_2(Session session_) {
+    if (this.c_country_t == null && this.getC_country() != null) {
+      this.c_country_t = C_Country_Manager.getCI().get_rec(session_, this.getC_country()); 
+    }
+    return this.c_country_t;
+  }
   public void setC_country_t(C_Country c_country_t) {
     this.c_country_t = c_country_t;
     this.c_country = (this.c_country_t != null?this.c_country_t.getC_country():null);
@@ -835,13 +836,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_cat_t;
   }
-//  @Transient
-//  public Ho_Cat getHo_cat_t_2(Session session_) {
-//    if (this.ho_cat_t == null && this.getHo_cat() != null) {
-//      this.ho_cat_t = Ho_Cat_Manager.getCI().get_rec(session_, this.getHo_cat()); 
-//    }
-//    return this.ho_cat_t;
-//  }
+  @Transient
+  public Ho_Cat getHo_cat_t_2(Session session_) {
+    if (this.ho_cat_t == null && this.getHo_cat() != null) {
+      this.ho_cat_t = Ho_Cat_Manager.getCI().get_rec(session_, this.getHo_cat()); 
+    }
+    return this.ho_cat_t;
+  }
   public void setHo_cat_t(Ho_Cat ho_cat_t) {
     this.ho_cat_t = ho_cat_t;
     this.ho_cat = (this.ho_cat_t != null?this.ho_cat_t.getHo_cat():null);
@@ -857,13 +858,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_build_type_t;
   }
-//  @Transient
-//  public Ho_Build_Type getHo_build_type_t_2(Session session_) {
-//    if (this.ho_build_type_t == null && this.getHo_build_type() != null) {
-//      this.ho_build_type_t = Ho_Build_Type_Manager.getCI().get_rec(session_, this.getHo_build_type()); 
-//    }
-//    return this.ho_build_type_t;
-//  }
+  @Transient
+  public Ho_Build_Type getHo_build_type_t_2(Session session_) {
+    if (this.ho_build_type_t == null && this.getHo_build_type() != null) {
+      this.ho_build_type_t = Ho_Build_Type_Manager.getCI().get_rec(session_, this.getHo_build_type()); 
+    }
+    return this.ho_build_type_t;
+  }
   public void setHo_build_type_t(Ho_Build_Type ho_build_type_t) {
     this.ho_build_type_t = ho_build_type_t;
     this.ho_build_type = (this.ho_build_type_t != null?this.ho_build_type_t.getHo_build_type():null);
@@ -883,13 +884,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.c_loc_t;
   }
-//  @Transient
-//  public C_Loc getC_loc_t_2(Session session_) {
-//    if (this.c_loc_t == null && this.getC_loc() != null) {
-//      this.c_loc_t = C_Loc_Manager.getCI().get_rec(session_, this.getC_loc()); 
-//    }
-//    return this.c_loc_t;
-//  }
+  @Transient
+  public C_Loc getC_loc_t_2(Session session_) {
+    if (this.c_loc_t == null && this.getC_loc() != null) {
+      this.c_loc_t = C_Loc_Manager.getCI().get_rec(session_, this.getC_loc()); 
+    }
+    return this.c_loc_t;
+  }
   public void setC_loc_t(C_Loc c_loc_t) {
     this.c_loc_t = c_loc_t;
     this.c_loc = (this.c_loc_t != null?this.c_loc_t.getC_loc():null);
@@ -902,13 +903,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_resid_complex_t;
   }
-//  @Transient
-//  public Ho_Resid_Complex getHo_resid_complex_t_2(Session session_) {
-//    if (this.ho_resid_complex_t == null && this.getHo_resid_complex() != null) {
-//      this.ho_resid_complex_t = Ho_Resid_Complex_Manager.getCI().get_rec(session_, this.getHo_resid_complex()); 
-//    }
-//    return this.ho_resid_complex_t;
-//  }
+  @Transient
+  public Ho_Resid_Complex getHo_resid_complex_t_2(Session session_) {
+    if (this.ho_resid_complex_t == null && this.getHo_resid_complex() != null) {
+      this.ho_resid_complex_t = Ho_Resid_Complex_Manager.getCI().get_rec(session_, this.getHo_resid_complex()); 
+    }
+    return this.ho_resid_complex_t;
+  }
   public void setHo_resid_complex_t(Ho_Resid_Complex ho_resid_complex_t) {
     this.ho_resid_complex_t = ho_resid_complex_t;
     this.ho_resid_complex = (this.ho_resid_complex_t != null?this.ho_resid_complex_t.getHo_resid_complex():null);
@@ -927,13 +928,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_condition_t;
   }
-//  @Transient
-//  public Ho_House_Condition getHo_house_condition_t_2(Session session_) {
-//    if (this.ho_house_condition_t == null && this.getHo_house_condition() != null) {
-//      this.ho_house_condition_t = Ho_House_Condition_Manager.getCI().get_rec(session_, this.getHo_house_condition()); 
-//    }
-//    return this.ho_house_condition_t;
-//  }
+  @Transient
+  public Ho_House_Condition getHo_house_condition_t_2(Session session_) {
+    if (this.ho_house_condition_t == null && this.getHo_house_condition() != null) {
+      this.ho_house_condition_t = Ho_House_Condition_Manager.getCI().get_rec(session_, this.getHo_house_condition()); 
+    }
+    return this.ho_house_condition_t;
+  }
   public void setHo_house_condition_t(Ho_House_Condition ho_house_condition_t) {
     this.ho_house_condition_t = ho_house_condition_t;
     this.ho_house_condition = (this.ho_house_condition_t != null?this.ho_house_condition_t.getHo_house_condition():null);
@@ -946,13 +947,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_phone_t;
   }
-//  @Transient
-//  public Ho_House_Phone getHo_house_phone_t_2(Session session_) {
-//    if (this.ho_house_phone_t == null && this.getHo_house_phone() != null) {
-//      this.ho_house_phone_t = Ho_House_Phone_Manager.getCI().get_rec(session_, this.getHo_house_phone()); 
-//    }
-//    return this.ho_house_phone_t;
-//  }
+  @Transient
+  public Ho_House_Phone getHo_house_phone_t_2(Session session_) {
+    if (this.ho_house_phone_t == null && this.getHo_house_phone() != null) {
+      this.ho_house_phone_t = Ho_House_Phone_Manager.getCI().get_rec(session_, this.getHo_house_phone()); 
+    }
+    return this.ho_house_phone_t;
+  }
   public void setHo_house_phone_t(Ho_House_Phone ho_house_phone_t) {
     this.ho_house_phone_t = ho_house_phone_t;
     this.ho_house_phone = (this.ho_house_phone_t != null?this.ho_house_phone_t.getHo_house_phone():null);
@@ -965,13 +966,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_inet_t;
   }
-//  @Transient
-//  public Ho_House_Inet getHo_house_inet_t_2(Session session_) {
-//    if (this.ho_house_inet_t == null && this.getHo_house_inet() != null) {
-//      this.ho_house_inet_t = Ho_House_Inet_Manager.getCI().get_rec(session_, this.getHo_house_inet()); 
-//    }
-//    return this.ho_house_inet_t;
-//  }
+  @Transient
+  public Ho_House_Inet getHo_house_inet_t_2(Session session_) {
+    if (this.ho_house_inet_t == null && this.getHo_house_inet() != null) {
+      this.ho_house_inet_t = Ho_House_Inet_Manager.getCI().get_rec(session_, this.getHo_house_inet()); 
+    }
+    return this.ho_house_inet_t;
+  }
   public void setHo_house_inet_t(Ho_House_Inet ho_house_inet_t) {
     this.ho_house_inet_t = ho_house_inet_t;
     this.ho_house_inet = (this.ho_house_inet_t != null?this.ho_house_inet_t.getHo_house_inet():null);
@@ -984,13 +985,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_bathroom_t;
   }
-//  @Transient
-//  public Ho_House_Bathroom getHo_house_bathroom_t_2(Session session_) {
-//    if (this.ho_house_bathroom_t == null && this.getHo_house_bathroom() != null) {
-//      this.ho_house_bathroom_t = Ho_House_Bathroom_Manager.getCI().get_rec(session_, this.getHo_house_bathroom()); 
-//    }
-//    return this.ho_house_bathroom_t;
-//  }
+  @Transient
+  public Ho_House_Bathroom getHo_house_bathroom_t_2(Session session_) {
+    if (this.ho_house_bathroom_t == null && this.getHo_house_bathroom() != null) {
+      this.ho_house_bathroom_t = Ho_House_Bathroom_Manager.getCI().get_rec(session_, this.getHo_house_bathroom()); 
+    }
+    return this.ho_house_bathroom_t;
+  }
   public void setHo_house_bathroom_t(Ho_House_Bathroom ho_house_bathroom_t) {
     this.ho_house_bathroom_t = ho_house_bathroom_t;
     this.ho_house_bathroom = (this.ho_house_bathroom_t != null?this.ho_house_bathroom_t.getHo_house_bathroom():null);
@@ -1003,13 +1004,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_balcony_t;
   }
-//  @Transient
-//  public Ho_House_Balcony getHo_house_balcony_t_2(Session session_) {
-//    if (this.ho_house_balcony_t == null && this.getHo_house_balcony() != null) {
-//      this.ho_house_balcony_t = Ho_House_Balcony_Manager.getCI().get_rec(session_, this.getHo_house_balcony()); 
-//    }
-//    return this.ho_house_balcony_t;
-//  }
+  @Transient
+  public Ho_House_Balcony getHo_house_balcony_t_2(Session session_) {
+    if (this.ho_house_balcony_t == null && this.getHo_house_balcony() != null) {
+      this.ho_house_balcony_t = Ho_House_Balcony_Manager.getCI().get_rec(session_, this.getHo_house_balcony()); 
+    }
+    return this.ho_house_balcony_t;
+  }
   public void setHo_house_balcony_t(Ho_House_Balcony ho_house_balcony_t) {
     this.ho_house_balcony_t = ho_house_balcony_t;
     this.ho_house_balcony = (this.ho_house_balcony_t != null?this.ho_house_balcony_t.getHo_house_balcony():null);
@@ -1023,13 +1024,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_door_t;
   }
-//  @Transient
-//  public Ho_House_Door getHo_house_door_t_2(Session session_) {
-//    if (this.ho_house_door_t == null && this.getHo_house_door() != null) {
-//      this.ho_house_door_t = Ho_House_Door_Manager.getCI().get_rec(session_, this.getHo_house_door()); 
-//    }
-//    return this.ho_house_door_t;
-//  }
+  @Transient
+  public Ho_House_Door getHo_house_door_t_2(Session session_) {
+    if (this.ho_house_door_t == null && this.getHo_house_door() != null) {
+      this.ho_house_door_t = Ho_House_Door_Manager.getCI().get_rec(session_, this.getHo_house_door()); 
+    }
+    return this.ho_house_door_t;
+  }
   public void setHo_house_door_t(Ho_House_Door ho_house_door_t) {
     this.ho_house_door_t = ho_house_door_t;
     this.ho_house_door = (this.ho_house_door_t != null?this.ho_house_door_t.getHo_house_door():null);
@@ -1042,13 +1043,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_parking_t;
   }
-//  @Transient
-//  public Ho_House_Parking getHo_house_parking_t_2(Session session_) {
-//    if (this.ho_house_parking_t == null && this.getHo_house_parking() != null) {
-//      this.ho_house_parking_t = Ho_House_Parking_Manager.getCI().get_rec(session_, this.getHo_house_parking()); 
-//    }
-//    return this.ho_house_parking_t;
-//  }
+  @Transient
+  public Ho_House_Parking getHo_house_parking_t_2(Session session_) {
+    if (this.ho_house_parking_t == null && this.getHo_house_parking() != null) {
+      this.ho_house_parking_t = Ho_House_Parking_Manager.getCI().get_rec(session_, this.getHo_house_parking()); 
+    }
+    return this.ho_house_parking_t;
+  }
   public void setHo_house_parking_t(Ho_House_Parking ho_house_parking_t) {
     this.ho_house_parking_t = ho_house_parking_t;
     this.ho_house_parking = (this.ho_house_parking_t != null?this.ho_house_parking_t.getHo_house_parking():null);
@@ -1061,13 +1062,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_furniture_t;
   }
-//  @Transient
-//  public Ho_House_Furniture getHo_house_furniture_t_2(Session session_) {
-//    if (this.ho_house_furniture_t == null && this.getHo_house_furniture() != null) {
-//      this.ho_house_furniture_t = Ho_House_Furniture_Manager.getCI().get_rec(session_, this.getHo_house_furniture()); 
-//    }
-//    return this.ho_house_furniture_t;
-//  }
+  @Transient
+  public Ho_House_Furniture getHo_house_furniture_t_2(Session session_) {
+    if (this.ho_house_furniture_t == null && this.getHo_house_furniture() != null) {
+      this.ho_house_furniture_t = Ho_House_Furniture_Manager.getCI().get_rec(session_, this.getHo_house_furniture()); 
+    }
+    return this.ho_house_furniture_t;
+  }
   public void setHo_house_furniture_t(Ho_House_Furniture ho_house_furniture_t) {
     this.ho_house_furniture_t = ho_house_furniture_t;
     this.ho_house_furniture = (this.ho_house_furniture_t != null?this.ho_house_furniture_t.getHo_house_furniture():null);
@@ -1080,13 +1081,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_floor_t;
   }
-//  @Transient
-//  public Ho_House_Floor getHo_house_floor_t_2(Session session_) {
-//    if (this.ho_house_floor_t == null && this.getHo_house_floor() != null) {
-//      this.ho_house_floor_t = Ho_House_Floor_Manager.getCI().get_rec(session_, this.getHo_house_floor()); 
-//    }
-//    return this.ho_house_floor_t;
-//  }
+  @Transient
+  public Ho_House_Floor getHo_house_floor_t_2(Session session_) {
+    if (this.ho_house_floor_t == null && this.getHo_house_floor() != null) {
+      this.ho_house_floor_t = Ho_House_Floor_Manager.getCI().get_rec(session_, this.getHo_house_floor()); 
+    }
+    return this.ho_house_floor_t;
+  }
   public void setHo_house_floor_t(Ho_House_Floor ho_house_floor_t) {
     this.ho_house_floor_t = ho_house_floor_t;
     this.ho_house_floor = (this.ho_house_floor_t != null?this.ho_house_floor_t.getHo_house_floor():null);
@@ -1101,13 +1102,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_contact_info_type_t;
   }
-//  @Transient
-//  public Ho_Contact_Info_Type getHo_contact_info_type_t_2(Session session_) {
-//    if (this.ho_contact_info_type_t == null && this.getHo_contact_info_type() != null) {
-//      this.ho_contact_info_type_t = Ho_Contact_Info_Type_Manager.getCI().get_rec(session_, this.getHo_contact_info_type()); 
-//    }
-//    return this.ho_contact_info_type_t;
-//  }
+  @Transient
+  public Ho_Contact_Info_Type getHo_contact_info_type_t_2(Session session_) {
+    if (this.ho_contact_info_type_t == null && this.getHo_contact_info_type() != null) {
+      this.ho_contact_info_type_t = Ho_Contact_Info_Type_Manager.getCI().get_rec(session_, this.getHo_contact_info_type()); 
+    }
+    return this.ho_contact_info_type_t;
+  }
   public void setHo_contact_info_type_t(Ho_Contact_Info_Type ho_contact_info_type_t) {
     this.ho_contact_info_type_t = ho_contact_info_type_t;
     this.ho_contact_info_type = (this.ho_contact_info_type_t != null?this.ho_contact_info_type_t.getHo_contact_info_type():null);
@@ -1125,13 +1126,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_ad_status_t;
   }
-//  @Transient
-//  public Ho_Ad_Status getHo_ad_status_t_2(Session session_) {
-//    if (this.ho_ad_status_t == null && this.getHo_ad_status() != null) {
-//      this.ho_ad_status_t = Ho_Ad_Status_Manager.getCI().get_rec(session_, this.getHo_ad_status()); 
-//    }
-//    return this.ho_ad_status_t;
-//  }
+  @Transient
+  public Ho_Ad_Status getHo_ad_status_t_2(Session session_) {
+    if (this.ho_ad_status_t == null && this.getHo_ad_status() != null) {
+      this.ho_ad_status_t = Ho_Ad_Status_Manager.getCI().get_rec(session_, this.getHo_ad_status()); 
+    }
+    return this.ho_ad_status_t;
+  }
   public void setHo_ad_status_t(Ho_Ad_Status ho_ad_status_t) {
     this.ho_ad_status_t = ho_ad_status_t;
     this.ho_ad_status = (this.ho_ad_status_t != null?this.ho_ad_status_t.getHo_ad_status():null);
@@ -1148,13 +1149,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_sewerage_t;
   }
-//  @Transient
-//  public Ho_House_Sewerage getHo_house_sewerage_t_2(Session session_) {
-//    if (this.ho_house_sewerage_t == null && this.getHo_house_sewerage() != null) {
-//      this.ho_house_sewerage_t = Ho_House_Sewerage_Manager.getCI().get_rec(session_, this.getHo_house_sewerage()); 
-//    }
-//    return this.ho_house_sewerage_t;
-//  }
+  @Transient
+  public Ho_House_Sewerage getHo_house_sewerage_t_2(Session session_) {
+    if (this.ho_house_sewerage_t == null && this.getHo_house_sewerage() != null) {
+      this.ho_house_sewerage_t = Ho_House_Sewerage_Manager.getCI().get_rec(session_, this.getHo_house_sewerage()); 
+    }
+    return this.ho_house_sewerage_t;
+  }
   public void setHo_house_sewerage_t(Ho_House_Sewerage ho_house_sewerage_t) {
     this.ho_house_sewerage_t = ho_house_sewerage_t;
     this.ho_house_sewerage = (this.ho_house_sewerage_t != null?this.ho_house_sewerage_t.getHo_house_sewerage():null);
@@ -1167,13 +1168,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_drink_water_t;
   }
-//  @Transient
-//  public Ho_House_Drink_Water getHo_house_drink_water_t_2(Session session_) {
-//    if (this.ho_house_drink_water_t == null && this.getHo_house_drink_water() != null) {
-//      this.ho_house_drink_water_t = Ho_House_Drink_Water_Manager.getCI().get_rec(session_, this.getHo_house_drink_water()); 
-//    }
-//    return this.ho_house_drink_water_t;
-//  }
+  @Transient
+  public Ho_House_Drink_Water getHo_house_drink_water_t_2(Session session_) {
+    if (this.ho_house_drink_water_t == null && this.getHo_house_drink_water() != null) {
+      this.ho_house_drink_water_t = Ho_House_Drink_Water_Manager.getCI().get_rec(session_, this.getHo_house_drink_water()); 
+    }
+    return this.ho_house_drink_water_t;
+  }
   public void setHo_house_drink_water_t(Ho_House_Drink_Water ho_house_drink_water_t) {
     this.ho_house_drink_water_t = ho_house_drink_water_t;
     this.ho_house_drink_water = (this.ho_house_drink_water_t != null?this.ho_house_drink_water_t.getHo_house_drink_water():null);
@@ -1186,13 +1187,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_electricity_t;
   }
-//  @Transient
-//  public Ho_House_Electricity getHo_house_electricity_t_2(Session session_) {
-//    if (this.ho_house_electricity_t == null && this.getHo_house_electricity() != null) {
-//      this.ho_house_electricity_t = Ho_House_Electricity_Manager.getCI().get_rec(session_, this.getHo_house_electricity()); 
-//    }
-//    return this.ho_house_electricity_t;
-//  }
+  @Transient
+  public Ho_House_Electricity getHo_house_electricity_t_2(Session session_) {
+    if (this.ho_house_electricity_t == null && this.getHo_house_electricity() != null) {
+      this.ho_house_electricity_t = Ho_House_Electricity_Manager.getCI().get_rec(session_, this.getHo_house_electricity()); 
+    }
+    return this.ho_house_electricity_t;
+  }
   public void setHo_house_electricity_t(Ho_House_Electricity ho_house_electricity_t) {
     this.ho_house_electricity_t = ho_house_electricity_t;
     this.ho_house_electricity = (this.ho_house_electricity_t != null?this.ho_house_electricity_t.getHo_house_electricity():null);
@@ -1205,13 +1206,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_heating_t;
   }
-//  @Transient
-//  public Ho_House_Heating getHo_house_heating_t_2(Session session_) {
-//    if (this.ho_house_heating_t == null && this.getHo_house_heating() != null) {
-//      this.ho_house_heating_t = Ho_House_Heating_Manager.getCI().get_rec(session_, this.getHo_house_heating()); 
-//    }
-//    return this.ho_house_heating_t;
-//  }
+  @Transient
+  public Ho_House_Heating getHo_house_heating_t_2(Session session_) {
+    if (this.ho_house_heating_t == null && this.getHo_house_heating() != null) {
+      this.ho_house_heating_t = Ho_House_Heating_Manager.getCI().get_rec(session_, this.getHo_house_heating()); 
+    }
+    return this.ho_house_heating_t;
+  }
   public void setHo_house_heating_t(Ho_House_Heating ho_house_heating_t) {
     this.ho_house_heating_t = ho_house_heating_t;
     this.ho_house_heating = (this.ho_house_heating_t != null?this.ho_house_heating_t.getHo_house_heating():null);
@@ -1224,13 +1225,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_gas_t;
   }
-//  @Transient
-//  public Ho_House_Gas getHo_house_gas_t_2(Session session_) {
-//    if (this.ho_house_gas_t == null && this.getHo_house_gas() != null) {
-//      this.ho_house_gas_t = Ho_House_Gas_Manager.getCI().get_rec(session_, this.getHo_house_gas()); 
-//    }
-//    return this.ho_house_gas_t;
-//  }
+  @Transient
+  public Ho_House_Gas getHo_house_gas_t_2(Session session_) {
+    if (this.ho_house_gas_t == null && this.getHo_house_gas() != null) {
+      this.ho_house_gas_t = Ho_House_Gas_Manager.getCI().get_rec(session_, this.getHo_house_gas()); 
+    }
+    return this.ho_house_gas_t;
+  }
   public void setHo_house_gas_t(Ho_House_Gas ho_house_gas_t) {
     this.ho_house_gas_t = ho_house_gas_t;
     this.ho_house_gas = (this.ho_house_gas_t != null?this.ho_house_gas_t.getHo_house_gas():null);
@@ -1246,13 +1247,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_irrigation_water_t;
   }
-//  @Transient
-//  public Ho_House_Irrigation_Water getHo_house_irrigation_water_t_2(Session session_) {
-//    if (this.ho_house_irrigation_water_t == null && this.getHo_house_irrigation_water() != null) {
-//      this.ho_house_irrigation_water_t = Ho_House_Irrigation_Water_Manager.getCI().get_rec(session_, this.getHo_house_irrigation_water()); 
-//    }
-//    return this.ho_house_irrigation_water_t;
-//  }
+  @Transient
+  public Ho_House_Irrigation_Water getHo_house_irrigation_water_t_2(Session session_) {
+    if (this.ho_house_irrigation_water_t == null && this.getHo_house_irrigation_water() != null) {
+      this.ho_house_irrigation_water_t = Ho_House_Irrigation_Water_Manager.getCI().get_rec(session_, this.getHo_house_irrigation_water()); 
+    }
+    return this.ho_house_irrigation_water_t;
+  }
   public void setHo_house_irrigation_water_t(Ho_House_Irrigation_Water ho_house_irrigation_water_t) {
     this.ho_house_irrigation_water_t = ho_house_irrigation_water_t;
     this.ho_house_irrigation_water = (this.ho_house_irrigation_water_t != null?this.ho_house_irrigation_water_t.getHo_house_irrigation_water():null);
@@ -1265,13 +1266,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_office_type_t;
   }
-//  @Transient
-//  public Ho_House_Office_Type getHo_house_office_type_t_2(Session session_) {
-//    if (this.ho_house_office_type_t == null && this.getHo_house_office_type() != null) {
-//      this.ho_house_office_type_t = Ho_House_Office_Type_Manager.getCI().get_rec(session_, this.getHo_house_office_type()); 
-//    }
-//    return this.ho_house_office_type_t;
-//  }
+  @Transient
+  public Ho_House_Office_Type getHo_house_office_type_t_2(Session session_) {
+    if (this.ho_house_office_type_t == null && this.getHo_house_office_type() != null) {
+      this.ho_house_office_type_t = Ho_House_Office_Type_Manager.getCI().get_rec(session_, this.getHo_house_office_type()); 
+    }
+    return this.ho_house_office_type_t;
+  }
   public void setHo_house_office_type_t(Ho_House_Office_Type ho_house_office_type_t) {
     this.ho_house_office_type_t = ho_house_office_type_t;
     this.ho_house_office_type = (this.ho_house_office_type_t != null?this.ho_house_office_type_t.getHo_house_office_type():null);
@@ -1289,13 +1290,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_shop_type_t;
   }
-//  @Transient
-//  public Ho_House_Shop_Type getHo_house_shop_type_t_2(Session session_) {
-//    if (this.ho_house_shop_type_t == null && this.getHo_house_shop_type() != null) {
-//      this.ho_house_shop_type_t = Ho_House_Shop_Type_Manager.getCI().get_rec(session_, this.getHo_house_shop_type()); 
-//    }
-//    return this.ho_house_shop_type_t;
-//  }
+  @Transient
+  public Ho_House_Shop_Type getHo_house_shop_type_t_2(Session session_) {
+    if (this.ho_house_shop_type_t == null && this.getHo_house_shop_type() != null) {
+      this.ho_house_shop_type_t = Ho_House_Shop_Type_Manager.getCI().get_rec(session_, this.getHo_house_shop_type()); 
+    }
+    return this.ho_house_shop_type_t;
+  }
   public void setHo_house_shop_type_t(Ho_House_Shop_Type ho_house_shop_type_t) {
     this.ho_house_shop_type_t = ho_house_shop_type_t;
     this.ho_house_shop_type = (this.ho_house_shop_type_t != null?this.ho_house_shop_type_t.getHo_house_shop_type():null);
@@ -1308,13 +1309,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_loc_t;
   }
-//  @Transient
-//  public Ho_House_Loc getHo_house_loc_t_2(Session session_) {
-//    if (this.ho_house_loc_t == null && this.getHo_house_loc() != null) {
-//      this.ho_house_loc_t = Ho_House_Loc_Manager.getCI().get_rec(session_, this.getHo_house_loc()); 
-//    }
-//    return this.ho_house_loc_t;
-//  }
+  @Transient
+  public Ho_House_Loc getHo_house_loc_t_2(Session session_) {
+    if (this.ho_house_loc_t == null && this.getHo_house_loc() != null) {
+      this.ho_house_loc_t = Ho_House_Loc_Manager.getCI().get_rec(session_, this.getHo_house_loc()); 
+    }
+    return this.ho_house_loc_t;
+  }
   public void setHo_house_loc_t(Ho_House_Loc ho_house_loc_t) {
     this.ho_house_loc_t = ho_house_loc_t;
     this.ho_house_loc = (this.ho_house_loc_t != null?this.ho_house_loc_t.getHo_house_loc():null);
@@ -1328,13 +1329,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_indus_base_type_t;
   }
-//  @Transient
-//  public Ho_House_Indus_Base_Type getHo_house_indus_base_type_t_2(Session session_) {
-//    if (this.ho_house_indus_base_type_t == null && this.getHo_house_indus_base_type() != null) {
-//      this.ho_house_indus_base_type_t = Ho_House_Indus_Base_Type_Manager.getCI().get_rec(session_, this.getHo_house_indus_base_type()); 
-//    }
-//    return this.ho_house_indus_base_type_t;
-//  }
+  @Transient
+  public Ho_House_Indus_Base_Type getHo_house_indus_base_type_t_2(Session session_) {
+    if (this.ho_house_indus_base_type_t == null && this.getHo_house_indus_base_type() != null) {
+      this.ho_house_indus_base_type_t = Ho_House_Indus_Base_Type_Manager.getCI().get_rec(session_, this.getHo_house_indus_base_type()); 
+    }
+    return this.ho_house_indus_base_type_t;
+  }
   public void setHo_house_indus_base_type_t(Ho_House_Indus_Base_Type ho_house_indus_base_type_t) {
     this.ho_house_indus_base_type_t = ho_house_indus_base_type_t;
     this.ho_house_indus_base_type = (this.ho_house_indus_base_type_t != null?this.ho_house_indus_base_type_t.getHo_house_indus_base_type():null);
@@ -1348,13 +1349,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.territory_area_unit_t;
   }
-//  @Transient
-//  public C_Land_Area_Unit getTerritory_area_unit_t_2(Session session_) {
-//    if (this.territory_area_unit_t == null && this.getTerritory_area_unit() != null) {
-//      this.territory_area_unit_t = C_Land_Area_Unit_Manager.getCI().get_rec(session_, this.getTerritory_area_unit()); 
-//    }
-//    return this.territory_area_unit_t;
-//  }
+  @Transient
+  public C_Land_Area_Unit getTerritory_area_unit_t_2(Session session_) {
+    if (this.territory_area_unit_t == null && this.getTerritory_area_unit() != null) {
+      this.territory_area_unit_t = C_Land_Area_Unit_Manager.getCI().get_rec(session_, this.getTerritory_area_unit()); 
+    }
+    return this.territory_area_unit_t;
+  }
   public void setTerritory_area_unit_t(C_Land_Area_Unit territory_area_unit_t) {
     this.territory_area_unit_t = territory_area_unit_t;
     this.territory_area_unit = (this.territory_area_unit_t != null?this.territory_area_unit_t.getC_land_area_unit():null);
@@ -1375,13 +1376,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_land_price_t;
   }
-//  @Transient
-//  public Ho_House_Land_Price getHo_house_land_price_t_2(Session session_) {
-//    if (this.ho_house_land_price_t == null && this.getHo_house_land_price() != null) {
-//      this.ho_house_land_price_t = Ho_House_Land_Price_Manager.getCI().get_rec(session_, this.getHo_house_land_price()); 
-//    }
-//    return this.ho_house_land_price_t;
-//  }
+  @Transient
+  public Ho_House_Land_Price getHo_house_land_price_t_2(Session session_) {
+    if (this.ho_house_land_price_t == null && this.getHo_house_land_price() != null) {
+      this.ho_house_land_price_t = Ho_House_Land_Price_Manager.getCI().get_rec(session_, this.getHo_house_land_price()); 
+    }
+    return this.ho_house_land_price_t;
+  }
   public void setHo_house_land_price_t(Ho_House_Land_Price ho_house_land_price_t) {
     this.ho_house_land_price_t = ho_house_land_price_t;
     this.ho_house_land_price = (this.ho_house_land_price_t != null?this.ho_house_land_price_t.getHo_house_land_price():null);
@@ -1395,13 +1396,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_spec_purpose_t;
   }
-//  @Transient
-//  public Ho_House_Spec_Purpose getHo_house_spec_purpose_t_2(Session session_) {
-//    if (this.ho_house_spec_purpose_t == null && this.getHo_house_spec_purpose() != null) {
-//      this.ho_house_spec_purpose_t = Ho_House_Spec_Purpose_Manager.getCI().get_rec(session_, this.getHo_house_spec_purpose()); 
-//    }
-//    return this.ho_house_spec_purpose_t;
-//  }
+  @Transient
+  public Ho_House_Spec_Purpose getHo_house_spec_purpose_t_2(Session session_) {
+    if (this.ho_house_spec_purpose_t == null && this.getHo_house_spec_purpose() != null) {
+      this.ho_house_spec_purpose_t = Ho_House_Spec_Purpose_Manager.getCI().get_rec(session_, this.getHo_house_spec_purpose()); 
+    }
+    return this.ho_house_spec_purpose_t;
+  }
   public void setHo_house_spec_purpose_t(Ho_House_Spec_Purpose ho_house_spec_purpose_t) {
     this.ho_house_spec_purpose_t = ho_house_spec_purpose_t;
     this.ho_house_spec_purpose = (this.ho_house_spec_purpose_t != null?this.ho_house_spec_purpose_t.getHo_house_spec_purpose():null);
@@ -1416,13 +1417,13 @@ public class Ho_Ad extends Abstract_Entity {
     }
     return this.ho_house_rent_period_t;
   }
-//  @Transient
-//  public Ho_House_Rent_Period getHo_house_rent_period_t_2(Session session_) {
-//    if (this.ho_house_rent_period_t == null && this.getHo_house_rent_period() != null) {
-//      this.ho_house_rent_period_t = Ho_House_Rent_Period_Manager.getCI().get_rec(session_, this.getHo_house_rent_period()); 
-//    }
-//    return this.ho_house_rent_period_t;
-//  }
+  @Transient
+  public Ho_House_Rent_Period getHo_house_rent_period_t_2(Session session_) {
+    if (this.ho_house_rent_period_t == null && this.getHo_house_rent_period() != null) {
+      this.ho_house_rent_period_t = Ho_House_Rent_Period_Manager.getCI().get_rec(session_, this.getHo_house_rent_period()); 
+    }
+    return this.ho_house_rent_period_t;
+  }
   public void setHo_house_rent_period_t(Ho_House_Rent_Period ho_house_rent_period_t) {
     this.ho_house_rent_period_t = ho_house_rent_period_t;
     this.ho_house_rent_period = (this.ho_house_rent_period_t != null?this.ho_house_rent_period_t.getHo_house_rent_period():null);
@@ -1436,13 +1437,13 @@ public class Ho_Ad extends Abstract_Entity {
     return this.ho_usr_t;
   }
   @Transient
-//  @Hint
-//  public Ho_Usr getHo_usr_t2(Session session_) {
-//    if (this.ho_usr_t == null && this.getHo_usr() != null) {
-//      this.ho_usr_t = Ho_Usr_Manager.getCI().get_rec(session_, this.getHo_usr()); 
-//    }
-//    return this.ho_usr_t;
-//  }
+  
+  public Ho_Usr getHo_usr_t2(Session session_) {
+    if (this.ho_usr_t == null && this.getHo_usr() != null) {
+      this.ho_usr_t = Ho_Usr_Manager.getCI().get_rec(session_, this.getHo_usr()); 
+    }
+    return this.ho_usr_t;
+  }
 
 
   public void setHo_usr_t(Ho_Usr ho_usr_t) {

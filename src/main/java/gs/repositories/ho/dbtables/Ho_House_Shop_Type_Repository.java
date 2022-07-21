@@ -24,5 +24,10 @@ public interface Ho_House_Shop_Type_Repository extends JpaRepository<Ho_House_Sh
   List<HoAdCatResponse> find_all();
    @Query("select t from Ho_House_Shop_Type t where t.is_deleted=false ")
   List<Ho_House_Shop_Type> find_all1();
+  
+   @Query("select t from Ho_House_Shop_Type t where t.is_deleted=false and t.ho_house_shop_type=:id_ ")
+ Ho_House_Shop_Type find_by_id(@Param("id_") Integer id_);
+   @Query("select t.name as name from Ho_House_Shop_Type t where t.is_deleted=false and t.ho_house_shop_type=:id_ ")
+ String find_by_id1(@Param("id_") Integer id_);
 }
 

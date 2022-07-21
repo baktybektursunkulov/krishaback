@@ -25,6 +25,8 @@ public interface Ho_House_Spec_Purpose_Repository extends JpaRepository<Ho_House
   
   @Query("select t from Ho_House_Spec_Purpose t where t.is_deleted=false ")
   List<Ho_House_Spec_Purpose> find_all1();
+    @Query("select t.name as name from Ho_House_Spec_Purpose t where t.is_deleted=false and t.ho_house_spec_purpose=:id_ ")
+  String find_by_id(@Param("id_") Integer id_);
   
 }
 

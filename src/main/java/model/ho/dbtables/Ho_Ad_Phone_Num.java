@@ -64,16 +64,16 @@ public class Ho_Ad_Phone_Num extends Abstract_Entity {
 
    @Transient
   public Ho_Ad getHo_ad_t() {
-    if (this.ho_ad_t == null && this.getHo_ad_t() != null) {
+    if (this.ho_ad_t == null && this.getHo_ad_t() == null) {
       this.ho_ad_t = Ho_Ad_Manager.getCI().get_rec(this.getHo_ad()); 
     }
     return this.ho_ad_t;
   }
 
 //  @Transient
-//  public  getHo_ad_t_2(Session session_) {
+//  public  getHo_ad_t_2(Session session_o_Ad) {
 //    if (this.ho_ad_t == null && this.getHo_ad() != null) {
-//      this.ho_ad_t = _Manager.getCI().get_rec(session_, this.getHo_ad()); 
+//      this.ho_ad_t = Ho_Ad_Manager.getCI().get_rec(session_, this.getHo_ad()); 
 //    }
 //    return this.ho_ad_t;
 //  }

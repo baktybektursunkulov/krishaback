@@ -168,7 +168,6 @@ public class Ho_Cat_Controller {
   @GetMapping(value = "/get_subcat_list")
   public ResponseEntity<List<HoCatResponse>> get_subcat_list(@Valid @RequestParam Integer id, HttpServletRequest httpServletRequest) throws RuntimeException {
 
-    //Ho_Cat ho_Cat1 = ho_Cat_Service.get_subcat_list(id);
     List<HoCatResponse> ho_list = new ArrayList();
     List<Ho_Cat> ho_Cats = ho_Cat_Service.get_subcat_list(id);
 
@@ -206,21 +205,6 @@ public class Ho_Cat_Controller {
 
     return new ResponseEntity<>(child_list, HttpStatus.OK);
   }
-
-//  @GetMapping(value = "/get_sell_rent_cat")
-//  public ResponseEntity<List<HoCatResponse>> get_sell_rent_cat(HttpServletRequest httpServletRequest) throws RuntimeException {
-//
-//    List<HoCatResponse> child_list = new ArrayList();
-//    List<Ho_Cat> ho_Cats = ho_Cat_Service.get_sell_rent_cat();
-//
-//    for (Ho_Cat ho_Cat : ho_Cats) {
-//      child_list.add(new HoCatResponse(ho_Cat.getHo_cat(),
-//        ho_Cat.getName()));
-//    }
-//
-//    return new ResponseEntity<>(child_list, HttpStatus.OK);
-//  }
-
   @GetMapping(value = "/get_sell_rent_subcat")
   public ResponseEntity<List<HoSellRentResponse>> get_sell_rent_subcat(@Valid @RequestParam Integer id, HttpServletRequest httpServletRequest) throws RuntimeException {
     List<HoSellRentResponse> ho_list = new ArrayList();
