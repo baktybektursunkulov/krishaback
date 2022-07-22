@@ -84,8 +84,10 @@ import lombok.Data;
   private List<String> commun;
   private List<String> loc;
   private List<String> misc;
+  private List<String> alloc_type;
+  private List<String> field_activ;
 
-  public HoAdFieldsResponse(Integer ho_ad, Integer c_country, Integer room_cnt, String ho_build_type, Integer construction_year, Integer floor, Integer max_floor, Double total_area, Double living_area, Double kitchen_area, Boolean is_in_priv_hostel, String c_loc, String ho_resid_complex, String street_name, String house_num, String intersection, Boolean is_hide_house_num, Double lat, Double lon, String ho_house_condition, String ho_house_phone, String ho_house_inet, String ho_house_bathroom, String ho_house_balcony, Boolean is_balcony_glazed, String ho_house_door, String ho_house_parking, String ho_house_furniture, String ho_house_floor, Double ceiling_height, String ho_contact_info_type, String contact_name, Boolean is_exch_possible, Boolean is_agree_with_rules, Integer ho_ad_status, Boolean is_deleted, Integer level_num, Double land_area, String how_area_fenced, String ho_house_sewerage, String ho_house_drink_water, String ho_house_electricity, String ho_house_heating, String ho_house_gas, String roofing, String suburban_area_name, Double house_area, String ho_house_irrigation_water, String ho_house_office_type, String business_center_name, Integer phone_lines_num, String parking, Boolean is_has_sep_entr_group, Double adj_territory_area, String ho_house_shop_type, String ho_house_loc, String shop_center_name, String ho_house_indus_base_type, Double territory_area, String territory_area_unit, Double production_area, Double production_area_ceiling_height, Double warehouse_area, Double warehouse_ceiling_height, Double office_area, Boolean is_has_railway_siding, Double max_power_consumption, Boolean is_has_own_substation, String ho_house_land_price, Boolean is_divisible, String ho_house_spec_purpose, String title, Boolean is_operating_business, String ho_house_rent_period, Long ho_usr, List<String> security, List<String> commun, List<String> loc, List<String> misc) {
+  public HoAdFieldsResponse(Integer ho_ad, Integer c_country, Integer room_cnt, String ho_build_type, Integer construction_year, Integer floor, Integer max_floor, Double total_area, Double living_area, Double kitchen_area, Boolean is_in_priv_hostel, String c_loc, String ho_resid_complex, String street_name, String house_num, String intersection, Boolean is_hide_house_num, Double lat, Double lon, String ho_house_condition, String ho_house_phone, String ho_house_inet, String ho_house_bathroom, String ho_house_balcony, Boolean is_balcony_glazed, String ho_house_door, String ho_house_parking, String ho_house_furniture, String ho_house_floor, Double ceiling_height, String ho_contact_info_type, String contact_name, Boolean is_exch_possible, Boolean is_agree_with_rules, Integer ho_ad_status, Boolean is_deleted, Integer level_num, Double land_area, String how_area_fenced, String ho_house_sewerage, String ho_house_drink_water, String ho_house_electricity, String ho_house_heating, String ho_house_gas, String roofing, String suburban_area_name, Double house_area, String ho_house_irrigation_water, String ho_house_office_type, String business_center_name, Integer phone_lines_num, String parking, Boolean is_has_sep_entr_group, Double adj_territory_area, String ho_house_shop_type, String ho_house_loc, String shop_center_name, String ho_house_indus_base_type, Double territory_area, String territory_area_unit, Double production_area, Double production_area_ceiling_height, Double warehouse_area, Double warehouse_ceiling_height, Double office_area, Boolean is_has_railway_siding, Double max_power_consumption, Boolean is_has_own_substation, String ho_house_land_price, Boolean is_divisible, String ho_house_spec_purpose, String title, Boolean is_operating_business, String ho_house_rent_period, Long ho_usr, List<String> security, List<String> commun, List<String> loc, List<String> misc, List<String> alloc_type, List<String> field_activ) {
     this.ho_ad = ho_ad;
     this.c_country = c_country;
     this.room_cnt = room_cnt;
@@ -165,7 +167,9 @@ import lombok.Data;
     this.commun = commun;
     this.loc = loc;
     this.misc = misc;
+    this.alloc_type = alloc_type;
+    this.field_activ = field_activ;
   }
-  
+
 
 }

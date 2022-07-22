@@ -86,20 +86,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RequestMapping("/ho_cat")
 @Api(tags = {"Ad_Cat_Controller"})
 public class Ho_Cat_Controller {
- @Autowired
-  private  Ho_House_Security_Repository ho_house_security_repository;
-     @Autowired
-  private  Ho_House_Commun_Repository ho_house_commun_repository;
-      @Autowired
-  private  Ho_House_Misc_Repository ho_house_misc_repository;
-    @Autowired
-  private  Ho_Ad_House_Security_Repository ho_ad_house_security_repository;
-     @Autowired
-  private  Ho_Ad_House_Loc_Repository ho_ad_house_loc_repository;
-      @Autowired
-  private  Ho_Ad_House_Commun_Repository ho_ad_house_commun_repository;
-       @Autowired
-  private  Ho_Ad_House_Misc_Repository ho_ad_house_misc_repository;
   @Autowired
   private  Ho_House_Shop_Type_Repository ho_house_shop_type_repository;
   @Autowired
@@ -108,56 +94,8 @@ public class Ho_Cat_Controller {
   private C_Img_Repository c_img_repository; 
   @Autowired
  private  C_Tbl_Rec_Img_Moder_Repository c_tbl_rec_img_moder_repository;
-  @Autowired
-  private Ho_Contact_Info_Type_Repository ho_contact_info_type_repository;
-  @Autowired
-  private Ho_Build_Type_Repository ho_build_type_Repository;
-  @Autowired
-  private Ho_Resid_Complex_Repository ho_resid_complex_repository;
-  @Autowired
-  private Ho_House_Phone_Repository ho_house_phone_repository;
-  @Autowired
-  private Ho_House_Inet_Repository ho_house_inet_repository;
-  @Autowired
-  private Ho_House_Balcony_Repository ho_house_balcony_repository;
-  @Autowired
-  private Ho_House_Bathroom_Repository ho_house_bathroom_repository;
-  @Autowired
-  private Ho_House_Door_Repository ho_house_door_repository;
-  @Autowired
-  private Ho_House_Parking_Repository ho_house_parking_repository;
-  @Autowired
-  private Ho_House_Furniture_Repository ho_house_furniture_repository;
-  @Autowired
-  private Ho_House_Floor_Repository ho_house_floor_repository;
- @Autowired
-  private Ho_House_Sewerage_Repository ho_house_sewerege_repository;
- @Autowired
-  private Ho_House_Drink_Water_Repository ho_house_drink_water_repository;
- @Autowired
-  private Ho_House_Electricity_Repository ho_house_electricity_repository;
-  @Autowired
-  private Ho_House_Heating_Repository ho_house_heating_repository;
- @Autowired
-  private Ho_House_Gas_Repository ho_house_gas_repository;
- @Autowired
-  private Ho_House_Irrigation_Water_Repository ho_house_irrigation_water_repository;
- @Autowired
-  private Ho_House_Office_Type_Repository ho_house_office_type_repository;
-@Autowired
-  private Ho_House_Loc_Repository ho_house_loc_repository;
-@Autowired
-  private C_Land_Area_Unit_Repository C_land_area_unit_repository;
-@Autowired
-  private Ho_House_Land_Price_Repository ho_house_land_price_repository;
-@Autowired
-  private Ho_House_Spec_Purpose_Repository ho_house_spec_purpose_repository;
 @Autowired
   private Ho_House_Rent_Period_Repository ho_house_rent_period_repository;
- @Autowired
-  private Ho_House_Condition_Repository ho_house_condition_repository;
-  @Autowired
-  private Ho_Ad_Phone_Num_Repository ho_ad_phone_num_repository;
   @Autowired
   private Ho_House_Indus_Base_Type_Repository ho_house_indus_base_type_repository;
   @Autowired

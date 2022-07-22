@@ -1,4 +1,4 @@
-package gs.repositories.core.dbtables;
+             package gs.repositories.core.dbtables;
 
 import gs.payload.response.horesponse.HoAdCatResponse;
 import gs.payload.response.horesponse.HoCLocResponse;
@@ -13,17 +13,17 @@ import org.springframework.data.repository.query.Param;
 
 @Repository
 public interface C_Loc_Repository extends JpaRepository<C_Loc, Long> {
-@Query("select t from C_Loc t where t.parent_id=:id_ and is_deleted=false order by t.c_loc")
+@Query("select t from C_Loc t where t.parent_id=:id_ and is_deleted=true order by t.c_loc")
   List<C_Loc> findall(@Param("id_") Integer id_);
-  @Query("select t.c_loc as id, t.name as name from C_Loc t where t.parent_id=:id_ and is_deleted=false order by name")
+  @Query("select t.c_loc as id, t.name as name from C_Loc t where t.parent_id=:id_ and is_deleted=true order by name")
   List<HoCLocResponse> find_by_id(@Param("id_") Integer id_);
-  @Query("select t.name as name from C_Loc t where t.c_loc=:id_ and is_deleted=false")
+  @Query("select t.name as name from C_Loc t where t.c_loc=:id_ and is_deleted=true")
   String find_by_Id(@Param("id_") Integer id_);
-  @Query("select t from C_Loc t where t.c_loc=:id_ and is_deleted=false ")
+  @Query("select t from C_Loc t where t.c_loc=:id_ and is_deleted=true ")
   C_Loc find_all(@Param("id_") Integer id_);
-   @Query("select t from C_Loc t where t.parent_id=:id_ and is_deleted=false and t.is_city=false order by name ")
+   @Query("select t from C_Loc t where t.parent_id=:id_ and is_deleted=true and t.is_city=false order by name ")
   List<C_Loc> c_loc_all(@Param("id_") Integer id_);
-  @Query("select t from C_Loc t where t.parent_id=:id_ and is_deleted=false and t.is_city=true order by name ")
+  @Query("select t from C_Loc t where t.parent_id=:id_ and is_deleted=true and t.is_city=true order by name ")
   List<C_Loc> c_city(@Param("id_") Integer id_);
   
 }

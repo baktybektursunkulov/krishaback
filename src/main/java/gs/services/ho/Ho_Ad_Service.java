@@ -12,6 +12,7 @@ import java.text.DateFormat;
 import model.ho.dbtables.Ho_Ad;
 import model.ho.dbtables.Ho_Cat;
 import model.ho.dbtables.Ho_House_Shop_Type;
+import org.springframework.data.repository.query.Param;
 
 @Service
 public class Ho_Ad_Service {

@@ -15,7 +15,9 @@ import gs.repositories.core.dbtables.C_Loc_Repository;
 import gs.repositories.core.dbtables.C_Tbl_Rec_Corr_By_Name_Repository;
 import gs.repositories.core.dbtables.C_Tbl_Rec_Img_Moder_Repository;
 import gs.repositories.core.dbtables.C_Usr_Repository;
+import gs.repositories.ho.dbtables.Ho_Ad_House_Alloc_Type_Repository;
 import gs.repositories.ho.dbtables.Ho_Ad_House_Commun_Repository;
+import gs.repositories.ho.dbtables.Ho_Ad_House_Field_Activ_Repository;
 import gs.repositories.ho.dbtables.Ho_Ad_House_Loc_Repository;
 import gs.repositories.ho.dbtables.Ho_Ad_House_Misc_Repository;
 import gs.repositories.ho.dbtables.Ho_Ad_House_Security_Repository;
@@ -24,6 +26,7 @@ import gs.repositories.ho.dbtables.Ho_Ad_Repository;
 import gs.repositories.ho.dbtables.Ho_Ad_Status_Repository;
 import gs.repositories.ho.dbtables.Ho_Build_Type_Repository;
 import gs.repositories.ho.dbtables.Ho_Contact_Info_Type_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Alloc_Type_Repository;
 import gs.repositories.ho.dbtables.Ho_House_Balcony_Repository;
 import gs.repositories.ho.dbtables.Ho_House_Bathroom_Repository;
 import gs.repositories.ho.dbtables.Ho_House_Commun_Repository;
@@ -31,6 +34,7 @@ import gs.repositories.ho.dbtables.Ho_House_Condition_Repository;
 import gs.repositories.ho.dbtables.Ho_House_Door_Repository;
 import gs.repositories.ho.dbtables.Ho_House_Drink_Water_Repository;
 import gs.repositories.ho.dbtables.Ho_House_Electricity_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Field_Activ_Repository;
 import gs.repositories.ho.dbtables.Ho_House_Floor_Repository;
 import gs.repositories.ho.dbtables.Ho_House_Furniture_Repository;
 import gs.repositories.ho.dbtables.Ho_House_Gas_Repository;
@@ -76,7 +80,9 @@ import java.util.logging.Logger;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import model.ho.dbtables.Ho_Ad;
+import model.ho.dbtables.Ho_Ad_House_Alloc_Type;
 import model.ho.dbtables.Ho_Ad_House_Commun;
+import model.ho.dbtables.Ho_Ad_House_Field_Activ;
 import model.ho.dbtables.Ho_Ad_House_Loc;
 import model.ho.dbtables.Ho_Ad_House_Misc;
 import model.ho.dbtables.Ho_Ad_House_Security;
@@ -84,7 +90,9 @@ import model.ho.dbtables.Ho_Ad_Phone_Num;
 import model.ho.dbtables.Ho_Build_Type;
 import model.ho.dbtables.Ho_Cat;
 import model.ho.dbtables.Ho_Contact_Info_Type;
+import model.ho.dbtables.Ho_House_Alloc_Type;
 import model.ho.dbtables.Ho_House_Commun;
+import model.ho.dbtables.Ho_House_Field_Activ;
 import model.ho.dbtables.Ho_House_Indus_Base_Type;
 import model.ho.dbtables.Ho_House_Misc;
 import model.ho.dbtables.Ho_House_Parking;
@@ -116,12 +124,20 @@ public class Ho_Ad_Controller {
   Ho_Cat_Service ho_cat_service;
    @Autowired
   private  Ho_House_Security_Repository ho_house_security_repository;
+   @Autowired
+  private  Ho_House_Alloc_Type_Repository ho_house_alloc_type_repository;
+   @Autowired
+  private  Ho_House_Field_Activ_Repository ho_house_field_activ_repository;
      @Autowired
   private  Ho_House_Commun_Repository ho_house_commun_repository;
       @Autowired
   private  Ho_House_Misc_Repository ho_house_misc_repository;
     @Autowired
   private  Ho_Ad_House_Security_Repository ho_ad_house_security_repository;
+    @Autowired
+  private  Ho_Ad_House_Alloc_Type_Repository ho_ad_house_alloc_type_repository;
+     @Autowired
+  private  Ho_Ad_House_Field_Activ_Repository ho_ad_house_field_activ_repository;
      @Autowired
   private  Ho_Ad_House_Loc_Repository ho_ad_house_loc_repository;
       @Autowired
@@ -274,7 +290,20 @@ public class Ho_Ad_Controller {
          Ho_House_Misc Ho_House_Security=ho_house_misc_repository.find_by_id(ho_Ad_House_Security.getHo_ad_house_misc());
           misc.add(Ho_House_Security.getName());
         }
-         
+        List<String> alloc_type=new ArrayList();
+     
+        List<Ho_Ad_House_Alloc_Type> ho_ad_house_alloc_type=ho_ad_house_alloc_type_repository.find_by_id(ho_ads.getHo_ad());
+        for (Ho_Ad_House_Alloc_Type ho_Ad_House_Security : ho_ad_house_alloc_type) {
+         Ho_House_Alloc_Type Ho_House_Security=ho_house_alloc_type_repository.find_by_id(ho_Ad_House_Security.getHo_ad_house_alloc_type());
+          alloc_type.add(Ho_House_Security.getName());
+        }
+          List<String> fiel_activ=new ArrayList();
+     
+        List<Ho_Ad_House_Field_Activ> ho_ad_house_fiel_activ=ho_ad_house_field_activ_repository.find_by_id(ho_ads.getHo_ad());
+        for (Ho_Ad_House_Field_Activ ho_Ad_House_Security : ho_ad_house_fiel_activ) {
+         Ho_House_Field_Activ Ho_House_Security=ho_house_field_activ_repository.find_by_id(ho_Ad_House_Security.getHo_ad_house_field_activ());
+          fiel_activ.add(Ho_House_Security.getName());
+        }
         PublishedBy publishedBy=new PublishedBy(ho_contact_info_type,phone);
         C_Loc c_loc1=c_loc_repository.find_all(ho_ads.getC_loc());
         
@@ -289,7 +318,7 @@ public class Ho_Ad_Controller {
        ho_ads.getIs_agree_with_rules(),ho_ads.getHo_ad_status(),ho_ads.getIs_deleted(),ho_ads.getLevel_num(),ho_ads.getLand_area(),ho_ads.getHow_area_fenced(),ho_house_sewerege_repository.find_by_id(ho_ads.getHo_house_sewerage()),ho_house_drink_water_repository.find_by_id(ho_ads.getHo_house_drink_water()),ho_house_electricity_repository.find_by_id(ho_ads.getHo_house_electricity()),ho_house_heating_repository.find_by_id(ho_ads.getHo_house_heating()),ho_house_gas_repository.find_by_id(ho_ads.getHo_house_gas()),ho_ads.getRoofing(),
        ho_ads.getSuburban_area_name(),ho_ads.getHouse_area(),ho_house_irrigation_water_repository.find_by_id(ho_ads.getHo_house_irrigation_water()),ho_house_office_type_repository.find_by_id(ho_ads.getHo_house_office_type()),ho_ads.getBusiness_center_name(),ho_ads.getPhone_lines_num(),ho_ads.getParking(),ho_ads.getIs_has_sep_entr_group(),ho_ads.getAdj_territory_area(),ho_house_shop_type_repository.find_by_id1(ho_ads.getHo_house_shop_type()),ho_house_loc_repository.find_by_id(ho_ads.getHo_house_loc()),ho_ads.getShop_center_name(),ho_house_indus_base_type_repository.find_by_id1(ho_ads.getHo_house_indus_base_type()),
        ho_ads.getTerritory_area(),C_land_area_unit_repository.find_by_id(ho_ads.getTerritory_area_unit()),ho_ads.getProduction_area(),ho_ads.getProduction_area_ceiling_height(),ho_ads.getWarehouse_area(),ho_ads.getWarehouse_ceiling_height(),ho_ads.getOffice_area(),ho_ads.getIs_has_railway_siding(),ho_ads.getMax_power_consumption(),ho_ads.getIs_has_own_substation(),
-       ho_house_land_price_repository.find_by_id(ho_ads.getHo_house_land_price()),ho_ads.getIs_divisible(),ho_house_spec_purpose_repository.find_by_id(ho_ads.getHo_house_spec_purpose()),ho_ads.getTitle(),ho_ads.getIs_operating_business(),ho_house_rent_period_repository.find_by_id(ho_ads.getHo_house_rent_period()),ho_ads.getHo_usr(),security,commun,loc,misc);
+       ho_house_land_price_repository.find_by_id(ho_ads.getHo_house_land_price()),ho_ads.getIs_divisible(),ho_house_spec_purpose_repository.find_by_id(ho_ads.getHo_house_spec_purpose()),ho_ads.getTitle(),ho_ads.getIs_operating_business(),ho_house_rent_period_repository.find_by_id(ho_ads.getHo_house_rent_period()),ho_ads.getHo_usr(),security,commun,loc,misc,alloc_type,fiel_activ);
     String Ho_house_rent_period=ho_house_rent_period_repository.find_by_id(ho_ads.getHo_house_rent_period());
      String rent_period="";
      if(Ho_house_rent_period!=null)rent_period=" "+Ho_house_rent_period; 
