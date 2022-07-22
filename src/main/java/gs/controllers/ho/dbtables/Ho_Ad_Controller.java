@@ -280,7 +280,7 @@ public class Ho_Ad_Controller {
         
         String location=c_loc.getName();
         if(location!=c_loc_repository.find_by_Id(ho_ads.getC_loc()))
-           location+=","+c_loc_repository.find_by_Id(ho_ads.getC_loc());
+           location+=", "+c_loc_repository.find_by_Id(ho_ads.getC_loc());
         
         List<Integer> images=c_tbl_rec_img_moder_repository.find_small_pictures(ho_ads.getHo_ad().longValue());
        HoAdFieldsResponse hoadfieldsresponse=new HoAdFieldsResponse(ho_ads.getHo_ad(),ho_ads.getC_country(),ho_ads.getRoom_cnt(),
