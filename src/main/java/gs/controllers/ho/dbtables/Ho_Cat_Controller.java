@@ -227,7 +227,7 @@ public class Ho_Cat_Controller {
        if(ho_ad.getMax_floor()!=null)floor+="/"+ho_ad.getMax_floor();
        floor+=floor_ru;
      }
-      offer_preview.add(new Offer_previewResponse(ho_ads.get(i).getHo_ad(), c_tbl_rec_img_moder.getC_img().intValue(), s_typ+i_typ+t+""+ho_cats.getSingular_name()+""+rent_period+total_area+floor+", "+ho_ad.getStreet_name(),
+      offer_preview.add(new Offer_previewResponse(ho_ads.get(i).getHo_ad(), c_tbl_rec_img_moder.getC_img().intValue(), s_typ+i_typ+t+""+ho_cats.getSingular_name()+""+rent_period+total_area+floor,
         ho_ads.get(j).getPrice(),c_loc.getName() , c_tbl_rec_img_moder_repository.find_all_small(ho_ads.get(j).getHo_ad().longValue()),
         ho_ads.get(j).getStreet_name()));
       i++;
@@ -297,7 +297,7 @@ public class Ho_Cat_Controller {
        if(ho_ad.getMax_floor()!=null)floor+="/"+ho_ad.getMax_floor();
        floor+=floor_ru;
      }
-      offer_preview.add(new Offer_previewResponse(ho_ads.get(i).getHo_ad(), c_tbl_rec_img_moder.getC_img().intValue(), s_typ+i_typ+t+""+ho_cats.getSingular_name()+""+rent_period+total_area+floor+", "+ho_ad.getStreet_name(),
+      offer_preview.add(new Offer_previewResponse(ho_ads.get(i).getHo_ad(), c_tbl_rec_img_moder.getC_img().intValue(), s_typ+i_typ+t+""+ho_cats.getSingular_name()+""+rent_period+total_area+floor,
         ho_ads.get(j).getPrice(), c_loc_repository.find_by_Id(ho_ads.get(j).getC_loc()), c_tbl_rec_img_moder_repository.find_all_small(ho_ads.get(j).getHo_ad().longValue()),
         ho_ads.get(j).getStreet_name()));
       i++;
