@@ -2,15 +2,52 @@ package gs.controllers.ho.dbtables;
 
 import static gs.common.byte_funcs.bytes;
 import gs.controllers.core.dbtables.*;
+import gs.payload.response.horesponse.HoAdFieldsResponse;
+import gs.payload.response.horesponse.HoAdsResponse;
 import gs.payload.response.horesponse.HoCatResponse;
 import gs.payload.response.horesponse.HoSellRentResponse;
 import gs.payload.response.horesponse.Offer_previewResponse;
+import gs.payload.response.horesponse.PublishedBy;
 import gs.repositories.core.dbtables.C_Bin_File_Body_Repository;
 import gs.repositories.core.dbtables.C_Img_Repository;
+import gs.repositories.core.dbtables.C_Land_Area_Unit_Repository;
 import gs.repositories.core.dbtables.C_Loc_Repository;
 import gs.repositories.core.dbtables.C_Tbl_Rec_Img_Moder_Repository;
+import gs.repositories.ho.dbtables.Ho_Ad_House_Commun_Repository;
+import gs.repositories.ho.dbtables.Ho_Ad_House_Loc_Repository;
+import gs.repositories.ho.dbtables.Ho_Ad_House_Misc_Repository;
+import gs.repositories.ho.dbtables.Ho_Ad_House_Security_Repository;
+import gs.repositories.ho.dbtables.Ho_Ad_Phone_Num_Repository;
 import gs.repositories.ho.dbtables.Ho_Ad_Repository;
+import gs.repositories.ho.dbtables.Ho_Build_Type_Repository;
 import gs.repositories.ho.dbtables.Ho_Cat_Repository;
+import gs.repositories.ho.dbtables.Ho_Contact_Info_Type_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Balcony_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Bathroom_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Commun_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Condition_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Door_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Drink_Water_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Electricity_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Floor_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Furniture_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Gas_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Heating_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Indus_Base_Type_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Inet_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Irrigation_Water_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Land_Price_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Loc_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Misc_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Office_Type_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Parking_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Phone_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Rent_Period_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Security_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Sewerage_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Shop_Type_Repository;
+import gs.repositories.ho.dbtables.Ho_House_Spec_Purpose_Repository;
+import gs.repositories.ho.dbtables.Ho_Resid_Complex_Repository;
 import model.core.dbtables.*;
 import gs.services.core.dbtables.*;
 import gs.services.ho.Ho_Ad_Service;
@@ -20,6 +57,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.OutputStream;
 import java.nio.file.Files;
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -30,7 +68,17 @@ import java.util.Optional;
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import model.ho.dbtables.Ho_Ad;
+import model.ho.dbtables.Ho_Ad_House_Commun;
+import model.ho.dbtables.Ho_Ad_House_Loc;
+import model.ho.dbtables.Ho_Ad_House_Misc;
+import model.ho.dbtables.Ho_Ad_House_Security;
+import model.ho.dbtables.Ho_Ad_Phone_Num;
 import model.ho.dbtables.Ho_Cat;
+import model.ho.dbtables.Ho_House_Commun;
+import model.ho.dbtables.Ho_House_Indus_Base_Type;
+import model.ho.dbtables.Ho_House_Misc;
+import model.ho.dbtables.Ho_House_Shop_Type;
+import model.ho.dbtables.Ho_Usr;
 import org.apache.commons.io.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -38,19 +86,86 @@ import org.springframework.beans.factory.annotation.Autowired;
 @RequestMapping("/ho_cat")
 @Api(tags = {"Ad_Cat_Controller"})
 public class Ho_Cat_Controller {
-
+ @Autowired
+  private  Ho_House_Security_Repository ho_house_security_repository;
+     @Autowired
+  private  Ho_House_Commun_Repository ho_house_commun_repository;
+      @Autowired
+  private  Ho_House_Misc_Repository ho_house_misc_repository;
+    @Autowired
+  private  Ho_Ad_House_Security_Repository ho_ad_house_security_repository;
+     @Autowired
+  private  Ho_Ad_House_Loc_Repository ho_ad_house_loc_repository;
+      @Autowired
+  private  Ho_Ad_House_Commun_Repository ho_ad_house_commun_repository;
+       @Autowired
+  private  Ho_Ad_House_Misc_Repository ho_ad_house_misc_repository;
+  @Autowired
+  private  Ho_House_Shop_Type_Repository ho_house_shop_type_repository;
+  @Autowired
+  private C_Loc_Repository c_loc_repository;
+   @Autowired
+  private C_Img_Repository c_img_repository; 
+  @Autowired
+ private  C_Tbl_Rec_Img_Moder_Repository c_tbl_rec_img_moder_repository;
+  @Autowired
+  private Ho_Contact_Info_Type_Repository ho_contact_info_type_repository;
+  @Autowired
+  private Ho_Build_Type_Repository ho_build_type_Repository;
+  @Autowired
+  private Ho_Resid_Complex_Repository ho_resid_complex_repository;
+  @Autowired
+  private Ho_House_Phone_Repository ho_house_phone_repository;
+  @Autowired
+  private Ho_House_Inet_Repository ho_house_inet_repository;
+  @Autowired
+  private Ho_House_Balcony_Repository ho_house_balcony_repository;
+  @Autowired
+  private Ho_House_Bathroom_Repository ho_house_bathroom_repository;
+  @Autowired
+  private Ho_House_Door_Repository ho_house_door_repository;
+  @Autowired
+  private Ho_House_Parking_Repository ho_house_parking_repository;
+  @Autowired
+  private Ho_House_Furniture_Repository ho_house_furniture_repository;
+  @Autowired
+  private Ho_House_Floor_Repository ho_house_floor_repository;
+ @Autowired
+  private Ho_House_Sewerage_Repository ho_house_sewerege_repository;
+ @Autowired
+  private Ho_House_Drink_Water_Repository ho_house_drink_water_repository;
+ @Autowired
+  private Ho_House_Electricity_Repository ho_house_electricity_repository;
+  @Autowired
+  private Ho_House_Heating_Repository ho_house_heating_repository;
+ @Autowired
+  private Ho_House_Gas_Repository ho_house_gas_repository;
+ @Autowired
+  private Ho_House_Irrigation_Water_Repository ho_house_irrigation_water_repository;
+ @Autowired
+  private Ho_House_Office_Type_Repository ho_house_office_type_repository;
+@Autowired
+  private Ho_House_Loc_Repository ho_house_loc_repository;
+@Autowired
+  private C_Land_Area_Unit_Repository C_land_area_unit_repository;
+@Autowired
+  private Ho_House_Land_Price_Repository ho_house_land_price_repository;
+@Autowired
+  private Ho_House_Spec_Purpose_Repository ho_house_spec_purpose_repository;
+@Autowired
+  private Ho_House_Rent_Period_Repository ho_house_rent_period_repository;
+ @Autowired
+  private Ho_House_Condition_Repository ho_house_condition_repository;
+  @Autowired
+  private Ho_Ad_Phone_Num_Repository ho_ad_phone_num_repository;
+  @Autowired
+  private Ho_House_Indus_Base_Type_Repository ho_house_indus_base_type_repository;
   @Autowired
   Ho_Cat_Service ho_Cat_Service;
   @Autowired
   Ho_Ad_Service ho_ad_Service;
-  @Autowired
-  C_Loc_Repository c_loc_repository;
-  @Autowired
-  C_Tbl_Rec_Img_Moder_Repository c_tbl_rec_img_moder_repository;
-  @Autowired
-  C_Img_Repository c_img_repository;
-  @Autowired
-  C_Bin_File_Body_Repository c_bin_file_body_repository;
+
+ 
   @GetMapping(value = "/preview_sell_rent")
   public ResponseEntity<List<Offer_previewResponse>> preview_sell_rent(@Valid @RequestParam Integer id,@Valid @RequestParam Integer parent_id,@Valid @RequestParam Integer page,HttpServletRequest httpServletRequest) throws RuntimeException {
     List<Offer_previewResponse> offer_preview = new ArrayList();
@@ -82,7 +197,37 @@ public class Ho_Cat_Controller {
         
         C_Tbl_Rec_Img_Moder c_tbl_rec_img_moder = c_tbl_rec_img_moder_list_.get(0);
         C_Img c_img = c_img_repository.find_all(c_tbl_rec_img_moder.getC_img());
-      offer_preview.add(new Offer_previewResponse(ho_ads.get(i).getHo_ad(), c_tbl_rec_img_moder.getC_img().intValue(), c_img.getFile_name(),
+        Ho_Ad ho_ad = ho_ad_Service.find_by_id(ho_ads.get(i).getHo_ad());
+    Ho_Cat ho_cats=ho_Cat_Service.find_by_id(ho_ad.getHo_cat());
+     Ho_Cat ho_cat1=ho_Cat_Service.find_by_id(ho_cats.getParent_id());
+     String s=ho_cats.getPage_title();  
+     Ho_House_Shop_Type shop_type=ho_house_shop_type_repository.find_by_id(ho_ad.getHo_house_shop_type());
+     String s_typ="";
+     if(ho_ad.getHo_house_shop_type()!=null)s_typ=shop_type.getName();
+      Ho_House_Indus_Base_Type indus_type=ho_house_indus_base_type_repository.find_by_id(ho_ad.getHo_house_indus_base_type());
+     String i_typ="";
+     if(ho_ad.getHo_house_indus_base_type()!=null)i_typ=indus_type.getName();
+     String t="";
+     if(ho_ad.getRoom_cnt()!=null&&ho_ad.getHo_cat()!=15&&ho_ad.getHo_cat()!=26)t=String.valueOf(ho_ad.getRoom_cnt());
+    
+       String Ho_house_rent_period=ho_house_rent_period_repository.find_by_id(ho_ad.getHo_house_rent_period());
+     String rent_period="";
+     if(Ho_house_rent_period!=null)rent_period=" "+Ho_house_rent_period; 
+     String total_area="";
+     if(s_typ==""&&i_typ==""){
+     if(ho_ad.getTotal_area()!=null)
+     total_area=", "+ho_ad.getTotal_area().intValue()+" м²";   
+     }
+     else if(s_typ!=""||i_typ!="")total_area=" "+ho_ad.getTotal_area().intValue()+" м²";
+     if(ho_ad.getHo_cat()==16||ho_ad.getHo_cat()==27||ho_ad.getHo_cat()==15||ho_ad.getHo_cat()==26)total_area=" "+ho_ad.getTotal_area().intValue()+" м²";
+     String floor="";
+     String floor_ru=" этаж";
+     if(ho_ad.getFloor()!=null){
+       floor=", "+ho_ad.getFloor();
+       if(ho_ad.getMax_floor()!=null)floor+="/"+ho_ad.getMax_floor();
+       floor+=floor_ru;
+     }
+      offer_preview.add(new Offer_previewResponse(ho_ads.get(i).getHo_ad(), c_tbl_rec_img_moder.getC_img().intValue(), s_typ+i_typ+t+""+ho_cats.getSingular_name()+""+rent_period+total_area+floor+", "+ho_ad.getStreet_name(),
         ho_ads.get(j).getPrice(),c_loc.getName() , c_tbl_rec_img_moder_repository.find_all_small(ho_ads.get(j).getHo_ad().longValue()),
         ho_ads.get(j).getStreet_name()));
       i++;
@@ -122,7 +267,37 @@ public class Ho_Cat_Controller {
       if (!c_tbl_rec_img_moder_list_.isEmpty()) {
         C_Tbl_Rec_Img_Moder c_tbl_rec_img_moder = c_tbl_rec_img_moder_list_.get(0);
         C_Img c_img = c_img_repository.find_all(c_tbl_rec_img_moder.getC_img());
-      offer_preview.add(new Offer_previewResponse(ho_ads.get(i).getHo_ad(), c_tbl_rec_img_moder.getC_img().intValue(), c_img.getFile_name(),
+             Ho_Ad ho_ad = ho_ad_Service.find_by_id(ho_ads.get(i).getHo_ad());
+    Ho_Cat ho_cats=ho_Cat_Service.find_by_id(ho_ad.getHo_cat());
+     Ho_Cat ho_cat1=ho_Cat_Service.find_by_id(ho_cats.getParent_id());
+     String s=ho_cats.getPage_title();  
+     Ho_House_Shop_Type shop_type=ho_house_shop_type_repository.find_by_id(ho_ad.getHo_house_shop_type());
+     String s_typ="";
+     if(ho_ad.getHo_house_shop_type()!=null)s_typ=shop_type.getName();
+      Ho_House_Indus_Base_Type indus_type=ho_house_indus_base_type_repository.find_by_id(ho_ad.getHo_house_indus_base_type());
+     String i_typ="";
+     if(ho_ad.getHo_house_indus_base_type()!=null)i_typ=indus_type.getName();
+     String t="";
+     if(ho_ad.getRoom_cnt()!=null&&ho_ad.getHo_cat()!=15&&ho_ad.getHo_cat()!=26)t=String.valueOf(ho_ad.getRoom_cnt());
+    
+       String Ho_house_rent_period=ho_house_rent_period_repository.find_by_id(ho_ad.getHo_house_rent_period());
+     String rent_period="";
+     if(Ho_house_rent_period!=null)rent_period=" "+Ho_house_rent_period; 
+     String total_area="";
+     if(s_typ==""&&i_typ==""){
+     if(ho_ad.getTotal_area()!=null)
+     total_area=", "+ho_ad.getTotal_area().intValue()+" м²";   
+     }
+     else if(s_typ!=""||i_typ!="")total_area=" "+ho_ad.getTotal_area().intValue()+" м²";
+     if(ho_ad.getHo_cat()==16||ho_ad.getHo_cat()==27||ho_ad.getHo_cat()==15||ho_ad.getHo_cat()==26)total_area=" "+ho_ad.getTotal_area().intValue()+" м²";
+     String floor="";
+     String floor_ru=" этаж";
+     if(ho_ad.getFloor()!=null){
+       floor=", "+ho_ad.getFloor();
+       if(ho_ad.getMax_floor()!=null)floor+="/"+ho_ad.getMax_floor();
+       floor+=floor_ru;
+     }
+      offer_preview.add(new Offer_previewResponse(ho_ads.get(i).getHo_ad(), c_tbl_rec_img_moder.getC_img().intValue(), s_typ+i_typ+t+""+ho_cats.getSingular_name()+""+rent_period+total_area+floor+", "+ho_ad.getStreet_name(),
         ho_ads.get(j).getPrice(), c_loc_repository.find_by_Id(ho_ads.get(j).getC_loc()), c_tbl_rec_img_moder_repository.find_all_small(ho_ads.get(j).getHo_ad().longValue()),
         ho_ads.get(j).getStreet_name()));
       i++;
