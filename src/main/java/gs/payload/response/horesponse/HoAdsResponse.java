@@ -16,6 +16,9 @@ import lombok.Data;
   private String text;
   private HoAdFieldsResponse properties;
 
+  public HoAdsResponse() {
+  }
+
   public HoAdsResponse(Integer id, String pageTitle, String title, Double price, Integer categoryId, Boolean isMortgaged, PublishedBy publishedBy, List<Integer> images, Date publishDate, String text, HoAdFieldsResponse properties) {
     this.id = id;
     this.pageTitle = pageTitle;

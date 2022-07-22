@@ -26,7 +26,7 @@ public interface C_Tbl_Rec_Img_Moder_Repository extends JpaRepository<C_Tbl_Rec_
   @Query(" select count(t.c_tbl_rec_img_moder) from C_Tbl_Rec_Img_Moder t where t.c_tbl=12 and t.rec_id=:id_ and t.c_img_kind=2 and t.c_img_status=2 and t.is_deleted=false")
   Integer find_all_small(@Param("id_") Long id_);
   
-   @Query(" select t.c_tbl_rec_img_moder from C_Tbl_Rec_Img_Moder t where t.c_tbl=12 and t.rec_id=:id_ and t.c_img_kind=2 and t.c_img_status=2 and t.is_deleted=false")
+   @Query(" select t.c_img from C_Tbl_Rec_Img_Moder t where t.c_tbl=12 and t.rec_id=:id_ and t.c_img_kind=2 and t.c_img_status=2 and t.is_deleted=false")
   List<Integer> find_small_pictures(@Param("id_") Long id_);
 
 }

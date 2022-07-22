@@ -88,6 +88,7 @@ import model.ho.dbtables.Ho_House_Commun;
 import model.ho.dbtables.Ho_House_Indus_Base_Type;
 import model.ho.dbtables.Ho_House_Misc;
 import model.ho.dbtables.Ho_House_Parking;
+import model.ho.dbtables.Ho_House_Rent_Period;
 import model.ho.dbtables.Ho_House_Room_Cnt_Filter;
 import model.ho.dbtables.Ho_House_Security;
 import model.ho.dbtables.Ho_House_Shop_Type;
@@ -181,7 +182,6 @@ public class Ho_Ad_Controller {
   private Ho_House_Spec_Purpose_Repository ho_house_spec_purpose_repository;
 @Autowired
   private Ho_House_Rent_Period_Repository ho_house_rent_period_repository;
-
  @Autowired
   private Ho_House_Condition_Repository ho_house_condition_repository;
   @Autowired
@@ -221,8 +221,7 @@ public class Ho_Ad_Controller {
     Ho_Ad ho_ads = ho_Ad_Service.find_by_id(id);
     Ho_Cat ho_cats=ho_cat_service.find_by_id(ho_ads.getHo_cat());
      Ho_Cat ho_cat=ho_cat_service.find_by_id(ho_cats.getParent_id());
-     String s="";
-     if(ho_ads.getTitle()!=null)s=ho_ads.getTitle();  
+     String s=ho_cats.getPage_title();  
      Ho_House_Shop_Type shop_type=ho_house_shop_type_repository.find_by_id(ho_ads.getHo_house_shop_type());
      String s_typ="";
      if(ho_ads.getHo_house_shop_type()!=null)s_typ=shop_type.getName();
@@ -230,16 +229,15 @@ public class Ho_Ad_Controller {
      String i_typ="";
      if(ho_ads.getHo_house_indus_base_type()!=null)i_typ=indus_type.getName();
      String t="";
-     if(ho_ads.getRoom_cnt()!=null)t=String.valueOf(ho_ads.getRoom_cnt());
+     if(ho_ads.getRoom_cnt()!=null&&ho_ads.getHo_cat()!=15&&ho_ads.getHo_cat()!=26)t=String.valueOf(ho_ads.getRoom_cnt());
      C_Loc c_loc=c_loc_repository.find_all(ho_ads.getC_loc());
     
      if(c_loc.getParent_id()!=1){
        c_loc=c_loc_repository.find_all(c_loc.getParent_id());
      }
-     HoAdsResponse ho_list =null;
       List<C_Tbl_Rec_Img_Moder> c_tbl_rec_img_moder_list_ = c_tbl_rec_img_moder_repository.find_all(ho_ads.getHo_ad().longValue());
-      if (!c_tbl_rec_img_moder_list_.isEmpty()) {
-        
+    //  if (!c_tbl_rec_img_moder_list_.isEmpty()) {
+          
         C_Tbl_Rec_Img_Moder c_tbl_rec_img_moder = c_tbl_rec_img_moder_list_.get(0);
         C_Img c_img = c_img_repository.find_all(c_tbl_rec_img_moder.getC_img());
         String ho_contact_info_type= ho_contact_info_type_repository.find_by_id(ho_ads.getHo_contact_info_type());
@@ -248,6 +246,7 @@ public class Ho_Ad_Controller {
         for(Ho_Ad_Phone_Num ho_ad_phone_num:ho_ad_phone_nums){
           phone.add(ho_ad_phone_num.getPhone_num());
         }
+       
         List<String> security=new ArrayList();
         List<Ho_Ad_House_Security> ho_ad_house_security=ho_ad_house_security_repository.find_by_id(ho_ads.getHo_ad());
         for (Ho_Ad_House_Security ho_Ad_House_Security : ho_ad_house_security) {
@@ -262,31 +261,56 @@ public class Ho_Ad_Controller {
           commun.add(Ho_House_Security.getName());
         }
         List<String> loc=new ArrayList();
+     
         List<Ho_Ad_House_Loc> ho_ad_house_loc=ho_ad_house_loc_repository.find_by_id(ho_ads.getHo_ad());
         for (Ho_Ad_House_Loc ho_Ad_House_Security : ho_ad_house_loc) {
           loc.add(ho_house_loc_repository.find_by_id(ho_Ad_House_Security.getHo_ad_house_loc()));
         }
+       
         List<String> misc=new ArrayList();
+     
         List<Ho_Ad_House_Misc> ho_ad_house_misc=ho_ad_house_misc_repository.find_by_id(ho_ads.getHo_ad());
         for (Ho_Ad_House_Misc ho_Ad_House_Security : ho_ad_house_misc) {
          Ho_House_Misc Ho_House_Security=ho_house_misc_repository.find_by_id(ho_Ad_House_Security.getHo_ad_house_misc());
           misc.add(Ho_House_Security.getName());
         }
+         
         PublishedBy publishedBy=new PublishedBy(ho_contact_info_type,phone);
+        C_Loc c_loc1=c_loc_repository.find_all(ho_ads.getC_loc());
+        
+        String location=c_loc.getName();
+        if(location!=c_loc_repository.find_by_Id(ho_ads.getC_loc()))
+           location+=","+c_loc_repository.find_by_Id(ho_ads.getC_loc());
+        
         List<Integer> images=c_tbl_rec_img_moder_repository.find_small_pictures(ho_ads.getHo_ad().longValue());
        HoAdFieldsResponse hoadfieldsresponse=new HoAdFieldsResponse(ho_ads.getHo_ad(),ho_ads.getC_country(),ho_ads.getRoom_cnt(),
-       ho_build_type_Repository.find_by_id(ho_ads.getHo_build_type()),ho_ads.getConstruction_year(),ho_ads.getFloor(),ho_ads.getMax_floor(),ho_ads.getTotal_area(),ho_ads.getLiving_area(),ho_ads.getKitchen_area(),ho_ads.getIs_in_priv_hostel(),c_loc_repository.find_by_Id(ho_ads.getC_loc()),ho_resid_complex_repository.find_by_id(ho_ads.getHo_resid_complex()),ho_ads.getStreet_name(),ho_ads.getHouse_num(),
+       ho_build_type_Repository.find_by_id(ho_ads.getHo_build_type()),ho_ads.getConstruction_year(),ho_ads.getFloor(),ho_ads.getMax_floor(),ho_ads.getTotal_area(),ho_ads.getLiving_area(),ho_ads.getKitchen_area(),ho_ads.getIs_in_priv_hostel(),location,ho_resid_complex_repository.find_by_id(ho_ads.getHo_resid_complex()),ho_ads.getStreet_name(),ho_ads.getHouse_num(),
        ho_ads.getIntersection(),ho_ads.getIs_hide_house_num(),ho_ads.getLat(),ho_ads.getLon(),ho_house_condition_repository.find_by_id(ho_ads.getHo_house_condition()),ho_house_phone_repository.find_by_id(ho_ads.getHo_house_phone()),ho_house_inet_repository.find_by_id(ho_ads.getHo_house_inet()),ho_house_bathroom_repository.find_by_id(ho_ads.getHo_house_bathroom()),ho_house_balcony_repository.find_by_id(ho_ads.getHo_house_balcony()),ho_ads.getIs_balcony_glazed(),ho_house_door_repository.find_by_id(ho_ads.getHo_house_door()),ho_house_parking_repository.find_by_id(ho_ads.getHo_house_parking()),ho_house_furniture_repository.find_by_id(ho_ads.getHo_house_furniture()),ho_house_floor_repository.find_by_id(ho_ads.getHo_house_floor()),ho_ads.getCeiling_height(),ho_contact_info_type_repository.find_by_id(ho_ads.getHo_contact_info_type()),ho_ads.getContact_name(),ho_ads.getIs_exch_possible(),
        ho_ads.getIs_agree_with_rules(),ho_ads.getHo_ad_status(),ho_ads.getIs_deleted(),ho_ads.getLevel_num(),ho_ads.getLand_area(),ho_ads.getHow_area_fenced(),ho_house_sewerege_repository.find_by_id(ho_ads.getHo_house_sewerage()),ho_house_drink_water_repository.find_by_id(ho_ads.getHo_house_drink_water()),ho_house_electricity_repository.find_by_id(ho_ads.getHo_house_electricity()),ho_house_heating_repository.find_by_id(ho_ads.getHo_house_heating()),ho_house_gas_repository.find_by_id(ho_ads.getHo_house_gas()),ho_ads.getRoofing(),
        ho_ads.getSuburban_area_name(),ho_ads.getHouse_area(),ho_house_irrigation_water_repository.find_by_id(ho_ads.getHo_house_irrigation_water()),ho_house_office_type_repository.find_by_id(ho_ads.getHo_house_office_type()),ho_ads.getBusiness_center_name(),ho_ads.getPhone_lines_num(),ho_ads.getParking(),ho_ads.getIs_has_sep_entr_group(),ho_ads.getAdj_territory_area(),ho_house_shop_type_repository.find_by_id1(ho_ads.getHo_house_shop_type()),ho_house_loc_repository.find_by_id(ho_ads.getHo_house_loc()),ho_ads.getShop_center_name(),ho_house_indus_base_type_repository.find_by_id1(ho_ads.getHo_house_indus_base_type()),
        ho_ads.getTerritory_area(),C_land_area_unit_repository.find_by_id(ho_ads.getTerritory_area_unit()),ho_ads.getProduction_area(),ho_ads.getProduction_area_ceiling_height(),ho_ads.getWarehouse_area(),ho_ads.getWarehouse_ceiling_height(),ho_ads.getOffice_area(),ho_ads.getIs_has_railway_siding(),ho_ads.getMax_power_consumption(),ho_ads.getIs_has_own_substation(),
        ho_house_land_price_repository.find_by_id(ho_ads.getHo_house_land_price()),ho_ads.getIs_divisible(),ho_house_spec_purpose_repository.find_by_id(ho_ads.getHo_house_spec_purpose()),ho_ads.getTitle(),ho_ads.getIs_operating_business(),ho_house_rent_period_repository.find_by_id(ho_ads.getHo_house_rent_period()),ho_ads.getHo_usr(),security,commun,loc,misc);
-        
-        
-     ho_list =new HoAdsResponse(ho_ads.getHo_ad(),ho_cat.getSingular_name()+t+" "+s+" "+s_typ+" "+i_typ+" №"+ho_ads.getHo_ad()+": "+ho_ads.getStreet_name()+", "+c_loc.getName()+" -за"+ho_ads.getPrice(),
-    c_img.getFile_name(),ho_ads.getPrice(),ho_ads.getHo_cat(),ho_ads.getIs_pledged(),publishedBy,images,ho_ads.getIns_dt(),ho_ads.getTxt(),hoadfieldsresponse);
+    String Ho_house_rent_period=ho_house_rent_period_repository.find_by_id(ho_ads.getHo_house_rent_period());
+     String rent_period="";
+     if(Ho_house_rent_period!=null)rent_period=" "+Ho_house_rent_period; 
+     String total_area="";
+     if(s_typ==""&&i_typ==""){
+     if(ho_ads.getTotal_area()!=null)
+     total_area=", "+ho_ads.getTotal_area().intValue()+" м²";   
+     }
+     else if(s_typ!=""||i_typ!="")total_area=" "+ho_ads.getTotal_area().intValue()+" м²";
+     if(ho_ads.getHo_cat()==16||ho_ads.getHo_cat()==27||ho_ads.getHo_cat()==15||ho_ads.getHo_cat()==26)total_area=" "+ho_ads.getTotal_area().intValue()+" м²";
+     String floor="";
+     String floor_ru=" этаж";
+     if(ho_ads.getFloor()!=null){
+       floor=", "+ho_ads.getFloor();
+       if(ho_ads.getMax_floor()!=null)floor+="/"+ho_ads.getMax_floor();
+       floor+=floor_ru;
+     }
+    HoAdsResponse ho_list =new HoAdsResponse(ho_ads.getHo_ad(),ho_cat.getSingular_name()+" "+t+" "+s+" "+s_typ+" "+i_typ+" №"+ho_ads.getHo_ad()+": "+ho_ads.getStreet_name()+", "+c_loc.getName()+" -за "+ho_ads.getPrice(),
+    s_typ+i_typ+t+""+ho_cats.getSingular_name()+""+rent_period+total_area+floor+", "+ho_ads.getStreet_name(),ho_ads.getPrice(),ho_ads.getHo_cat(),ho_ads.getIs_pledged(),publishedBy,images,ho_ads.getIns_dt(),ho_ads.getTxt(),hoadfieldsresponse);
    
-  }
+  //}
    return new ResponseEntity<>( ho_list,HttpStatus.OK);
   }
 }
