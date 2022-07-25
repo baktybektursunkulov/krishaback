@@ -319,15 +319,24 @@ public class Ho_Ad_Controller {
        ho_ads.getSuburban_area_name(),ho_ads.getHouse_area(),ho_house_irrigation_water_repository.find_by_id(ho_ads.getHo_house_irrigation_water()),ho_house_office_type_repository.find_by_id(ho_ads.getHo_house_office_type()),ho_ads.getBusiness_center_name(),ho_ads.getPhone_lines_num(),ho_ads.getParking(),ho_ads.getIs_has_sep_entr_group(),ho_ads.getAdj_territory_area(),ho_house_shop_type_repository.find_by_id1(ho_ads.getHo_house_shop_type()),ho_house_loc_repository.find_by_id(ho_ads.getHo_house_loc()),ho_ads.getShop_center_name(),ho_house_indus_base_type_repository.find_by_id1(ho_ads.getHo_house_indus_base_type()),
        ho_ads.getTerritory_area(),C_land_area_unit_repository.find_by_id(ho_ads.getTerritory_area_unit()),ho_ads.getProduction_area(),ho_ads.getProduction_area_ceiling_height(),ho_ads.getWarehouse_area(),ho_ads.getWarehouse_ceiling_height(),ho_ads.getOffice_area(),ho_ads.getIs_has_railway_siding(),ho_ads.getMax_power_consumption(),ho_ads.getIs_has_own_substation(),
        ho_house_land_price_repository.find_by_id(ho_ads.getHo_house_land_price()),ho_ads.getIs_divisible(),ho_house_spec_purpose_repository.find_by_id(ho_ads.getHo_house_spec_purpose()),ho_ads.getTitle(),ho_ads.getIs_operating_business(),ho_house_rent_period_repository.find_by_id(ho_ads.getHo_house_rent_period()),ho_ads.getHo_usr(),security,commun,loc,misc,alloc_type,fiel_activ);
-    String Ho_house_rent_period=ho_house_rent_period_repository.find_by_id(ho_ads.getHo_house_rent_period());
+    
+       String title="";
+       if(ho_ads.getTitle()!=null)title+=ho_ads.getTitle();
+       
+       String Ho_house_rent_period=ho_house_rent_period_repository.find_by_id(ho_ads.getHo_house_rent_period());
      String rent_period="";
      if(Ho_house_rent_period!=null)rent_period=" "+Ho_house_rent_period; 
      String total_area="";
-     if(s_typ==""&&i_typ==""){
+     
+     if(ho_ads.getHo_cat()==13){
+     total_area=" "+ho_ads.getTerritory_area().intValue()+" "+C_land_area_unit_repository.find_by_id(ho_ads.getTerritory_area_unit());
+     }
+     else if(s_typ==""&&i_typ==""){
      if(ho_ads.getTotal_area()!=null)
      total_area=", "+ho_ads.getTotal_area().intValue()+" м²";   
      }
-     else if(s_typ!=""||i_typ!="")total_area=" "+ho_ads.getTotal_area().intValue()+" м²";
+    else if(s_typ!="")total_area=" "+ho_ads.getTotal_area().intValue()+" м²"; 
+    else if(i_typ!=""&&ho_ads.getTerritory_area()!=null)total_area=" "+ho_ads.getTerritory_area().intValue()+" м²";
      if(ho_ads.getHo_cat()==16||ho_ads.getHo_cat()==27||ho_ads.getHo_cat()==15||ho_ads.getHo_cat()==26)total_area=" "+ho_ads.getTotal_area().intValue()+" м²";
      String floor="";
      String floor_ru=" этаж";
@@ -337,7 +346,7 @@ public class Ho_Ad_Controller {
        floor+=floor_ru;
      }
     HoAdsResponse ho_list =new HoAdsResponse(ho_ads.getHo_ad(),ho_cat.getSingular_name()+" "+t+" "+s+" "+s_typ+" "+i_typ+" №"+ho_ads.getHo_ad()+": "+ho_ads.getStreet_name()+", "+c_loc.getName()+" -за "+ho_ads.getPrice(),
-    s_typ+i_typ+t+""+ho_cats.getSingular_name()+""+rent_period+total_area+floor+", "+ho_ads.getStreet_name(),ho_ads.getPrice(),ho_ads.getHo_cat(),ho_ads.getIs_pledged(),publishedBy,images,ho_ads.getIns_dt(),ho_ads.getTxt(),hoadfieldsresponse);
+    title+s_typ+i_typ+t+""+ho_cats.getSingular_name()+""+rent_period+total_area+floor+", "+ho_ads.getStreet_name(),ho_ads.getPrice(),ho_ads.getHo_cat(),ho_ads.getIs_pledged(),publishedBy,images,ho_ads.getIns_dt(),ho_ads.getTxt(),hoadfieldsresponse);
    
   //}
    return new ResponseEntity<>( ho_list,HttpStatus.OK);

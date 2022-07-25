@@ -33,11 +33,14 @@ public class Ho_Ad_Service {
   public List<Ho_Ad> find(Integer id){
     return repository.find(id);
   }
+    public List<Ho_Ad> pagination(Integer id,Integer limit,Integer offset){
+    return repository.pagination(id,limit,offset);
+  }
   public Ho_Ad find_by_id(Integer id){
     return repository.find_by_id(id);
   }
-//  
-//  public List<DateFormat.Field> column_names(){
-//    return repository.column_names();
-//  }
+  
+  public Integer countofcat(Integer id){
+    return repository.countofcat(id);
+  }
 }
