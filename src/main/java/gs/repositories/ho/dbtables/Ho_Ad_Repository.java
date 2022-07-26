@@ -1,21 +1,9 @@
 package gs.repositories.ho.dbtables;
-
-import gs.payload.response.horesponse.HoCatResponse;
-import gs.payload.response.horesponse.HoPhoneResponse;
-import gs.repositories.core.dbtables.*;
-import java.text.DateFormat.Field;
 import java.util.List;
-import java.util.Optional; 
 import model.ho.dbtables.Ho_Ad;
-import model.ho.dbtables.Ho_Cat;
-import model.ho.dbtables.Ho_House_Balcony;
-import model.ho.dbtables.Ho_House_Shop_Type;
-import org.primefaces.component.api.Pageable;
-import org.springframework.data.domain.Page;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 

@@ -1,18 +1,11 @@
 package gs.services.ho;
 
-import gs.payload.response.horesponse.HoCatResponse;
-import gs.payload.response.horesponse.HoPhoneResponse;
 import gs.repositories.ho.dbtables.Ho_Ad_Repository;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import gs.repositories.ho.dbtables.Ho_Cat_Repository;
-import java.text.DateFormat;
 import model.ho.dbtables.Ho_Ad;
-import model.ho.dbtables.Ho_Cat;
-import model.ho.dbtables.Ho_House_Shop_Type;
-import org.springframework.data.repository.query.Param;
 
 @Service
 public class Ho_Ad_Service {

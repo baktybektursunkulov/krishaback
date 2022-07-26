@@ -1,20 +1,12 @@
 package gs.controllers.ho.dbtables;
 
-import gs.controllers.core.dbtables.*;
-import gs.payload.response.horesponse.HoAdCatResponse;
 import gs.payload.response.horesponse.HoAdFieldsResponse;
 import gs.payload.response.horesponse.HoAdsResponse;
-import gs.payload.response.horesponse.HoCLocResponse;
-import gs.payload.response.horesponse.HoCatResponse;
-import gs.payload.response.horesponse.HoHouseRoomCntFilterResponse;
-import gs.payload.response.horesponse.Offer_previewResponse;
 import gs.payload.response.horesponse.PublishedBy;
 import gs.repositories.core.dbtables.C_Img_Repository;
 import gs.repositories.core.dbtables.C_Land_Area_Unit_Repository;
 import gs.repositories.core.dbtables.C_Loc_Repository;
-import gs.repositories.core.dbtables.C_Tbl_Rec_Corr_By_Name_Repository;
 import gs.repositories.core.dbtables.C_Tbl_Rec_Img_Moder_Repository;
-import gs.repositories.core.dbtables.C_Usr_Repository;
 import gs.repositories.ho.dbtables.Ho_Ad_House_Alloc_Type_Repository;
 import gs.repositories.ho.dbtables.Ho_Ad_House_Commun_Repository;
 import gs.repositories.ho.dbtables.Ho_Ad_House_Field_Activ_Repository;
@@ -22,8 +14,6 @@ import gs.repositories.ho.dbtables.Ho_Ad_House_Loc_Repository;
 import gs.repositories.ho.dbtables.Ho_Ad_House_Misc_Repository;
 import gs.repositories.ho.dbtables.Ho_Ad_House_Security_Repository;
 import gs.repositories.ho.dbtables.Ho_Ad_Phone_Num_Repository;
-import gs.repositories.ho.dbtables.Ho_Ad_Repository;
-import gs.repositories.ho.dbtables.Ho_Ad_Status_Repository;
 import gs.repositories.ho.dbtables.Ho_Build_Type_Repository;
 import gs.repositories.ho.dbtables.Ho_Contact_Info_Type_Repository;
 import gs.repositories.ho.dbtables.Ho_House_Alloc_Type_Repository;
@@ -56,28 +46,15 @@ import gs.repositories.ho.dbtables.Ho_House_Spec_Purpose_Repository;
 import gs.repositories.ho.dbtables.Ho_Resid_Complex_Repository;
 import gs.repositories.ho.dbtables.Ho_Usr_Repository;
 import model.core.dbtables.*;
-import gs.services.core.dbtables.*;
 import gs.services.ho.Ho_Ad_Service;
 import gs.services.ho.Ho_Cat_Service;
-import gs.services.ho.Ho_House_Room_Cnt_Filter_Service;
-import gs.services.ho.Ho_Usr_Service;
 import io.swagger.annotations.Api;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Timestamp;
-import java.text.DateFormat.Field;
 import java.util.ArrayList;
-import java.util.Date;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
-import java.util.Optional;
-import java.util.Scanner;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
 import model.ho.dbtables.Ho_Ad;
 import model.ho.dbtables.Ho_Ad_House_Alloc_Type;
@@ -87,26 +64,15 @@ import model.ho.dbtables.Ho_Ad_House_Loc;
 import model.ho.dbtables.Ho_Ad_House_Misc;
 import model.ho.dbtables.Ho_Ad_House_Security;
 import model.ho.dbtables.Ho_Ad_Phone_Num;
-import model.ho.dbtables.Ho_Build_Type;
 import model.ho.dbtables.Ho_Cat;
-import model.ho.dbtables.Ho_Contact_Info_Type;
 import model.ho.dbtables.Ho_House_Alloc_Type;
 import model.ho.dbtables.Ho_House_Commun;
 import model.ho.dbtables.Ho_House_Field_Activ;
 import model.ho.dbtables.Ho_House_Indus_Base_Type;
 import model.ho.dbtables.Ho_House_Misc;
-import model.ho.dbtables.Ho_House_Parking;
-import model.ho.dbtables.Ho_House_Rent_Period;
-import model.ho.dbtables.Ho_House_Room_Cnt_Filter;
 import model.ho.dbtables.Ho_House_Security;
 import model.ho.dbtables.Ho_House_Shop_Type;
-import model.ho.dbtables.Ho_Resid_Complex;
 import model.ho.dbtables.Ho_Usr;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
-import org.openqa.selenium.*;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -252,8 +218,6 @@ public class Ho_Ad_Controller {
        c_loc=c_loc_repository.find_all(c_loc.getParent_id());
      }
       List<C_Tbl_Rec_Img_Moder> c_tbl_rec_img_moder_list_ = c_tbl_rec_img_moder_repository.find_all(ho_ads.getHo_ad().longValue());
-    //  if (!c_tbl_rec_img_moder_list_.isEmpty()) {
-          
         C_Tbl_Rec_Img_Moder c_tbl_rec_img_moder = c_tbl_rec_img_moder_list_.get(0);
         C_Img c_img = c_img_repository.find_all(c_tbl_rec_img_moder.getC_img());
         String ho_contact_info_type= ho_contact_info_type_repository.find_by_id(ho_ads.getHo_contact_info_type());
@@ -348,7 +312,6 @@ public class Ho_Ad_Controller {
     HoAdsResponse ho_list =new HoAdsResponse(ho_ads.getHo_ad(),ho_cat.getSingular_name()+" "+t+" "+s+" "+s_typ+" "+i_typ+" №"+ho_ads.getHo_ad()+": "+ho_ads.getStreet_name()+", "+c_loc.getName()+" -за "+ho_ads.getPrice(),
     title+s_typ+i_typ+t+""+ho_cats.getSingular_name()+""+rent_period+total_area+floor+", "+ho_ads.getStreet_name(),ho_ads.getPrice(),ho_ads.getHo_cat(),ho_ads.getIs_pledged(),publishedBy,images,ho_ads.getIns_dt(),ho_ads.getTxt(),hoadfieldsresponse);
    
-  //}
    return new ResponseEntity<>( ho_list,HttpStatus.OK);
   }
 }
