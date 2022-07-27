@@ -1,20 +1,9 @@
-
 package gs.controllers.ho.dbtables;
 
-import gs.payload.response.horesponse.HoAdCatResponse;
-import gs.payload.response.horesponse.HoAdCatResponse;
-import gs.services.core.dbtables.C_Lang_Service;
+import gs.payload.response.horesponse.*;
 import gs.services.ho.Ho_Ad_Cat_Service;
 import io.swagger.annotations.Api;
-import java.io.IOException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import model.core.dbtables.Country;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -26,119 +15,153 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/ho_ad_cat")
 @Api(tags = {"Ho_Ad_Cat_Controller"})
 public class Ho_Ad_Cat_Controller {
-  
+
   @Autowired
   Ho_Ad_Cat_Service ho_ad_cat_Service;
-   @GetMapping(value = "/ho_build_type_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_build_type_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_build_type_repository(), HttpStatus.OK);
-    }
 
-    @GetMapping(value = "/raznoe")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_misc_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_misc_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/kommunikasia")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_commun_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_commun_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/bezopasnost")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_security_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_security_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/mestopolojenia")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_loc_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_loc_repository(), HttpStatus.OK);
-    }
- 
-    @GetMapping(value = "/ho_resid_complex_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_resid_complex_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_resid_complex_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_condition_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_condition_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_condition_repository(), HttpStatus.OK);
-    }
-   @GetMapping(value = "/ho_house_phone_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_phone_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_phone_repository(), HttpStatus.OK);
-    }
-   @GetMapping(value = "/ho_house_inet_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_inet_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_inet_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_bathroom_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_bathroom_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_bathroom_repository(), HttpStatus.OK);
-    }
-   @GetMapping(value = "/ho_house_balcony_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_balcony_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_balcony_repository(), HttpStatus.OK);
-    }
-   @GetMapping(value = "/ho_house_door_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_door_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_door_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_parking_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_parking_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_parking_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_furniture_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_furniture_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_furniture_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_floor_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_floor_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_floor_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_contact_info_type_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_contact_info_type_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_contact_info_type_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_sewerage_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_sewerage_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_sewerage_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_drink_water_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_drink_water_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_drink_water_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_electricity_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_electricity_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_electricity_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_heating_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_heating_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_heating_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_gas_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_gas_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_gas_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_irrigation_water_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_irrigation_water_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_irrigation_water_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_office_type_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_office_type_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_office_type_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_shop_type_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_shop_type_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_shop_type_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_indus_base_type_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_indus_base_type_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_indus_base_type_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_land_price_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_land_price_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_land_price_repository(), HttpStatus.OK);
-    }
-    @GetMapping(value = "/ho_house_spec_purpose_repository")
-    public ResponseEntity<List<HoAdCatResponse>> ho_house_spec_purpose_repository() throws RuntimeException {
-        return new ResponseEntity<>(ho_ad_cat_Service.ho_house_spec_purpose_repository(), HttpStatus.OK);
-    }
-  
-    
+  @GetMapping(value = "/ho_build_type")
+  public ResponseEntity<List<HoAdCatResponse>> ho_build_type() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_build_type(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_alloc_type")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_alloc_type() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_alloc_type(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_field_activ")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_field_activ() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_field_activ(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_misc")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_misc() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_misc(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_commun")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_commun() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_commun(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_security")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_security_() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_security(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_loc")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_loc() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_loc(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_resid_complex")
+  public ResponseEntity<List<HoAdCatResponse>> ho_resid_complex() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_resid_complex(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_condition")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_condition() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_condition(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_phone")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_phone() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_phone(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_inet")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_inet() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_inet(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_bathroom")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_bathroom() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_bathroom(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_balcony")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_balcony() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_balcony(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_door")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_door() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_door(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_parking")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_parking() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_parking(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_furniture")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_furniture() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_furniture(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_floor")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_floor() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_floor(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_contact_info_type")
+  public ResponseEntity<List<HoAdCatResponse>> ho_contact_info_type() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_contact_info_type(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_sewerage")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_sewerage() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_sewerage(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_drink_water")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_drink_water() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_drink_water(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_electricity")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_electricity() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_electricity(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_heating")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_heating() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_heating(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_gas")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_gas() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_gas(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_irrigation_water")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_irrigation_water() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_irrigation_water(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_office_type")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_office_type() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_office_type(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_shop_type")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_shop_type() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_shop_type(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_indus_base_type")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_indus_base_type() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_indus_base_type(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_land_price")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_land_price() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_land_price(), HttpStatus.OK);
+  }
+
+  @GetMapping(value = "/ho_house_spec_purpose")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_spec_purpose() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_spec_purpose(), HttpStatus.OK);
+  }
+
 }

@@ -1,16 +1,8 @@
 package gs.repositories.ho.dbtables;
 
 import gs.payload.response.horesponse.HoAdCatResponse;
-import gs.payload.response.horesponse.HoCatResponse;
-import gs.repositories.core.dbtables.*;
 import java.util.List;
-import java.util.Optional; 
-import model.ho.dbtables.Ho_Build_Type;
-import model.ho.dbtables.Ho_Cat;
-import model.ho.dbtables.Ho_House_Balcony;
 import model.ho.dbtables.Ho_House_Heating;
-import model.ho.dbtables.Ho_House_Inet;
-import model.ho.dbtables.Ho_House_Sewerage;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;

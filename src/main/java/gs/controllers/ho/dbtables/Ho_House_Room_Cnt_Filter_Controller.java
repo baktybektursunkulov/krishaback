@@ -1,11 +1,6 @@
 package gs.controllers.ho.dbtables;
 
-import gs.controllers.core.dbtables.*;
-import gs.payload.response.horesponse.HoCatResponse;
 import gs.payload.response.horesponse.HoHouseRoomCntFilterResponse;
-import model.core.dbtables.*;
-import gs.services.core.dbtables.*;
-import gs.services.ho.Ho_Cat_Service;
 import gs.services.ho.Ho_House_Room_Cnt_Filter_Service;
 import io.swagger.annotations.Api;
 import java.util.ArrayList;
@@ -15,8 +10,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import javax.servlet.http.HttpServletRequest;
-import javax.validation.Valid;
-import model.ho.dbtables.Ho_Cat;
 import model.ho.dbtables.Ho_House_Room_Cnt_Filter;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -26,23 +19,19 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class Ho_House_Room_Cnt_Filter_Controller {
 
   @Autowired
- Ho_House_Room_Cnt_Filter_Service ho_house_room_cnt_filter_Service;
+  Ho_House_Room_Cnt_Filter_Service ho_house_room_cnt_filter_Service;
 
   @GetMapping(value = "/find_all")
   public ResponseEntity<List<HoHouseRoomCntFilterResponse>> find_all(HttpServletRequest httpServletRequest) throws RuntimeException {
-    
+
     List<HoHouseRoomCntFilterResponse> ho_list = new ArrayList();
     List<Ho_House_Room_Cnt_Filter> ho_Cats = ho_house_room_cnt_filter_Service.find_all();
-    
+
     for (Ho_House_Room_Cnt_Filter ho_Cat : ho_Cats) {
       ho_list.add(new HoHouseRoomCntFilterResponse(ho_Cat.getHo_house_room_cnt_filter(),
-                                             ho_Cat.getName()));
+        ho_Cat.getName()));
     }
-    
- 
+
     return new ResponseEntity<>(ho_list, HttpStatus.OK);
   }
 }
-
-
-

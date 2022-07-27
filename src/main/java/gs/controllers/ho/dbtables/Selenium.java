@@ -2,44 +2,8 @@ package gs.controllers.ho.dbtables;
 
 import gs.payload.request.horequest.SeleniumRequest;
 import gs.payload.response.horesponse.HoAdCatResponse;
-import gs.repositories.core.dbtables.C_Bin_File_Body_Repository;
-import gs.repositories.core.dbtables.C_Img_Repository;
-import gs.repositories.core.dbtables.C_Land_Area_Unit_Repository;
-import gs.repositories.core.dbtables.C_Loc_Repository;
-import gs.repositories.core.dbtables.C_Tbl_Rec_Corr_By_Name_Repository;
-import gs.repositories.core.dbtables.C_Tbl_Rec_Img_Moder_Repository;
-import gs.repositories.ho.dbtables.Ho_Ad_House_Commun_Repository;
-import gs.repositories.ho.dbtables.Ho_Ad_House_Loc_Repository;
-import gs.repositories.ho.dbtables.Ho_Ad_House_Security_Repository;
-import gs.repositories.ho.dbtables.Ho_Ad_Phone_Num_Repository;
-import gs.repositories.ho.dbtables.Ho_Ad_Repository;
-import gs.repositories.ho.dbtables.Ho_Build_Type_Repository;
-import gs.repositories.ho.dbtables.Ho_Contact_Info_Type_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Balcony_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Bathroom_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Commun_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Condition_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Door_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Drink_Water_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Electricity_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Floor_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Furniture_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Gas_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Heating_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Indus_Base_Type_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Inet_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Irrigation_Water_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Land_Price_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Loc_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Office_Type_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Parking_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Phone_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Rent_Period_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Security_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Sewerage_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Shop_Type_Repository;
-import gs.repositories.ho.dbtables.Ho_House_Spec_Purpose_Repository;
-import gs.repositories.ho.dbtables.Ho_Resid_Complex_Repository;
+import gs.repositories.core.dbtables.*;
+import gs.repositories.ho.dbtables.*;
 import gs.services.ho.Ho_Ad_Service;
 import io.swagger.annotations.Api;
 import java.io.ByteArrayOutputStream;
@@ -49,41 +13,8 @@ import java.io.InputStream;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
-import model.core.dbtables.C_Bin_File_Body;
-import model.core.dbtables.C_Img;
-import model.core.dbtables.C_Land_Area_Unit;
-import model.core.dbtables.C_Loc;
-import model.core.dbtables.C_Tbl_Rec_Img_Moder;
-import model.ho.dbtables.Ho_Ad;
-import model.ho.dbtables.Ho_Ad_House_Commun;
-import model.ho.dbtables.Ho_Ad_House_Loc;
-import model.ho.dbtables.Ho_Ad_House_Security;
-import model.ho.dbtables.Ho_Ad_Phone_Num;
-import model.ho.dbtables.Ho_Build_Type;
-import model.ho.dbtables.Ho_Contact_Info_Type;
-import model.ho.dbtables.Ho_House_Balcony;
-import model.ho.dbtables.Ho_House_Bathroom;
-import model.ho.dbtables.Ho_House_Commun;
-import model.ho.dbtables.Ho_House_Condition;
-import model.ho.dbtables.Ho_House_Door;
-import model.ho.dbtables.Ho_House_Drink_Water;
-import model.ho.dbtables.Ho_House_Electricity;
-import model.ho.dbtables.Ho_House_Floor;
-import model.ho.dbtables.Ho_House_Furniture;
-import model.ho.dbtables.Ho_House_Gas;
-import model.ho.dbtables.Ho_House_Heating;
-import model.ho.dbtables.Ho_House_Inet;
-import model.ho.dbtables.Ho_House_Irrigation_Water;
-import model.ho.dbtables.Ho_House_Land_Price;
-import model.ho.dbtables.Ho_House_Loc;
-import model.ho.dbtables.Ho_House_Office_Type;
-import model.ho.dbtables.Ho_House_Parking;
-import model.ho.dbtables.Ho_House_Phone;
-import model.ho.dbtables.Ho_House_Security;
-import model.ho.dbtables.Ho_House_Sewerage;
-import model.ho.dbtables.Ho_House_Shop_Type;
-import model.ho.dbtables.Ho_House_Spec_Purpose;
-import model.ho.dbtables.Ho_Resid_Complex;
+import model.core.dbtables.*;
+import model.ho.dbtables.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -104,8 +35,6 @@ public class Selenium {
   @Autowired
   private Ho_House_Rent_Period_Repository ho_house_rent_period_repository;
   @Autowired
-  private C_Tbl_Rec_Corr_By_Name_Repository c_tbl_rec_corr_by_name_repository;
-  @Autowired
   private Ho_Ad_Phone_Num_Repository ho_ad_phone_num_repository;
   @Autowired
   private Ho_House_Indus_Base_Type_Repository Ho_House_Indus_Base_Type_Repository;
@@ -120,12 +49,12 @@ public class Selenium {
 
   @PostMapping("/prods")
   public void prods(@RequestBody SeleniumRequest seleniumrequest) throws FileNotFoundException, InterruptedException, IOException {
-    Ho_Ad ho_ad=new Ho_Ad();
+    Ho_Ad ho_ad = new Ho_Ad();
     ho_ad.setLat(seleniumrequest.getLat());
     ho_ad.setLon(seleniumrequest.getLon());
     ho_ad.setRoom_cnt(seleniumrequest.getRoom_cnt());
-    String loc=seleniumrequest.getLoc();
-    C_Loc c_loc=c_loc_repository.ho_ad_loc(seleniumrequest.getLoc());
+    String loc = seleniumrequest.getLoc();
+    C_Loc c_loc = c_loc_repository.ho_ad_loc(seleniumrequest.getLoc());
     ho_ad.setC_loc(c_loc.getC_loc());
     for (int itip = 0; itip < seleniumrequest.getSidebar().size(); itip++) {
       String tip = seleniumrequest.getSidebar().get(itip);
@@ -157,7 +86,7 @@ public class Selenium {
       } else if (tip.equals("Дверь")) {
         door(s, ho_ad);
       }
-      
+
     }
     List<Ho_Contact_Info_Type> ho_cit = repc.find_all1();
     for (Ho_Contact_Info_Type ho_usr : ho_cit) {
@@ -191,109 +120,111 @@ public class Selenium {
         furniture(s, ho_ad);
       } else if (f.equals("Телефон")) {
         phone(s, ho_ad);
-      } 
+      }
     }
-      Date timestamp = new Date();
-      ho_ad.setIns_dt(timestamp);
-      ho_ad.setIs_deleted(Boolean.FALSE);
-      ho_ad.setC_country(2);
-      ho_ad.setIs_agree_with_rules(true);
-      ho_ad.setHo_usr(1L);
-      ho_ad.setHo_cat(9);
-      ho_ad.setHo_ad_status(1);
-      ho_Ad_Service.saveOrUpdate(ho_ad);
+    Date timestamp = new Date();
+    ho_ad.setIns_dt(timestamp);
+    ho_ad.setIs_deleted(Boolean.FALSE);
+    ho_ad.setC_country(2);
+    ho_ad.setIs_agree_with_rules(true);
+    ho_ad.setHo_usr(1L);
+    ho_ad.setHo_cat(9);
+    ho_ad.setHo_ad_status(1);
+    ho_Ad_Service.saveOrUpdate(ho_ad);
+    try {
+      for (int itip = 0; itip < seleniumrequest.getSidebar().size(); itip++) {
+        String tip = seleniumrequest.getSidebar().get(itip);
+        String s = seleniumrequest.getSidebar_values().get(itip);
+        if (tip.equals("Безопасность")) {
+          house_security(s, ho_ad);
+        }
+      }
+
+      for (int itip = 0; itip < seleniumrequest.getOffer_parameters().size(); itip++) {
+        String s = seleniumrequest.getOffer_parameters().get(itip);
+        String f = seleniumrequest.getOffer_parameters_values().get(itip);
+        if (f.equals("Безопасность")) {
+          house_security(s, ho_ad);
+        }
+      }
+      C_Bin_File_Body c_Bin_File_Body = new C_Bin_File_Body();
+      URL url = new URL(seleniumrequest.getUrl());
+      ByteArrayOutputStream baos = new ByteArrayOutputStream();
+      InputStream is = null;
       try {
-       for (int itip = 0; itip < seleniumrequest.getSidebar().size(); itip++) {
-          String tip = seleniumrequest.getSidebar().get(itip);
-          String s = seleniumrequest.getSidebar_values().get(itip);
-          if (tip.equals("Безопасность")) {
-            house_security(s, ho_ad);
-          }
+        is = url.openStream();
+        byte[] byteChunk = new byte[4096]; // Or whatever size you want to read in at a time.
+        int n;
+        while ((n = is.read(byteChunk)) > 0) {
+          baos.write(byteChunk, 0, n);
         }
-        
-       for (int itip = 0; itip < seleniumrequest.getOffer_parameters().size(); itip++) {
-          String s =seleniumrequest.getOffer_parameters().get(itip) ;
-          String f = seleniumrequest.getOffer_parameters_values().get(itip);
-          if (f.equals("Безопасность")) {
-            house_security(s, ho_ad);
-          }
-        }
-         C_Bin_File_Body c_Bin_File_Body = new C_Bin_File_Body();
-        URL url = new URL(seleniumrequest.getUrl());
+      } catch (IOException e) {
+      }
+      c_Bin_File_Body.setFile_body(baos.toByteArray());
+      c_bin_file_body_repository.save(c_Bin_File_Body);
+      C_Img c_Img = new C_Img();
+      c_Img.setVersion(1);
+      c_Img.setIs_deleted(Boolean.FALSE);
+      c_Img.setFile_name(seleniumrequest.getFile_name());
+      c_Img.setC_bin_file_body(c_Bin_File_Body.getC_bin_file_body());
+      c_img_repository.save(c_Img);
+
+      C_Tbl_Rec_Img_Moder c_tbl_rec_img_moder = new C_Tbl_Rec_Img_Moder();
+      c_tbl_rec_img_moder.setC_tbl(12);
+      c_tbl_rec_img_moder.setRec_id(Long.valueOf(ho_ad.getHo_ad()));
+      c_tbl_rec_img_moder.setC_img_kind(1);
+      c_tbl_rec_img_moder.setC_img_status(2);
+      c_tbl_rec_img_moder.setIs_deleted(Boolean.FALSE);
+      c_tbl_rec_img_moder.setC_img(c_Img.getC_img());
+
+      c_tbl_rec_img_moder_repository.save(c_tbl_rec_img_moder);
+    } catch (NullPointerException ex) {
+    }
+
+    try {
+      for (int l = 0; l < seleniumrequest.getUrl_small().size(); l++) {
+        String s = seleniumrequest.getUrl_small().get(l);
+        String file_name = seleniumrequest.getFile_name_small().get(l);
+        C_Bin_File_Body c_Bin_File_Body = new C_Bin_File_Body();
+        URL url = new URL(s);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
         InputStream is = null;
         try {
           is = url.openStream();
           byte[] byteChunk = new byte[4096]; // Or whatever size you want to read in at a time.
           int n;
+
           while ((n = is.read(byteChunk)) > 0) {
             baos.write(byteChunk, 0, n);
           }
-        } catch (IOException e) {  }
+        } catch (IOException e) {
+        }
         c_Bin_File_Body.setFile_body(baos.toByteArray());
         c_bin_file_body_repository.save(c_Bin_File_Body);
         C_Img c_Img = new C_Img();
         c_Img.setVersion(1);
         c_Img.setIs_deleted(Boolean.FALSE);
-        c_Img.setFile_name(seleniumrequest.getFile_name());
+        c_Img.setFile_name(file_name);
         c_Img.setC_bin_file_body(c_Bin_File_Body.getC_bin_file_body());
         c_img_repository.save(c_Img);
 
         C_Tbl_Rec_Img_Moder c_tbl_rec_img_moder = new C_Tbl_Rec_Img_Moder();
         c_tbl_rec_img_moder.setC_tbl(12);
         c_tbl_rec_img_moder.setRec_id(Long.valueOf(ho_ad.getHo_ad()));
-        c_tbl_rec_img_moder.setC_img_kind(1);
+        c_tbl_rec_img_moder.setC_img_kind(2);
         c_tbl_rec_img_moder.setC_img_status(2);
         c_tbl_rec_img_moder.setIs_deleted(Boolean.FALSE);
         c_tbl_rec_img_moder.setC_img(c_Img.getC_img());
 
         c_tbl_rec_img_moder_repository.save(c_tbl_rec_img_moder);
-      } catch (NullPointerException ex) {
       }
-
-      try {
-        for (int l = 0; l < seleniumrequest.getUrl_small().size(); l++) {
-          String s = seleniumrequest.getUrl_small().get(l);
-          String file_name = seleniumrequest.getFile_name_small().get(l);
-          C_Bin_File_Body c_Bin_File_Body = new C_Bin_File_Body();
-          URL url = new URL(s);
-          ByteArrayOutputStream baos = new ByteArrayOutputStream();
-          InputStream is = null;
-          try {
-            is = url.openStream();
-            byte[] byteChunk = new byte[4096]; // Or whatever size you want to read in at a time.
-            int n;
-
-            while ((n = is.read(byteChunk)) > 0) {
-              baos.write(byteChunk, 0, n);
-            }
-          } catch (IOException e) {  }
-          c_Bin_File_Body.setFile_body(baos.toByteArray());
-          c_bin_file_body_repository.save(c_Bin_File_Body);
-          C_Img c_Img = new C_Img();
-          c_Img.setVersion(1);
-          c_Img.setIs_deleted(Boolean.FALSE);
-          c_Img.setFile_name(file_name);
-          c_Img.setC_bin_file_body(c_Bin_File_Body.getC_bin_file_body());
-          c_img_repository.save(c_Img);
-
-          C_Tbl_Rec_Img_Moder c_tbl_rec_img_moder = new C_Tbl_Rec_Img_Moder();
-          c_tbl_rec_img_moder.setC_tbl(12);
-          c_tbl_rec_img_moder.setRec_id(Long.valueOf(ho_ad.getHo_ad()));
-          c_tbl_rec_img_moder.setC_img_kind(2);
-          c_tbl_rec_img_moder.setC_img_status(2);
-          c_tbl_rec_img_moder.setIs_deleted(Boolean.FALSE);
-          c_tbl_rec_img_moder.setC_img(c_Img.getC_img());
-
-          c_tbl_rec_img_moder_repository.save(c_tbl_rec_img_moder);
-        }
       Ho_Ad_Phone_Num ho_ad_phone_num = new Ho_Ad_Phone_Num();
       ho_ad_phone_num.setHo_ad(ho_ad.getHo_ad());
       ho_ad_phone_num.setIs_deleted(Boolean.FALSE);
       ho_ad_phone_num.setPhone_num(seleniumrequest.getPhone());
       ho_ad_phone_num_repository.save(ho_ad_phone_num);
-      } catch (NullPointerException ex) {
-      }
+    } catch (NullPointerException ex) {
+    }
   }
 
   public void flat_priv_dorm(String prob, Ho_Ad ho_ad) {
@@ -403,27 +334,27 @@ public class Selenium {
       }
     }
   }
-  
+
   @Autowired
   private C_Land_Area_Unit_Repository C_Land_Area_Unit_Repository;
 
   public void territory_area_unit(String s, Ho_Ad ho_ad) {
     List<C_Land_Area_Unit> ho_usrs = C_Land_Area_Unit_Repository.find_all1();
-      int k7 = 0;
-              while (k7 < s.length()) {
-                if (s.charAt(k7) == ' ') {
-                  break;
-                }
-                k7++;
-              }
-              k7 = k7 + 1;
-              String f = "";
-              while (k7 < s.length()) {
-                f += s.charAt(k7);
-                k7++;
-              }
+    int k7 = 0;
+    while (k7 < s.length()) {
+      if (s.charAt(k7) == ' ') {
+        break;
+      }
+      k7++;
+    }
+    k7 = k7 + 1;
+    String f = "";
+    while (k7 < s.length()) {
+      f += s.charAt(k7);
+      k7++;
+    }
     for (C_Land_Area_Unit ho_usr1 : ho_usrs) {
-  
+
       if (ho_usr1.getName().equals(f)) {
 
         ho_ad.setTerritory_area_unit(ho_usr1.getC_land_area_unit());
@@ -431,8 +362,8 @@ public class Selenium {
       }
     }
   }
-          
-   @Autowired
+
+  @Autowired
   private Ho_House_Land_Price_Repository Ho_House_Laand_Price_Repository;
 
   public void land_price(String s, Ho_Ad ho_ad) {
@@ -522,7 +453,6 @@ public class Selenium {
   public void house_ad_loc(String s, Ho_Ad ho_ad) {
     List<Ho_House_Loc> ho_usrs = Ho_House_Loc_Repository.find_all1();
 
-    
     s = s + ",";
     int d = 0, k = 0;
     while (k < s.length()) {
@@ -564,7 +494,7 @@ public class Selenium {
 
   public void house_security(String s, Ho_Ad ho_ad) {
     List<Ho_House_Security> ho_usrs = Ho_House_Security_Repository.find_all1();
-   
+
     s = s + ",";
     int d = 0, k = 0;
     while (k < s.length()) {
@@ -575,7 +505,7 @@ public class Selenium {
     }
     int i = 0;
     for (int j = 0; j < d; j++) {
-       Ho_Ad_House_Security h1 = new Ho_Ad_House_Security();
+      Ho_Ad_House_Security h1 = new Ho_Ad_House_Security();
       String f = "";
       while (true) {
         if (s.charAt(i) == ',') {
@@ -605,7 +535,7 @@ public class Selenium {
 
   public void house_commun(String s, Ho_Ad ho_ad) {
     List<Ho_House_Commun> ho_usrs = Ho_House_Commun_Repository.find_all1();
-  
+
     s = s + ",";
     int d = 0, k = 0;
     while (k < s.length()) {
@@ -616,7 +546,7 @@ public class Selenium {
     }
     int i = 0;
     for (int j = 0; j < d; j++) {
-        Ho_Ad_House_Commun h1 = new Ho_Ad_House_Commun();
+      Ho_Ad_House_Commun h1 = new Ho_Ad_House_Commun();
       String f = "";
       while (true) {
         if (s.charAt(i) == ',') {
@@ -775,7 +705,7 @@ public class Selenium {
         break;
       }
     }
-   
+
   }
   @Autowired
   Ho_House_Balcony_Repository Ho_House_Balcony_Repository;
@@ -791,7 +721,7 @@ public class Selenium {
   }
   @Autowired
   Ho_House_Door_Repository Ho_House_Door_Repository;
-  
+
   public void door(String parking, Ho_Ad ho_ad) {
     List<Ho_House_Door> ho_prk = Ho_House_Door_Repository.find_all1();
     for (Ho_House_Door ho_usr : ho_prk) {

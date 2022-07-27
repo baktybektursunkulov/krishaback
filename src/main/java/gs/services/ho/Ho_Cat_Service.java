@@ -1,6 +1,5 @@
 package gs.services.ho;
 
-import gs.payload.response.horesponse.HoCatResponse;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,33 +12,40 @@ public class Ho_Cat_Service {
 
   @Autowired
   private Ho_Cat_Repository repository;
- 
+
   public List<Ho_Cat> find_all() {
     return repository.find_all();
   }
+
   public List<Integer> ho_cat_sell(Integer id) {
     return repository.ho_cat_sell(id);
   }
-  public List<Integer> ho_cat_sell_rent(Integer id,Integer order_num) {
-    return repository.ho_cat_sell_rent(id,order_num);
+
+  public List<Integer> ho_cat_sell_rent(Integer id, Integer order_num) {
+    return repository.ho_cat_sell_rent(id, order_num);
   }
+
   public List<Ho_Cat> find_page_title() {
     return repository.find_page_title();
   }
-   public List<Ho_Cat> get_sell_rent_subcat(Integer id) {
+
+  public List<Ho_Cat> get_sell_rent_subcat(Integer id) {
     return repository.get_sell_rent_subcat(id);
   }
+
   public Ho_Cat find_by_id(Integer id) {
     return repository.find_by_id(id);
   }
+
   public List<Ho_Cat> get_subcat_list(Integer id) {
     return repository.get_subcat_list(id);
   }
-  public List<Ho_Cat> get_seocontent_menu_list(){
+
+  public List<Ho_Cat> get_seocontent_menu_list() {
     return repository.get_seocontent_menu_list();
   }
-  
-  public List<Ho_Cat> get_sell_rent_cat(){
+
+  public List<Ho_Cat> get_sell_rent_cat() {
     return repository.get_sell_rent_cat();
   }
 }

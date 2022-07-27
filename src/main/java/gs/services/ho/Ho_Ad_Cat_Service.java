@@ -8,6 +8,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class Ho_Ad_Cat_Service {
+
+  @Autowired
+  private Ho_House_Field_Activ_Repository ho_house_field_activ_repository;
+  @Autowired
+  private Ho_House_Alloc_Type_Repository ho_house_alloc_type_repository;
   @Autowired
   private Ho_House_Commun_Repository ho_house_commun_repository;
   @Autowired
@@ -29,13 +34,13 @@ public class Ho_Ad_Cat_Service {
   @Autowired
   private Ho_House_Bathroom_Repository ho_house_bathroom_repository;
   @Autowired
-  private Ho_House_Balcony_Repository ho_house_balcony_repository;  
+  private Ho_House_Balcony_Repository ho_house_balcony_repository;
   @Autowired
-  private Ho_House_Door_Repository ho_house_door_repository;  
+  private Ho_House_Door_Repository ho_house_door_repository;
   @Autowired
-  private Ho_House_Parking_Repository ho_house_parking_repository;  
+  private Ho_House_Parking_Repository ho_house_parking_repository;
   @Autowired
-  private Ho_House_Furniture_Repository ho_house_furniture_repository; 
+  private Ho_House_Furniture_Repository ho_house_furniture_repository;
   @Autowired
   private Ho_House_Floor_Repository ho_house_floor_repository;
   @Autowired
@@ -63,85 +68,119 @@ public class Ho_Ad_Cat_Service {
   @Autowired
   private Ho_House_Spec_Purpose_Repository ho_house_spec_purpose_repository;
 
-  public List<HoAdCatResponse> ho_build_type_repository() {
+  public List<HoAdCatResponse> ho_house_alloc_type() {
+    return ho_house_alloc_type_repository.find_all();
+  }
+
+  public List<HoAdCatResponse> ho_house_field_activ() {
+    return ho_house_field_activ_repository.find_all();
+  }
+
+  public List<HoAdCatResponse> ho_build_type() {
     return ho_build_type_repository.find_all();
   }
-    public List<HoAdCatResponse> ho_house_loc_repository() {
+
+  public List<HoAdCatResponse> ho_house_loc() {
     return ho_house_loc_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_resid_complex_repository() {
+
+  public List<HoAdCatResponse> ho_resid_complex() {
     return ho_resid_complex_repository.find_all();
   }
-     public List<HoAdCatResponse> ho_house_misc_repository() {
+
+  public List<HoAdCatResponse> ho_house_misc() {
     return ho_house_misc_repository.find_all();
   }
-    public List<HoAdCatResponse> ho_house_security_repository() {
+
+  public List<HoAdCatResponse> ho_house_security() {
     return ho_house_security_repository.find_all();
   }
-      public List<HoAdCatResponse> ho_house_commun_repository() {
+
+  public List<HoAdCatResponse> ho_house_commun() {
     return ho_house_commun_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_condition_repository() {
+
+  public List<HoAdCatResponse> ho_house_condition() {
     return ho_house_condition_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_phone_repository() {
+
+  public List<HoAdCatResponse> ho_house_phone() {
     return ho_house_phone_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_inet_repository() {
+
+  public List<HoAdCatResponse> ho_house_inet() {
     return ho_house_inet_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_bathroom_repository() {
+
+  public List<HoAdCatResponse> ho_house_bathroom() {
     return ho_house_bathroom_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_balcony_repository() {
+
+  public List<HoAdCatResponse> ho_house_balcony() {
     return ho_house_balcony_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_door_repository() {
+
+  public List<HoAdCatResponse> ho_house_door() {
     return ho_house_door_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_parking_repository() {
+
+  public List<HoAdCatResponse> ho_house_parking() {
     return ho_house_parking_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_furniture_repository() {
+
+  public List<HoAdCatResponse> ho_house_furniture() {
     return ho_house_furniture_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_floor_repository() {
+
+  public List<HoAdCatResponse> ho_house_floor() {
     return ho_house_floor_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_contact_info_type_repository() {
+
+  public List<HoAdCatResponse> ho_contact_info_type() {
     return ho_contact_info_type_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_sewerage_repository() {
+
+  public List<HoAdCatResponse> ho_house_sewerage() {
     return ho_house_sewerage_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_drink_water_repository() {
+
+  public List<HoAdCatResponse> ho_house_drink_water() {
     return ho_house_drink_water_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_electricity_repository() {
+
+  public List<HoAdCatResponse> ho_house_electricity() {
     return ho_house_electricity_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_heating_repository() {
+
+  public List<HoAdCatResponse> ho_house_heating() {
     return ho_house_heating_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_gas_repository() {
+
+  public List<HoAdCatResponse> ho_house_gas() {
     return ho_house_gas_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_irrigation_water_repository() {
+
+  public List<HoAdCatResponse> ho_house_irrigation_water() {
     return ho_house_irrigation_water_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_office_type_repository() {
+
+  public List<HoAdCatResponse> ho_house_office_type() {
     return ho_house_office_type_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_shop_type_repository() {
+
+  public List<HoAdCatResponse> ho_house_shop_type() {
     return ho_house_shop_type_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_indus_base_type_repository() {
+
+  public List<HoAdCatResponse> ho_house_indus_base_type() {
     return ho_house_indus_base_type_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_land_price_repository() {
+
+  public List<HoAdCatResponse> ho_house_land_price() {
     return ho_house_land_price_repository.find_all();
   }
-  public List<HoAdCatResponse> ho_house_spec_purpose_repository() {
+
+  public List<HoAdCatResponse> ho_house_spec_purpose() {
     return ho_house_spec_purpose_repository.find_all();
   }
 }
