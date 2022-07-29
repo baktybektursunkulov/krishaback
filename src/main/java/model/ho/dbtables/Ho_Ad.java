@@ -1,7 +1,6 @@
 
 package model.ho.dbtables;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Objects;
