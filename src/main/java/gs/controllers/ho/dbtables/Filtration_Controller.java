@@ -35,7 +35,7 @@ public class Filtration_Controller {
   }
 
   @PostMapping("/filters_cnt")
-  @CrossOrigin(value="*")
+  @CrossOrigin(allowedHeaders="*")
   private ResponseEntity<FiltrationResponse> filters_cnt(@RequestBody FiltrationRequest filtrationrequest){
     FiltrationResponse res = new FiltrationResponse(); 
     Session session_ = model.core.dbutil.CoreSessionFactoryUtil.getSessionFactoryUtilInstance().openSession();
