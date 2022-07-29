@@ -27,6 +27,9 @@ public class Ho_Ad_Controller {
   private Ho_Usr_Repository repository;
   @Autowired
   Ho_Cat_Service ho_cat_service;
+  
+  
+  
   @Autowired
   Ho_House_Security_Service ho_house_security_service;
   @Autowired
