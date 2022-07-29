@@ -36,10 +36,11 @@ public class Filtration_Controller {
     return new ResponseEntity<>(res, HttpStatus.OK);
   }
 
-  @PostMapping("/filters_cnt_test")
-  private ResponseEntity<String> filters_cnt_test() {
-    return new ResponseEntity<>("ok", HttpStatus.OK);
-  }
+//  
+//  @PostMapping("/filters_cnt_test")
+//  private ResponseEntity<String> filters_cnt_test() {
+//    return new ResponseEntity<>("ok", HttpStatus.OK);
+//  }
 
   @PostMapping("/filters_cnt")
   private ResponseEntity<FiltrationResponse> filters_cnt(@RequestBody FiltrationRequest filtrationrequest) {
