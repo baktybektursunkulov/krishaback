@@ -13,6 +13,7 @@ import org.hibernate.Session;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,7 @@ public class Filtration_Controller {
   }
 
   @PostMapping("/filters_cnt")
+  @CrossOrigin(origins="*")
   private ResponseEntity<FiltrationResponse> filters_cnt(@RequestBody FiltrationRequest filtrationrequest){
     FiltrationResponse res = new FiltrationResponse(); 
     Session session_ = model.core.dbutil.CoreSessionFactoryUtil.getSessionFactoryUtilInstance().openSession();
