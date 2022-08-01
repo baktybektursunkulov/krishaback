@@ -2,6 +2,7 @@ package gs.controllers.ho.dbtables;
 
 import gs.payload.request.horequest.*;
 import gs.payload.response.horesponse.*;
+import gs.repositories.ho.dbtables.Ho_Ad_Repository_A1;
 import gs.services.ho.*;
 import io.swagger.annotations.Api;
 import java.util.ArrayList;
@@ -27,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class Filtration_Controller {
 
   @Autowired
-  Ho_Ad_Service ho_ad_service;
+  private Ho_Ad_Repository_A1 ho_ad_repository_a1;
 
   @PostMapping("/filters")
   private ResponseEntity<List<FiltrationResponse>> filters(@RequestBody FiltrationRequest filtrationrequest) {
@@ -36,26 +37,20 @@ public class Filtration_Controller {
     return new ResponseEntity<>(res, HttpStatus.OK);
   }
 
-//  
-//  @PostMapping("/filters_cnt_test")
-//  private ResponseEntity<String> filters_cnt_test() {
-//    return new ResponseEntity<>("ok", HttpStatus.OK);
-//  }
 
   @PostMapping("/filters_cnt")
-  private ResponseEntity<FiltrationResponse> filters_cnt(@RequestBody FiltrationRequest filtrationrequest) {
-    FiltrationResponse res = new FiltrationResponse();
-    Session session_ = model.core.dbutil.CoreSessionFactoryUtil.getSessionFactoryUtilInstance().openSession();
-    Integer size = ho_ad_service.filters_cnt(session_, filtrationrequest.getCat_id(), filtrationrequest.getHo_build_type(), filtrationrequest.getRoom_cnt(), filtrationrequest.getNot_last_floor(),
-      filtrationrequest.getNot_first_floor(), filtrationrequest.getPrice(), filtrationrequest.getMax_floor(), filtrationrequest.getMax_floor(),
-      filtrationrequest.getConstruction_year(), filtrationrequest.getTotal_area(), filtrationrequest.getKitchen_area());
-    res.setCount(size);
+  private ResponseEntity<FiltrationCountResponse> filters_cnt(@RequestBody FiltrationRequest filtrationrequest) {
+    FiltrationCountResponse res = new FiltrationCountResponse();
+   // Session session_ = model.core.dbutil.CoreSessionFactoryUtil.getSessionFactoryUtilInstance().openSession();
+    List<FiltrationResponse> all = get_list(filtrationrequest);
+      res.setCount(all.size());
     return new ResponseEntity<>(res, HttpStatus.OK);
   }
 
   public List<FiltrationResponse> get_list(FiltrationRequest filtrationrequest) {
-    List<FiltrationResponse> res = new ArrayList();
-
+      List<FiltrationResponse> res = ho_ad_repository_a1.filters_cnt(filtrationrequest.getCat_id(), filtrationrequest.getHo_build_type(), filtrationrequest.getRoom_cnt(), filtrationrequest.getNot_last_floor(),
+      filtrationrequest.getNot_first_floor(), filtrationrequest.getPrice(), filtrationrequest.getMax_floor(), filtrationrequest.getMax_floor(),
+      filtrationrequest.getConstruction_year(), filtrationrequest.getTotal_area(), filtrationrequest.getKitchen_area());
     return res;
   }
 }
