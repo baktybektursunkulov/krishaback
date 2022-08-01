@@ -104,19 +104,5 @@ public class Ho_Ad_Service {
      return q_.list().size();
   }
   
-  
-//  public List<Mt_Prod> get_prod_list(Session session_, Integer mt_prod_cat_id_, List<Integer> mt_brand_id_arr_, Integer page_num_, Integer page_size_) {
-//    List<Mt_Prod> res;
-//    Query q_ = session_.createSQLQuery("select t.* from Mt_Prod t "
-//            + "where "
-//            + "  t.mt_prod_cat=:mt_prod_cat_id_ "
-//            + ((mt_brand_id_arr_ != null && mt_brand_id_arr_.isEmpty()) ? "mt_brand=any(" + mt_brand_id_arr_.toString() + ")" : "")
-//            + "  and t.is_deleted=false ").addEntity(Mt_Prod.class);
-//    q_.setFirstResult((page_num_ - 1) * page_size_);
-//    q_.setMaxResults(page_size_);
-//    q_.setInteger("mt_prod_cat_id_", mt_prod_cat_id_);
-//
-//    res = q_.list();
-//    return res;
-//  }
+ 
 }

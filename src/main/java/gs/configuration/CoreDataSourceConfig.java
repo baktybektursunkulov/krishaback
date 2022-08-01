@@ -16,6 +16,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.sql.DataSource;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 @Configuration
 @EnableTransactionManagement
@@ -47,7 +48,7 @@ public class CoreDataSourceConfig {
   @ConfigurationProperties("spring.datasource.core.configuration")
   public DataSource coreDataSource() {
     return coreDatasourceProperties().initializeDataSourceBuilder()
-      .type(HikariDataSource.class).build();
+      .type(SimpleDriverDataSource.class).build();
   }
 
   /**

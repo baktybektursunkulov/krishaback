@@ -16,6 +16,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 
 import javax.sql.DataSource;
 import model.ho.dbtables.Ho_Cat;
+import org.springframework.jdbc.datasource.SimpleDriverDataSource;
 
 
 @Configuration
@@ -43,7 +44,7 @@ public class HoDataSourceConfig {
     @ConfigurationProperties("spring.datasource.core.configuration")
     public DataSource hoDataSource() {
         return hoDataSourceProperties().initializeDataSourceBuilder()
-                .type(HikariDataSource.class).build();
+                .type(SimpleDriverDataSource.class).build();
     }
 
     /**
