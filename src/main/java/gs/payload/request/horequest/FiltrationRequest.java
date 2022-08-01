@@ -10,6 +10,8 @@ import lombok.Data;
   private List<Integer> ho_build_type;
   private Boolean not_last_floor;
   private Boolean not_first_floor;
+  
+ 
   private FiltrationFieldsResponse price;
   private FiltrationFieldsResponse floor;
   private FiltrationFieldsResponse max_floor;
