@@ -43,7 +43,7 @@ public class Filtration_Controller {
   }
 
   public List<FiltrationResponse> get_list(FiltrationRequest filtrationrequest) {
-      List<FiltrationResponse> res = ho_ad_repository_a1.filters(filtrationrequest.getCat_id(), filtrationrequest.getHo_build_type(), filtrationrequest.getRoom_cnt(), filtrationrequest.getNot_last_floor(),
+      List<FiltrationResponse> res = ho_ad_repository_a1.filters(filtrationrequest.getCat_id(),filtrationrequest.getC_loc(), filtrationrequest.getHo_build_type(), filtrationrequest.getRoom_cnt(), filtrationrequest.getNot_last_floor(),
       filtrationrequest.getNot_first_floor(), filtrationrequest.getPrice(), filtrationrequest.getMax_floor(), filtrationrequest.getMax_floor(),
       filtrationrequest.getConstruction_year(), filtrationrequest.getTotal_area(), filtrationrequest.getKitchen_area(),filtrationrequest.getLiving_area(),
       filtrationrequest.getLand_area(),filtrationrequest.getAdj_territory_area(),filtrationrequest.getWarehouse_area(),filtrationrequest.getMax_power_consumption(),filtrationrequest.getOffice_area(),

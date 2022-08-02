@@ -8,6 +8,7 @@ import lombok.Data;
 public class FiltrationRequest {
 
   private Integer cat_id;
+  private Integer c_loc;
   private List<Integer> room_cnt;
   private List<Integer> ho_build_type;
   private Boolean not_last_floor;

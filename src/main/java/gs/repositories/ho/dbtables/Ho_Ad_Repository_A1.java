@@ -19,14 +19,14 @@ public class Ho_Ad_Repository_A1 {
 //  @Autowired
 //  Ho_Ad_House_Field_Activ_Repository ho_ad_house_field_activ_repository;
 
-  public List<FiltrationResponse> filters(Integer id, List<Integer> ho_build_type, List<Integer> room_cnt_arr, Boolean not_last_floor, Boolean not_first_floor, FiltrationFieldsResponse price,
+  public List<FiltrationResponse> filters(Integer id,Integer c_loc, List<Integer> ho_build_type, List<Integer> room_cnt_arr, Boolean not_last_floor, Boolean not_first_floor, FiltrationFieldsResponse price,
     FiltrationFieldsResponse floor, FiltrationFieldsResponse max_floor, FiltrationFieldsResponse construction_year, FiltrationFieldsResponse total_area, FiltrationFieldsResponse kitchen_area, FiltrationFieldsResponse living_area,
     FiltrationFieldsResponse land_area, FiltrationFieldsResponse adj_territory_area, FiltrationFieldsResponse warehouse_area, FiltrationFieldsResponse max_power_consumption, FiltrationFieldsResponse office_area,
     Boolean has_photo, Boolean owner, Boolean is_in_priv_hostel, Boolean is_has_railway_siding, Boolean is_has_own_substation, Boolean is_pledged, Boolean is_exch_possible, Boolean is_operating_business, Boolean is_divisible, Boolean is_has_sep_entr_group, Integer ho_house_spec_purpose, String txt_has,
     List<Integer> ho_house_furniture, List<Integer> ho_house_inet, List<Integer> ho_house_bathroom, List<Integer> ho_house_condition, List<Integer> ho_house_phone, List<Integer> ho_house_rent_period, List<Integer> ho_house_electricity,
     List<Integer> ho_house_drink_water, List<Integer> ho_house_irrigation_water, List<Integer> ho_house_gas, List<Integer> ho_house_office_type, List<Integer> ho_house_shop_type, List<Integer> ho_house_loc,
     List<Integer> ho_house_indus_base_type, List<Integer> ho_house_field_activ, List<Integer> ho_house_sewerage) {
-    List<FiltrationResponse> res = new ArrayList();
+    List<FiltrationResponse> res;
     List<Ho_Ad> ho_ads;
 
     String tmp_query_ = "";
@@ -44,6 +44,7 @@ public class Ho_Ad_Repository_A1 {
     javax.persistence.Query q_ = em.createNativeQuery("select t.* from Ho_Ad t "
       + "where "
       + "t.ho_cat=:id "
+      + ((c_loc != null) ? " and t.c_loc=:c_loc_" : "")
       + ((ho_build_type != null) ? " and t.ho_build_type in :ho_build_type" : "")
       + ((room_cnt_arr != null) ? " and t.room_cnt in :room_cnt_arr " : "")
       + ((not_last_floor != null && not_last_floor == true) ? " and t.floor=t.max_floor" : "")
@@ -130,6 +131,9 @@ public class Ho_Ad_Repository_A1 {
       + ho_house_field_activ_query_, Ho_Ad.class);
 
     q_.setParameter("id", id);
+     if (c_loc != null) {
+      q_.setParameter("c_loc_", c_loc);
+    }
     if (room_cnt_arr != null) {
       q_.setParameter("room_cnt_arr", room_cnt_arr);
     }
