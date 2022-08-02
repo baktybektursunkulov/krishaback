@@ -11,7 +11,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface Ho_Ad_Repository extends JpaRepository<Ho_Ad, Integer> {
 
-  @Query("select t.ho_ad from Ho_Ad t where t.is_deleted=false and t.ho_cat=30 order by t.ho_ad")
+  @Query("select t.ho_ad from Ho_Ad t where t.is_deleted=false and t.ho_cat=30  order by t.ho_ad")
   List<Integer> find_all();
 
   @Query("select t from Ho_Ad t where t.ho_cat=:id_ and t.is_deleted=false order by t.ho_ad ")
