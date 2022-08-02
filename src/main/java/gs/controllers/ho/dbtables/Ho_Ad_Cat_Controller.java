@@ -23,6 +23,11 @@ public class Ho_Ad_Cat_Controller {
     return new ResponseEntity<>(ho_ad_cat_Service.ho_build_type(), HttpStatus.OK);
   }
 
+   @GetMapping(value = "/ho_house_rent_period")
+  public ResponseEntity<List<HoAdCatResponse>> ho_house_rent_period() throws RuntimeException {
+    return new ResponseEntity<>(ho_ad_cat_Service.ho_house_rent_period(), HttpStatus.OK);
+  }
+  
   @GetMapping(value = "/ho_house_alloc_type")
   public ResponseEntity<List<HoAdCatResponse>> ho_house_alloc_type() throws RuntimeException {
     return new ResponseEntity<>(ho_ad_cat_Service.ho_house_alloc_type(), HttpStatus.OK);

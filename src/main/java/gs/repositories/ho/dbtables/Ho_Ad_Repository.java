@@ -29,7 +29,4 @@ public interface Ho_Ad_Repository extends JpaRepository<Ho_Ad, Integer> {
   @Query("select count(t.ho_ad) from Ho_Ad t where t.is_deleted=false and t.ho_cat=:id_")
   Integer countofcat(@Param("id_") Integer id_);
   
-  @Query("select count(t.ho_ad) from Ho_Ad t where t.is_deleted=false and t.ho_cat=:id_ and t.ho_build_type in :ho_build_type_arr and t.room_cnt in :room_cnt_arr")
-  Integer filteres_cnt(@Param("id_") Integer id_,@Param("ho_build_type_arr") List<Integer> ho_build_type,@Param("room_cnt_arr") List<Integer> room_cnt_arr);
-
 }

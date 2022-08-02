@@ -8,7 +8,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class Ho_Ad_Cat_Service {
-
+  @Autowired
+  private Ho_House_Rent_Period_Repository ho_house_rent_period_repository;
   @Autowired
   private Ho_House_Field_Activ_Repository ho_house_field_activ_repository;
   @Autowired
@@ -72,6 +73,10 @@ public class Ho_Ad_Cat_Service {
     return ho_house_alloc_type_repository.find_all();
   }
 
+  public List<HoAdCatResponse> ho_house_rent_period() {
+    return ho_house_rent_period_repository.find_all();
+  }
+  
   public List<HoAdCatResponse> ho_house_field_activ() {
     return ho_house_field_activ_repository.find_all();
   }
